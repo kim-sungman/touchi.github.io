@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>재판사기·민원 부당처리 — 정부·법원 조직도 분석</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Black+Han+Sans&family=Noto+Sans+KR:wght@400;500;700;900&display=swap" rel="stylesheet">
+<style>
+:root{
+ --bg:#f6f7fb; --ink:#1b2230; --dim:#5a6473;
+ --navy:#1f3864; --navy2:#2c4a7d; --navybg:#e8eef7;
+ --red:#b3271e; --redbg:#fbeae8; --redline:#dca69f;
+ --org:#b4641a; --orgbg:#fbeede; --grn:#1f7a3d; --grnbg:#e6f3ea;
+ --gray:#6b7280; --card:#fff; --line:#e2e7ef;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:var(--bg);font-family:'Noto Sans KR',sans-serif;color:var(--ink);line-height:1.65}
+.wrap{max-width:1080px;margin:0 auto;padding:0 18px 80px}
+header.hero{background:linear-gradient(135deg,#15233f,#27406e);color:#fff;border-radius:0 0 22px 22px;padding:36px 32px 30px;margin-bottom:26px;box-shadow:0 8px 26px rgba(20,30,55,.25)}
+header.hero .tag{font-size:12px;letter-spacing:3px;color:#9fb4d8;font-weight:700}
+header.hero h1{font-family:'Black Han Sans',sans-serif;font-size:31px;margin:9px 0 8px;line-height:1.26}
+header.hero .sub{font-size:14.5px;color:#cdd9ef;max-width:860px}
+.kpis{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin:22px 0 6px}
+.kpi{background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.18);border-radius:12px;padding:12px 14px}
+.kpi .n{font-family:'Black Han Sans';font-size:23px;color:#fff}
+.kpi .l{font-size:11.5px;color:#cdd9ef;margin-top:2px}
+.sectit{font-family:'Black Han Sans',sans-serif;font-size:21px;color:var(--navy);margin:38px 0 6px;display:flex;align-items:center;gap:10px}
+.sectit .bar{width:6px;height:24px;background:var(--red);border-radius:3px}
+.lead{color:var(--dim);font-size:14px;margin:4px 0 18px;max-width:900px}
+/* org tree */
+.tree{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:26px 18px;box-shadow:0 3px 14px rgba(0,0,0,.05);overflow-x:auto}
+.lvl{display:flex;justify-content:center;gap:16px;flex-wrap:wrap;position:relative}
+.lvl+.lvl{margin-top:34px}
+.conn{height:24px;border-left:2px solid #c4ccd9;width:0;margin:0 auto}
+.node{position:relative;min-width:150px;max-width:230px;border-radius:11px;padding:11px 13px;text-align:center;box-shadow:0 2px 8px rgba(0,0,0,.07)}
+.node .t{font-weight:900;font-size:13.5px}
+.node .r{font-size:11px;margin-top:3px;line-height:1.4}
+.node.top{background:var(--navy);color:#fff;min-width:200px}
+.node.org{background:var(--navybg);border:1.5px solid #b9cae6}
+.node.bad{background:var(--redbg);border:1.5px solid var(--redline)}
+.node.bad .t{color:var(--red)}
+.node .badge{display:inline-block;margin-top:6px;font-size:10px;font-weight:700;color:#fff;background:var(--red);border-radius:5px;padding:1px 7px}
+.node .who{font-size:10.5px;color:var(--navy);font-weight:700;margin-top:4px}
+.rowwrap{display:flex;flex-direction:column;align-items:center}
+.hsplit{display:flex;gap:18px;justify-content:center;flex-wrap:wrap;align-items:flex-start}
+.colcard{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:6px 0;min-width:300px;flex:1}
+.colhd{font-family:'Black Han Sans';font-size:15px;text-align:center;padding:10px;border-radius:12px 12px 0 0;color:#fff}
+.colhd.gov{background:linear-gradient(135deg,#1f3864,#33558c)}
+.colhd.court{background:linear-gradient(135deg,#7a1c12,#b3271e)}
+.colhd.nh{background:linear-gradient(135deg,#7a4a12,#b4641a)}
+.steplist{padding:12px 14px}
+.step{display:flex;gap:10px;padding:9px 0;border-bottom:1px dashed #e6e9f0}
+.step:last-child{border-bottom:none}
+.step .ix{flex:0 0 26px;height:26px;border-radius:50%;background:var(--navy);color:#fff;font-weight:900;font-size:12px;display:flex;align-items:center;justify-content:center}
+.step.x .ix{background:var(--red)}
+.step .bd{font-size:12.5px}
+.step .bd b{font-size:13px}
+.step .bd .q{color:#7a1c12;font-style:italic;font-size:12px}
+table{width:100%;border-collapse:collapse;background:#fff;border-radius:12px;overflow:hidden;box-shadow:0 2px 10px rgba(0,0,0,.05);font-size:12.5px;margin-top:6px}
+th{background:var(--navy);color:#fff;padding:9px 10px;text-align:left;font-size:12px}
+td{padding:8px 10px;border-bottom:1px solid #eef1f6;vertical-align:top}
+tr:nth-child(even) td{background:#f6f8fc}
+.tag2{display:inline-block;font-size:10.5px;color:#fff;border-radius:5px;padding:1px 7px;font-weight:700}
+.tag2.r{background:var(--red)} .tag2.o{background:var(--org)} .tag2.n{background:var(--navy2)}
+.cry{background:#fff;border-left:6px solid var(--red);border-radius:8px;padding:13px 17px;margin:14px 0;box-shadow:0 2px 10px rgba(0,0,0,.05)}
+.cry .t{font-size:15px;color:#7a1c12;font-style:italic;font-weight:500}
+.cry .s{font-size:11.5px;color:var(--gray);margin-top:6px}
+.summary{background:linear-gradient(135deg,#8e1b12,#b3271e);color:#fff;border-radius:16px;padding:22px 26px;margin-top:20px;box-shadow:0 6px 20px rgba(179,39,30,.3)}
+.summary .t{font-family:'Black Han Sans';font-size:21px}
+.summary p{font-size:14px;margin-top:9px;opacity:.96}
+.note{margin-top:26px;font-size:11px;color:var(--gray);background:#fff;border-radius:8px;padding:13px 16px;border-left:4px solid var(--navy)}
+.legend{display:flex;gap:16px;flex-wrap:wrap;margin:10px 0 0;font-size:11.5px;color:var(--dim)}
+.legend span{display:inline-flex;align-items:center;gap:6px}
+.dot{width:12px;height:12px;border-radius:3px;display:inline-block}
+@media(max-width:760px){.kpis{grid-template-columns:repeat(2,1fr)}.hsplit{flex-direction:column}}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<header class="hero">
+ <div class="tag">정부·법원 조직도 기반 분석 · ORG-CHART FORENSICS</div>
+ <h1>재판사기와 민원 부당처리 — 어느 책상에서 멈췄는가</h1>
+ <div class="sub">대한민국 정부 조직도(gov.kr)와 법원 조직도(대법원)를 그대로 가져와, 김성만 사건의 ‘재판사기’와 ‘NH투자증권 민원 부당처리’가 어느 기관·어느 부서에서 어떻게 처리(또는 외면)되었는지를 조직 단위로 박제한다.</div>
+ <div class="kpis">
+  <div class="kpi"><div class="n">10명</div><div class="l">1·2·3심 관여 법관</div></div>
+  <div class="kpi"><div class="n">5+1</div><div class="l">외부 감독기관 + NH 내부</div></div>
+  <div class="kpi"><div class="n">20개월</div><div class="l">금감원 지연 후 각하</div></div>
+  <div class="kpi"><div class="n">60억 vs 2천만</div><div class="l">손해 대 제시 보상(0.33%)</div></div>
+ </div>
+</header>
+
+<!-- ===== 법원 조직도 ===== -->
+<div class="sectit"><span class="bar"></span>① 법원 조직도 — ‘재판사기’가 통과한 3심급</div>
+<p class="lead">대법원을 정점으로 서울고등법원·서울중앙지방법원으로 이어지는 심급 구조에서, 10명의 법관이 동일한 위법(증거 미평가·일방 서면 채택·1문장 봉인)을 누적했다. 각 박스는 실제 법원 조직도의 단위이며, 빨간 박스는 본건 관여 재판부다.</p>
+<div class="tree">
+ <div class="lvl"><div class="node top"><div class="t">대법원 (大法院)</div><div class="r">최종심 · 법원행정처 관할</div></div></div>
+ <div class="conn"></div>
+ <div class="lvl">
+   <div class="node org"><div class="t">법원행정처</div><div class="r">사법행정·전산(증거열람 로그 보관)</div><div class="badge">로그 공개 쟁점</div></div>
+   <div class="node bad"><div class="t">대법원 상고심 재판부</div><div class="who">노경필·노태악·서경환·신숙희</div><div class="r">상고이유를 “사유 미해당” 1문장으로 봉인</div><div class="badge">19개 위법 봉인</div></div>
+ </div>
+ <div class="conn"></div>
+ <div class="lvl">
+   <div class="node bad"><div class="t">서울고등법원 (2심)</div><div class="who">홍성욱(재판장)·채동수·남양우</div><div class="r">변론종결 후 피고 참고서면 청취·채택, 석명권 일방운용</div><div class="badge">반론권 박탈</div></div>
+ </div>
+ <div class="conn"></div>
+ <div class="lvl">
+   <div class="node bad"><div class="t">서울중앙지방법원 (1심)</div><div class="who">최정인(재판장)·임효빈·방민우</div><div class="r">18종 물증·192녹취 평가 거부, 주문-이유 불일치</div><div class="badge">증거 평가 거부</div></div>
+ </div>
+ <div class="legend">
+   <span><i class="dot" style="background:var(--navy)"></i>조직 정점</span>
+   <span><i class="dot" style="background:#b9cae6"></i>행정 단위</span>
+   <span><i class="dot" style="background:var(--redbg);border:1px solid var(--redline)"></i>본건 관여 재판부(위법 누적)</span>
+ </div>
+</div>
+
+<!-- ===== 정부/감독 + NH 내부 ===== -->
+<div class="sectit"><span class="bar"></span>② 정부·감독기관 + NH 내부 조직도 — ‘민원’이 떠넘겨진 경로</div>
+<p class="lead">민원·진정은 헌법기관(감사원)·국무총리 소속(금융위·권익위)·대통령실·금융감독원, 그리고 피고 회사(NH투자증권) 내부 부서로 이어졌으나, 어느 책상에서도 처리되지 않고 ‘피고발인 책상’으로 회귀했다.</p>
+<div class="tree">
+ <div class="lvl">
+   <div class="node top"><div class="t">대통령</div><div class="r">국정 정점</div></div>
+   <div class="node top" style="background:#33558c"><div class="t">국무총리</div><div class="r">행정 통할</div></div>
+ </div>
+ <div class="conn"></div>
+ <div class="lvl">
+   <div class="node bad"><div class="t">대통령실 공직기강</div><div class="r">제보·청원을 ‘재판 중·사생활’ 사유로 각하</div><div class="badge">각하</div></div>
+   <div class="node bad"><div class="t">감사원 (헌법기관)</div><div class="r">공무원 카르텔 감사청원을 직접 감사 않고 금융위로 이송</div><div class="badge">방기·이송</div></div>
+   <div class="node bad"><div class="t">국민권익위원회</div><div class="r">고충민원을 실질 조사 없이 이첩</div><div class="badge">이첩</div></div>
+   <div class="node bad"><div class="t">금융위원회</div><div class="r">자본시장과 → 금감원 감찰실·분쟁조정국 이첩</div><div class="badge">이첩·전가</div></div>
+ </div>
+ <div class="conn"></div>
+ <div class="lvl">
+   <div class="node bad"><div class="t">금융감독원</div><div class="who">분쟁조정국 · 금융소비자보호처</div><div class="r">20개월 지연·대면조사 0회 → 셀프 각하. 이병용 “기망보다 나쁘다” 인정에도 결정 회피</div><div class="badge">지연·각하</div></div>
+ </div>
+ <div class="conn"></div>
+ <div class="lvl">
+   <div class="node org" style="background:var(--orgbg);border-color:#e0b78a"><div class="t">NH투자증권 (피고 회사)</div><div class="r">민원이 결국 ‘피고발 회사’ 내부로 회귀</div></div>
+ </div>
+ <div class="conn"></div>
+ <div class="lvl">
+   <div class="node bad"><div class="t">컴플라이언스부</div><div class="who">배성진 차장</div><div class="r">지주 내부고발이 피고발 회사로 재배당</div><div class="badge">자기 책상 회귀</div></div>
+   <div class="node bad"><div class="t">금융소비자보호부(금소부)</div><div class="who">이한길 부부장 · 김오훈 부장</div><div class="r">민원 무마, 회신문에 “민원 제기한 적 없다”·“가정의 평화를 기원”</div><div class="badge">무마·조롱</div></div>
+   <div class="node bad"><div class="t">법무팀</div><div class="r">‘인과관계 단절’ 판례 기획·참고서면 제출(소송사기 설계)</div><div class="badge">설계·기획</div></div>
+ </div>
+ <div class="legend">
+   <span><i class="dot" style="background:var(--navy)"></i>국정 정점</span>
+   <span><i class="dot" style="background:var(--orgbg);border:1px solid #e0b78a"></i>피고 회사</span>
+   <span><i class="dot" style="background:var(--redbg);border:1px solid var(--redline)"></i>부당 처리·외면 단위</span>
+ </div>
+</div>
+
+<!-- ===== 핑퐁 경로 ===== -->
+<div class="sectit"><span class="bar"></span>③ 책임 떠넘기기(핑퐁) — 고발이 피고발인 책상으로 돌아오다</div>
+<div class="hsplit">
+ <div class="colcard">
+   <div class="colhd gov">외부 감독·국가기관 (5)</div>
+   <div class="steplist">
+     <div class="step x"><div class="ix">1</div><div class="bd"><b>금융감독원</b><br>20개월 지연·대면조사 0회 → 각하. <span class="q">“기망보다 나쁘다”(이병용) 인정에도 결정 회피</span></div></div>
+     <div class="step x"><div class="ix">2</div><div class="bd"><b>금융위원회</b><br>심의 대신 자본시장과→금감원 이첩(피고발인 책상 회귀)</div></div>
+     <div class="step x"><div class="ix">3</div><div class="bd"><b>감사원</b><br>공무원 카르텔 감사청원을 금융위로 이송</div></div>
+     <div class="step x"><div class="ix">4</div><div class="bd"><b>국민권익위</b><br>고충민원 실질 조사 없이 이첩</div></div>
+     <div class="step x"><div class="ix">5</div><div class="bd"><b>대통령실 공직기강</b><br>‘재판 중·사생활’ 사유로 각하</div></div>
+   </div>
+ </div>
+ <div class="colcard">
+   <div class="colhd nh">NH투자증권 내부 (3)</div>
+   <div class="steplist">
+     <div class="step x"><div class="ix">A</div><div class="bd"><b>NH지주 윤리경영 제보</b><br>→ 다시 피고발 회사(NH투자증권)로 재배당</div></div>
+     <div class="step x"><div class="ix">B</div><div class="bd"><b>컴플라이언스부 배성진</b><br>비위 발생 회사 내부로 사건 회귀 → 금소부로 재이첩</div></div>
+     <div class="step x"><div class="ix">C</div><div class="bd"><b>금소부 이한길 부부장·김오훈 부장</b><br>이미 민원을 처리하지 않은 부서로 재회송 → 처리 봉쇄</div></div>
+   </div>
+ </div>
+</div>
+<div class="cry">
+ <div class="t">“위법 행위를 (이미 처리 안 한) 금소부에 다시 보내면 일이 처리되겠어요?”</div>
+ <div class="s">— 김성만 (책임 떠넘김 구조에 대한 절규)</div>
+</div>
+
+<!-- ===== 분석 보고서 표 ===== -->
+<div class="sectit"><span class="bar"></span>④ 기관·부서별 부당 처리 분석표</div>
+<table>
+ <tr><th>구분</th><th>기관 / 부서</th><th>맡은 직무</th><th>부당 처리 내용</th><th>법적 문제</th></tr>
+ <tr><td><span class="tag2 r">법원</span></td><td>서울중앙지법(1심)<br>최정인·임효빈·방민우</td><td>증거조사·사실인정</td><td>18종 물증·192녹취 평가 거부, 주문-이유 불일치</td><td>직무유기(형§122), 재판청구권 침해</td></tr>
+ <tr><td><span class="tag2 r">법원</span></td><td>서울고법(2심)<br>홍성욱·채동수·남양우</td><td>변론·석명·판단</td><td>변론종결 후 피고 서면 채택, 원고 반론권 박탈</td><td>공정성 위반, 변론재개 절차 위반(민소§141)</td></tr>
+ <tr><td><span class="tag2 r">법원</span></td><td>대법원(3심)<br>노경필·노태악·서경환·신숙희</td><td>법령위반 심사</td><td>19개 위법을 ‘사유 미해당’ 1문장 봉인</td><td>심리 의무 해태, 검증기능 정지</td></tr>
+ <tr><td><span class="tag2 o">감독</span></td><td>금융감독원<br>분쟁조정국·금소처</td><td>분쟁조정·검사</td><td>20개월 지연·대면 0회·셀프 각하</td><td>직무유기, 신의칙 위반</td></tr>
+ <tr><td><span class="tag2 o">국가</span></td><td>금융위·감사원·권익위·대통령실</td><td>감독·감사·고충·기강</td><td>심의·감사 대신 이첩·각하 반복</td><td>책임 전가, 권리구제 봉쇄</td></tr>
+ <tr><td><span class="tag2 n">NH내부</span></td><td>컴플라이언스부 배성진</td><td>내부통제·민원</td><td>지주 고발을 피고발 회사로 재배당</td><td>이해충돌, 자기심사</td></tr>
+ <tr><td><span class="tag2 n">NH내부</span></td><td>금소부 이한길 부부장·김오훈 부장</td><td>금융소비자보호</td><td>민원 무마·“민원 없었다” 허위 회신·조롱</td><td>허위 회신, 2차 가해(소송사기 빌드업)</td></tr>
+ <tr><td><span class="tag2 n">NH내부</span></td><td>법무팀</td><td>법률·소송</td><td>‘인과관계 단절’ 판례 기획·참고서면 제출</td><td>소송사기 설계, 변호사법§24</td></tr>
+</table>
+
+<!-- ===== 결론 ===== -->
+<div class="sectit"><span class="bar"></span>⑤ 결론 — 조직도가 증명하는 ‘구조적 외면’</div>
+<div class="summary">
+ <div class="t">어느 책상에서도 처리되지 않았다 — 그것이 ‘구조’의 증거다.</div>
+ <p>법원 3심급(10명)은 같은 위법을 누적했고, 외부 5개 국가·감독기관은 심의 대신 이첩·각하를 반복했으며, NH 내부 3개 부서(컴플라이언스부 배성진 / 금소부 이한길 부부장·김오훈 부장 / 법무팀)는 민원을 무마·설계했다. 정부·법원 조직도 위에 사건을 올려놓으면, 개별 담당자의 실수가 아니라 <b>‘재판사기 + 민원 부당처리’가 조직 단위로 맞물린 구조</b>임이 드러난다. 이 구조의 책임은 징벌적 배상과 자본시장 퇴출(인가취소)로만 회복될 수 있다.</p>
+</div>
+
+<div class="note">
+ ※ 본 자료는 정부조직도(gov.kr)·법원조직도(대법원)의 공개 구조를 바탕으로, 원고 측이 보유한 녹취·내부제보·통화기록·회신문 등 사실관계를 조직 단위에 대입해 정리한 분석 자료이다. 인용 발언은 음성·원본 대조가 필요할 수 있으며, 특정인에 대한 단정적 유죄 판단이 아니라 처리 경로의 적정성에 관한 문제 제기이다. 최종 판단은 수사기관·법원·감독당국의 권한에 속한다. 인명·부서명 일부는 음성인식 한계로 오기가 있을 수 있다.
+</div>
+<div style="text-align:center;color:#9aa1ad;font-size:11px;margin-top:22px">정부·법원 조직도 기반 재판사기·민원 부당처리 분석 · 작성 2026.06.08 · 김성만</div>
+
+</div>
+</body>
+</html>
