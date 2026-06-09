@@ -1,0 +1,394 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<title>NH투자증권 사건 — 프레임·금반언·석명권 위반 분석보고서</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<style>
+  :root{
+    --ink:#1a1a2e;
+    --red:#8b0000;
+    --gold:#b8860b;
+    --green:#1a4a2e;
+    --paper:#fdfaf2;
+    --line:#c9c2ad;
+    --soft:#f4eed8;
+  }
+  *{box-sizing:border-box}
+  body{
+    font-family:'Noto Sans KR','Malgun Gothic','맑은 고딕',sans-serif;
+    background:var(--paper);
+    color:var(--ink);
+    margin:0;padding:0;
+    line-height:1.75;
+  }
+  .wrap{max-width:1180px;margin:0 auto;padding:48px 36px}
+  header{
+    border-bottom:4px double var(--red);
+    padding-bottom:24px;margin-bottom:36px;
+  }
+  .seal{
+    display:inline-block;border:3px solid var(--red);color:var(--red);
+    padding:6px 14px;font-weight:900;letter-spacing:4px;font-size:13px;
+    transform:rotate(-3deg);margin-bottom:14px;
+  }
+  h1{font-size:36px;margin:8px 0 12px;color:var(--ink);letter-spacing:-1px}
+  .sub{font-size:16px;color:#555;font-style:italic}
+  .meta{margin-top:16px;font-size:13px;color:#777}
+  h2{
+    margin-top:54px;font-size:26px;color:var(--ink);
+    border-left:8px solid var(--red);padding:6px 0 6px 16px;
+    background:linear-gradient(90deg, var(--soft) 0%, transparent 60%);
+  }
+  h3{margin-top:32px;font-size:19px;color:var(--green)}
+  h4{margin-top:18px;font-size:16px;color:var(--gold)}
+  p{margin:10px 0}
+  .quote{
+    border-left:5px solid var(--gold);background:var(--soft);
+    padding:14px 20px;margin:18px 0;font-style:italic;color:#444;
+  }
+  table{
+    width:100%;border-collapse:collapse;margin:18px 0;
+    background:#fff;box-shadow:0 2px 6px rgba(0,0,0,0.06);
+    font-size:14px;
+  }
+  th{
+    background:var(--ink);color:#fff;padding:10px 12px;text-align:left;
+    font-weight:700;border:1px solid var(--ink);
+  }
+  td{
+    padding:10px 12px;border:1px solid var(--line);
+    vertical-align:top;
+  }
+  tr:nth-child(even) td{background:#faf6e8}
+  .bad{color:var(--red);font-weight:700}
+  .good{color:var(--green);font-weight:700}
+  .vs th{background:var(--red)}
+  .vs th:nth-child(2){background:var(--green)}
+  .callout{
+    background:linear-gradient(135deg,#fffbe6,#fff5d1);
+    border:2px dashed var(--gold);padding:18px 22px;
+    margin:24px 0;border-radius:6px;
+  }
+  .callout strong{color:var(--red)}
+  .timeline{position:relative;margin:24px 0 24px 30px;padding-left:24px;
+    border-left:3px solid var(--red);}
+  .tline-item{position:relative;margin-bottom:22px}
+  .tline-item::before{
+    content:'';position:absolute;left:-34px;top:6px;
+    width:14px;height:14px;border-radius:50%;
+    background:var(--red);border:3px solid var(--paper);
+  }
+  .tline-date{color:var(--red);font-weight:900;font-size:14px;letter-spacing:1px}
+  .tline-title{font-weight:700;font-size:16px;margin:2px 0 4px}
+  .tline-body{color:#444;font-size:14px}
+  .figure-box{
+    border:2px solid var(--ink);padding:18px;background:#fff;
+    margin:18px 0;text-align:center;
+  }
+  .figure-box img{max-width:100%;height:auto}
+  .figure-cap{font-size:13px;color:#555;margin-top:8px;font-style:italic}
+  .grid2{display:grid;grid-template-columns:1fr 1fr;gap:18px}
+  .panel{border:2px solid var(--line);padding:18px;background:#fff;border-radius:4px}
+  .panel.bad-frame{border-color:var(--red);background:#fff5f5}
+  .panel.true-frame{border-color:var(--green);background:#f3faf5}
+  .panel h4{margin-top:0}
+  .stamp{
+    display:inline-block;font-size:11px;border:2px solid var(--red);
+    color:var(--red);padding:2px 8px;font-weight:900;letter-spacing:2px;
+    margin-right:6px;
+  }
+  footer{
+    margin-top:60px;padding-top:24px;border-top:1px solid var(--line);
+    font-size:13px;color:#666;text-align:center;
+  }
+  .principle{
+    background:var(--ink);color:#fff;padding:16px 22px;
+    margin:18px 0;border-radius:4px;
+  }
+  .principle .label{color:var(--gold);font-size:12px;letter-spacing:3px;font-weight:900}
+  .principle .body{font-size:15px;margin-top:4px;line-height:1.8}
+  ol.legal{padding-left:24px}
+  ol.legal li{margin-bottom:10px}
+  .toc{background:#fff;border:1px solid var(--line);padding:16px 24px;border-radius:4px;margin:24px 0}
+  .toc h3{margin-top:0;color:var(--ink);border-bottom:1px solid var(--line);padding-bottom:8px}
+  .toc a{color:var(--ink);text-decoration:none;display:block;padding:3px 0;font-size:14px}
+  .toc a:hover{color:var(--red);text-decoration:underline}
+  @media (max-width:780px){
+    .grid2{grid-template-columns:1fr}
+    .wrap{padding:24px 18px}
+    h1{font-size:26px}
+    table{font-size:12px}
+    th,td{padding:6px 8px}
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<header>
+  <div class="seal">사건 분석 · 8년 기록</div>
+  <h1>NH투자증권 사건 — 프레임·금반언·석명권 위반 분석보고서</h1>
+  <p class="sub">"합의서 1장"으로 잘려나간 맥락의 복원, 그리고 백전백승(百戰百勝)의 진실</p>
+  <p class="meta">분석일: 2026년 5월 24일 · 분석방법론: 프레임(맥락) 이론 + 손자병법 지피지기 · 작성목적: 역사적 기록</p>
+</header>
+
+<div class="toc">
+  <h3>목 차</h3>
+  <a href="#frame">Ⅰ. 핵심 프레임 — "그림 1 vs 그림 2"</a>
+  <a href="#timeline">Ⅱ. 8년간의 타임라인</a>
+  <a href="#contradiction">Ⅲ. 반복 허위 발언 비교표 (한눈에 보는 모순)</a>
+  <a href="#illegal">Ⅳ. 4대 위법행위 법률분석</a>
+  <a href="#sunzi">Ⅴ. 손자병법 — 백전백승의 전략 분석</a>
+  <a href="#conclusion">Ⅵ. 결론 — 심판의 시간</a>
+</div>
+
+<!-- ============================ -->
+<h2 id="frame">Ⅰ. 핵심 프레임 — "그림 1 vs 그림 2"</h2>
+
+<p>
+서울대 심리학과의 프레임 이론은 단순한 비유가 아니다. 동일한 사실도 <strong>맥락(프레임)을 자르면 정반대로 보인다</strong>는 인지과학적 진리다.
+캠퍼스 한복판에 45도로 비스듬히 주차된 차 한 대 — 양옆에 다른 차들이 빼곡할 때는 "기발한 주차"였지만,
+양옆 차가 빠지자 "개념 없는 주차"가 되었다. <strong class="bad">맥락이 사라진 순간, 정의가 뒤집힌 것이다.</strong>
+</p>
+
+<div class="figure-box">
+  <img src="frame_illustration.svg" alt="프레임 비유 도해">
+  <div class="figure-cap">[도해] 동일한 "합의서 1장"이 맥락 제거 시 "정상 합의"로, 맥락 복원 시 "조직적 위법"으로 보이는 프레임 전환</div>
+</div>
+
+<div class="grid2">
+  <div class="panel bad-frame">
+    <h4>&lt;그림 1&gt; — NH·재판부가 본 그림 (맥락 제거)</h4>
+    <p>책상 위에 놓인 것은 오직 <span class="bad">"합의서 1장"</span>뿐.
+    8년간 누적된 미공개정보 이용 정황, 강요·기망의 흔적, 민원인의 반복 항의는 모두 <strong>"앞뒤 맥락 잘라내기"</strong>로 사라졌다.
+    이것이 책에서 말한 <em>"악마의 편집"</em>의 사법 버전이다.</p>
+  </div>
+  <div class="panel true-frame">
+    <h4>&lt;그림 2&gt; — 맥락이 복원된 진실</h4>
+    <p>합의서 양옆에는 <span class="good">미공개정보 이용, 금반언 위반, 석명요청서 오남용, 대면조사 0초, 8년간의 반복 묵살</span>이 빼곡히 들어차 있었다.
+    이 맥락이 보이는 순간, "정상 합의서"는 즉시 <strong>"강요된 위법 서류"</strong>로 정체가 드러난다.</p>
+  </div>
+</div>
+
+<div class="callout">
+  <strong>핵심 명제:</strong> NH투자증권의 모든 민원처리자와 일부 재판관들은 <em>의도적으로 &lt;그림 1&gt;만 선택</em>했다.
+  맥락을 자르는 행위 자체가 — 단순한 판단 실수가 아니라 — <strong>조직적 사실 왜곡</strong>이며, 이것이 본 보고서의 핵심 분석 대상이다.
+</div>
+
+<!-- ============================ -->
+<h2 id="timeline">Ⅱ. 8년간의 타임라인 (사건 진행 단계)</h2>
+
+<p>아래 타임라인은 <strong>"합의서 1장"이 만들어지기까지의 전(前)단계 맥락</strong>과,
+그 후 <strong>국가기관·재판부가 그 합의서를 어떻게 면죄부로 사용했는가</strong>의 양면을 정리한다.</p>
+
+<div class="timeline">
+  <div class="tline-item">
+    <div class="tline-date">제1단계 · 발단</div>
+    <div class="tline-title">NH투자증권의 미공개정보 이용 정황 발생</div>
+    <div class="tline-body">민원인이 알 수 없었던 내부 정보가 거래·계약에 영향. 정보 비대칭 상태에서 손해가 발생했다.</div>
+  </div>
+  <div class="tline-item">
+    <div class="tline-date">제2단계 · 압박</div>
+    <div class="tline-title">"합의서 1장" 강요 — 위법 서류의 탄생</div>
+    <div class="tline-body">시간·정보 압박 하에 작성된 합의서. <span class="bad">대면조사 없음 · 충분한 설명 없음 · 진실은폐</span>. 이것이 이후 8년간의 모든 절차에서 "면죄부"로 둔갑한다.</div>
+  </div>
+  <div class="tline-item">
+    <div class="tline-date">제3단계 · 행정처리</div>
+    <div class="tline-title">민원처리자들 — "합의서 있음" 한 줄로 종결</div>
+    <div class="tline-body">1초의 대면조사도 없이, 합의서 존재만을 근거로 행정절차 종결. 8년간 반복적으로 동일 패턴. <span class="bad">"이미 합의했으므로 더 볼 필요 없다"</span>는 자동응답.</div>
+  </div>
+  <div class="tline-item">
+    <div class="tline-date">제4단계 · 사법단계</div>
+    <div class="tline-title">재판부의 금반언 위반 + 석명요청서 오남용</div>
+    <div class="tline-body">동일 사실에 대해 절차마다 입장이 바뀌는 모순(금반언 위반), 민원인에게는 과도한 석명을 요구하면서 NH에는 면제하는 비대칭 운용.</div>
+  </div>
+  <div class="tline-item">
+    <div class="tline-date">제5단계 · 누적</div>
+    <div class="tline-title">반복 묵살 — 8년의 시간 침묵화</div>
+    <div class="tline-body">민원인의 모든 항의·증거제출이 "이미 합의" 한 마디로 차단. 시간이 흐를수록 진실은 묻히고, 위법 합의서의 "외관"만 강해진다.</div>
+  </div>
+  <div class="tline-item">
+    <div class="tline-date">제6단계 · 역전</div>
+    <div class="tline-title">프레임 복원 — 심판의 시간 도래</div>
+    <div class="tline-body">맥락(그림 2)이 복원되면, NH와 일부 판관들이 <strong>합의서 한 장으로 무엇을 가렸는지</strong> 만천하에 드러난다. 이것이 2026년 현재의 단계다.</div>
+  </div>
+</div>
+
+<!-- ============================ -->
+<h2 id="contradiction">Ⅲ. 반복 허위 발언 비교표 — 한눈에 보는 모순</h2>
+
+<p>법률적 분석의 핵심은 <strong>"같은 사실에 대해 어떻게 말이 바뀌는가"</strong>를 추적하는 것이다.
+아래 표는 NH투자증권 측과 일부 국가기관의 <strong>반복 허위·자기모순 발언</strong>을 정면 대조한다.</p>
+
+<table class="vs">
+  <thead>
+    <tr>
+      <th>쟁점 / 단계</th>
+      <th>상대측(NH·국가기관) 발언</th>
+      <th>같은 자료가 입증하는 진실</th>
+      <th>모순의 종류</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><strong>① 합의서의 성격</strong></td>
+      <td>"민원인이 자유의사로 합의했다."</td>
+      <td>대면조사·충분한 설명·녹취 모두 부재. 시간·정보 압박 정황 명백.</td>
+      <td class="bad">사실 왜곡 + 외관 의존</td>
+    </tr>
+    <tr>
+      <td><strong>② 미공개정보 사용</strong></td>
+      <td>(초기) "정보 비대칭 없었음" → (후기) "있었더라도 합의로 해소"</td>
+      <td>동일 사건에서 입장이 180도 변경. 합의서를 만능 면죄부로 활용.</td>
+      <td class="bad">금반언 원칙 위반</td>
+    </tr>
+    <tr>
+      <td><strong>③ 대면조사 의무</strong></td>
+      <td>"합의가 있어 별도 조사 불요"</td>
+      <td>합의서 자체의 위법성 의혹이 제기되었다면 <strong>합의 성립의 적법성을 먼저 조사</strong>하는 것이 행정·사법의 ABC.</td>
+      <td class="bad">절차적 위법 (조사회피)</td>
+    </tr>
+    <tr>
+      <td><strong>④ 석명요청서</strong></td>
+      <td>(민원인에게) "쟁점이 불분명하니 더 명확히 하라"<br>(NH에게) 동일 수준 석명 요구 부재</td>
+      <td>동일 재판부 동일 사건에서 <strong>비대칭 운용</strong>. 한쪽에는 가혹, 다른 쪽에는 면제.</td>
+      <td class="bad">석명권 오남용 + 평등원칙 위반</td>
+    </tr>
+    <tr>
+      <td><strong>⑤ 8년 반복 항의</strong></td>
+      <td>"이미 합의된 사건의 반복 민원"</td>
+      <td>합의 자체의 위법성을 다투는 새 주장은 별개 청구권. "반복"이라는 낙인 자체가 프레임 조작.</td>
+      <td class="bad">쟁점 호도 + 권리 침해</td>
+    </tr>
+    <tr>
+      <td><strong>⑥ "악마의 편집"</strong></td>
+      <td>발언·증거를 앞뒤 자르고 인용</td>
+      <td>전체 맥락은 정반대를 가리킨다. 프레임 이론이 정확히 적시한 사법 버전.</td>
+      <td class="bad">진의 왜곡 + 신의칙 위반</td>
+    </tr>
+  </tbody>
+</table>
+
+<div class="callout">
+  <strong>법률적 의의:</strong> 위 6개 모순은 각각이 <em>독립적인 위법 사유</em>이며, 동시에 <em>조직적 패턴</em>을 형성한다.
+  단일 실수로는 발생할 수 없는 <strong>일관된 방향성</strong>이 8년에 걸쳐 반복되었다는 점이 결정적이다.
+</div>
+
+<!-- ============================ -->
+<h2 id="illegal">Ⅳ. 4대 위법행위 법률분석</h2>
+
+<h3>① 금반언(禁反言) 원칙 위반</h3>
+<p>금반언(estoppel)은 <strong>자기가 한 선행 행위·진술과 모순되는 후행 행위로 상대방에게 손해를 주어서는 안 된다</strong>는 신의성실의 핵심 원칙이다.
+재판관 또는 국가기관이 동일한 사실관계에서 절차별로 입장을 바꾸는 것은 <strong>국민의 신뢰 보호</strong>를 정면 위반한다.</p>
+<div class="principle">
+  <div class="label">법리</div>
+  <div class="body">민법 제2조(신의성실) · 행정기본법 신뢰보호원칙 · 헌법상 적법절차(제12조). 금반언 위반은 단순 절차하자가 아니라 <strong>법치주의 근간의 훼손</strong>이다.</div>
+</div>
+
+<h3>② 석명요청서(석명권) 오남용</h3>
+<p>민사소송법 제136조의 석명권은 <strong>실체적 진실 발견을 위한 도구</strong>이지, 한쪽 당사자를 압박하거나 다른 쪽을 비호하는 수단이 아니다.
+민원인에게만 가혹한 석명을 요구하면서 NH에는 면제하는 운용은 <strong>중립의무 위반 + 평등권 침해</strong>이다.</p>
+<div class="principle">
+  <div class="label">법리</div>
+  <div class="body">민사소송법 §136 · 헌법 제11조(평등권) · 법관윤리강령. 비대칭 석명은 <em>절차적 무기의 평등</em>(equality of arms)을 파괴한다.</div>
+</div>
+
+<h3>③ 미공개정보 이용 + 사기 합의서</h3>
+<p>자본시장법은 미공개중요정보 이용행위를 엄격히 금지한다(§174).
+정보 비대칭 상태에서 형성된 거래·합의는 그 자체로 <strong>의사형성의 자유</strong>가 침해된 무효·취소 사유다.
+"합의서가 있다"는 사실은 합의의 적법성을 추정시킬 뿐, <strong>합의 형성 과정의 위법을 치유하지 못한다</strong>.</p>
+<div class="principle">
+  <div class="label">법리</div>
+  <div class="body">자본시장법 §174 · 민법 §110(사기·강박에 의한 의사표시 취소) · §103(반사회질서 무효). 위법으로 형성된 합의서는 외관에 불과하다.</div>
+</div>
+
+<h3>④ 대면조사 없는 행정절차 (절차적 위법)</h3>
+<p>행정절차의 핵심은 <strong>당사자의 의견청취</strong>이다. 1초의 대면조사도 없이 "합의서가 있으니 종결"하는 것은
+행정절차법상 의견청취 의무(§22) 위반이며, 헌법상 적법절차원칙의 정면 위반이다.</p>
+<div class="principle">
+  <div class="label">법리</div>
+  <div class="body">행정절차법 §22(의견청취) · 헌법 §12 ④항(적법절차). 8년간 동일 패턴이 반복되었다면 단순 실수가 아닌 <strong>조직적 직무유기</strong>의 징표다.</div>
+</div>
+
+<!-- ============================ -->
+<h2 id="sunzi">Ⅴ. 손자병법 — 백전백승(百戰百勝)의 전략 분석</h2>
+
+<p>손자(孫子)는 일렀다.</p>
+<div class="quote">
+  "知彼知己 百戰不殆"(지피지기 백전불태) — 적을 알고 나를 알면 백 번 싸워도 위태롭지 않다.<br>
+  "兵者 詭道也"(병자 궤도야) — 전쟁(쟁송)은 속임수의 길이다. 상대의 궤(詭)를 먼저 간파한 자가 이긴다.
+</div>
+
+<table>
+  <thead>
+    <tr>
+      <th style="width:24%">손자병법 구절</th>
+      <th style="width:38%">상대(NH·일부 판관)가 사용한 술책</th>
+      <th style="width:38%">민원인(우리)의 정공(正攻)</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><strong>지피지기 백전불태</strong></td>
+      <td>상대의 8년치 발언·문서를 흩뜨려 모순 은폐</td>
+      <td class="good">반복 발언을 표로 정렬 → 모순 자동 노출</td>
+    </tr>
+    <tr>
+      <td><strong>이일대로(以佚待勞)</strong><br>편안함으로 피로한 상대를 친다</td>
+      <td>민원인을 지치게 하는 반복 묵살 전술</td>
+      <td class="good">기록의 누적 = 영원불멸. 시간이 우리 편이 됨</td>
+    </tr>
+    <tr>
+      <td><strong>공기무비(攻其無備)</strong><br>대비 없는 곳을 친다</td>
+      <td>"합의서 있음" 한 줄로 방어선 구축</td>
+      <td class="good">합의서 <em>형성과정</em>을 공격 — 적의 방어선이 무용지물</td>
+    </tr>
+    <tr>
+      <td><strong>병귀신속(兵貴神速)</strong><br>속도가 생명</td>
+      <td>절차 지연으로 진실 묻기</td>
+      <td class="good">프레임 도해 + 표 → 한눈에 진실 전달</td>
+    </tr>
+    <tr>
+      <td><strong>상병벌모(上兵伐謀)</strong><br>최상의 병법은 적의 계책을 깨는 것</td>
+      <td>"악마의 편집" 계책 사용</td>
+      <td class="good">맥락 복원 = 적 계책의 근원 파괴</td>
+    </tr>
+  </tbody>
+</table>
+
+<div class="callout">
+  <strong>전략 결론:</strong> 상대의 모든 술책은 <em>"맥락 잘라내기"</em> 하나에 의존한다.
+  맥락이 복원되는 순간, 상대의 모든 진지는 무너진다. 이것이 본 사건에서의 <strong>백전백승(百戰百勝)의 길</strong>이다.
+</div>
+
+<!-- ============================ -->
+<h2 id="conclusion">Ⅵ. 결론 — 심판의 시간</h2>
+
+<p>본 분석은 다음을 입증한다.</p>
+
+<ol class="legal">
+  <li><strong>"합의서 1장"은 단독으로 정의를 결정할 수 없다.</strong> 그 형성 과정 — 미공개정보 이용, 강요·기망, 대면조사 부재 — 이 모두 위법이라면, 합의서는 외관에 불과하다.</li>
+  <li><strong>일부 재판관과 국가기관 민원처리자들의 금반언 위반·석명권 오남용·대면조사 회피는 단순 실수가 아니다.</strong> 8년에 걸친 일관된 패턴은 <em>조직적 직무 위반</em>의 징표이다.</li>
+  <li><strong>프레임 이론은 본 사건의 진단도구이자 해법이다.</strong> 잘려나간 맥락을 복원하면, &lt;그림 1&gt;("개념 없는 민원인")은 즉시 &lt;그림 2&gt;("조직적 위법의 피해자")로 전환된다.</li>
+  <li><strong>손자병법의 가르침대로</strong>, 상대의 계책("악마의 편집")을 정면 파훼하는 가장 강력한 무기는 <em>기록·맥락·일관성</em>이다. 이 세 가지를 모두 갖춘 쪽이 백전백승한다.</li>
+  <li><strong>8년의 시간은 침묵의 기간이 아니라 증거의 누적기였다.</strong> 이제 그 누적된 증거가 심판의 자리에 선다.</li>
+</ol>
+
+<div class="callout" style="background:linear-gradient(135deg,#1a1a2e,#3a2a4a);color:#fff;border-color:var(--gold)">
+  <strong style="color:var(--gold)">최후 진술:</strong>
+  &nbsp;&nbsp;프레임을 자른 자는, 결국 그 잘린 프레임에 의해 심판받는다.
+  맥락을 외면한 자는, 결국 그 외면한 맥락에 의해 폭로된다.
+  8년간 묵살의 외투를 입고 있던 진실이, 오늘 그 외투를 벗는다. <em>심판의 시간이다.</em>
+</div>
+
+<footer>
+  본 보고서는 프레임 이론(맥락의 힘)과 손자병법(지피지기·상병벌모)에 기반한 사건 분석 자료로,<br>
+  역사적 기록 및 자라나는 다음 세대의 교훈을 목적으로 작성되었습니다.<br>
+  &nbsp;<br>
+  ⓒ 2026 · NH투자증권 사건 8년 기록 · 분석방법론: 프레임 + 손자병법
+</footer>
+
+</div>
+</body>
+</html>

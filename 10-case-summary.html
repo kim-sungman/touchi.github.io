@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>NH투자증권 사건 한눈 요약 — 사실관계 인포그래픽</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Black+Han+Sans&family=Noto+Sans+KR:wght@400;500;700;900&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#f7f8fb; --ink:#1c2230; --dim:#5b6472;
+  --navy:#1f3864; --navy2:#2e4a7a; --navybg:#e8edf6;
+  --red:#b3271e; --redbg:#fbeae8; --redline:#dfa7a0;
+  --org:#b4641a; --orgbg:#fbeede;
+  --grn:#1f7a3d; --grnbg:#e7f4ec;
+  --gray:#6b7280; --card:#ffffff; --line:#e3e7ee;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:var(--bg);font-family:'Noto Sans KR',sans-serif;color:var(--ink);line-height:1.6}
+.wrap{max-width:1100px;margin:0 auto;padding:0 18px 70px}
+header.hero{background:linear-gradient(135deg,#16233f,#27406e);color:#fff;border-radius:0 0 20px 20px;padding:34px 34px 28px;margin-bottom:26px;box-shadow:0 6px 24px rgba(20,30,55,.25)}
+header.hero .tag{font-size:12px;letter-spacing:3px;color:#9fb4d8;font-weight:700}
+header.hero h1{font-family:'Black Han Sans',sans-serif;font-size:32px;margin:8px 0 4px;letter-spacing:.5px;line-height:1.25}
+header.hero .sub{font-size:15px;color:#cdd9ef}
+header.hero .case{font-size:12px;color:#92a4c6;margin-top:12px}
+.sectit{font-family:'Black Han Sans',sans-serif;font-size:20px;color:var(--navy);margin:34px 0 14px;display:flex;align-items:center;gap:10px}
+.sectit .bar{width:6px;height:22px;background:var(--red);border-radius:3px}
+/* stat callouts */
+.stats{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
+.stat{background:var(--card);border-radius:14px;padding:18px 18px 16px;box-shadow:0 2px 10px rgba(0,0,0,.05);border-top:5px solid var(--navy)}
+.stat.red{border-top-color:var(--red)}.stat.org{border-top-color:var(--org)}
+.stat .big{font-family:'Black Han Sans',sans-serif;font-size:32px;color:var(--navy);line-height:1.1}
+.stat.red .big{color:var(--red)}.stat.org .big{color:var(--org)}
+.stat .lab{font-size:13px;color:var(--dim);margin-top:6px;font-weight:500}
+/* evidence cards */
+.ev{display:grid;grid-template-columns:repeat(2,1fr);gap:14px}
+.evc{background:var(--card);border-radius:14px;padding:16px 18px;box-shadow:0 2px 10px rgba(0,0,0,.05);border-left:6px solid var(--red);display:flex;gap:14px;align-items:flex-start}
+.evc .ic{flex:0 0 auto;width:42px;height:42px;border-radius:50%;background:var(--redbg);color:var(--red);display:flex;align-items:center;justify-content:center;font-size:20px;font-weight:900}
+.evc h4{font-size:15px;margin-bottom:3px}
+.evc p{font-size:12.5px;color:#444}
+.evc .src{display:inline-block;margin-top:5px;font-size:10.5px;color:#fff;background:var(--navy);border-radius:4px;padding:1px 7px}
+/* flow */
+.flow{display:flex;align-items:stretch;gap:0;flex-wrap:wrap;background:var(--card);border-radius:14px;padding:18px 10px;box-shadow:0 2px 10px rgba(0,0,0,.05)}
+.fstep{flex:1;min-width:140px;text-align:center;padding:6px 8px;position:relative}
+.fstep .n{width:30px;height:30px;border-radius:50%;background:var(--red);color:#fff;font-weight:900;display:flex;align-items:center;justify-content:center;margin:0 auto 8px}
+.fstep b{display:block;font-size:13.5px;color:var(--navy)}
+.fstep span{font-size:11.5px;color:var(--dim)}
+.fstep:not(:last-child)::after{content:"›";position:absolute;right:-6px;top:30px;font-size:24px;color:#c2c8d4}
+.fstep.end .n{background:var(--navy)}
+/* grade bars */
+.grades{display:grid;grid-template-columns:repeat(4,1fr);gap:12px}
+.gr{background:var(--card);border-radius:12px;padding:14px;box-shadow:0 2px 10px rgba(0,0,0,.05);text-align:center}
+.gr .badge{width:40px;height:40px;border-radius:50%;color:#fff;font-family:'Black Han Sans';font-size:20px;display:flex;align-items:center;justify-content:center;margin:0 auto 8px}
+.gr h5{font-size:13px;margin-bottom:4px}
+.gr p{font-size:11.5px;color:#555}
+/* timeline */
+.tl{background:var(--card);border-radius:14px;padding:8px 20px;box-shadow:0 2px 10px rgba(0,0,0,.05)}
+.tlrow{display:flex;gap:16px;padding:11px 0;border-bottom:1px solid var(--line);align-items:flex-start}
+.tlrow:last-child{border-bottom:none}
+.tlrow .d{flex:0 0 110px;font-weight:700;color:var(--navy);font-size:13px}
+.tlrow .c{font-size:13px;color:var(--ink)}
+.tlrow .c b{color:var(--red)}
+/* claims */
+.claims{display:grid;grid-template-columns:repeat(5,1fr);gap:10px}
+.cl{background:var(--navybg);border-radius:12px;padding:14px 10px;text-align:center;border:1px solid #cfdbef}
+.cl .nn{font-family:'Black Han Sans';font-size:22px;color:var(--navy)}
+.cl p{font-size:12px;color:var(--ink);margin-top:5px;font-weight:500}
+.law{background:var(--card);border-radius:12px;padding:14px 18px;box-shadow:0 2px 10px rgba(0,0,0,.05);font-size:13px;color:#333}
+.law b{color:var(--red)}
+.note{margin-top:26px;font-size:11px;color:var(--gray);background:#fff;border-radius:8px;padding:12px 16px;border-left:4px solid var(--navy)}
+@media(max-width:720px){.stats,.ev,.grades,.claims{grid-template-columns:1fr}.fstep{min-width:45%}}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<header class="hero">
+  <div class="tag">사실관계 한눈 요약 · FACT SHEET</div>
+  <h1>NH투자증권 양도세 기망·합의서 위조·재판절차 위반 사건</h1>
+  <div class="sub">한 시민이 30년 거래 증권사로부터 약 60억 원의 손해를 입고, 위조 의혹 합의서로 2,000만 원에 면책된 사건 — 핵심 사실을 한눈에.</div>
+  <div class="case">원고/고소인 김성만 · 상대 NH투자증권㈜·이정미·임진기·법무법인 세한 · 서울남부지법 2022가합108719 / 서울고법 2023나2052728 / 대법원 2024다321102</div>
+</header>
+
+<!-- 핵심 숫자 -->
+<div class="sectit"><span class="bar"></span>핵심 숫자</div>
+<div class="stats">
+  <div class="stat red"><div class="big">약 60억 원</div><div class="lab">주식 시가손실 등 재산 손해 규모 (신용 포함)</div></div>
+  <div class="stat org"><div class="big">2,000만 원</div><div class="lab">합의금 = 손해의 약 0.33% (현저한 불공정 주장)</div></div>
+  <div class="stat red"><div class="big">3,342만 원</div><div class="lab">패소 후 NH가 피해자에게 청구한 소송비용</div></div>
+  <div class="stat"><div class="big">11:05:04</div><div class="lab">합의서 디지털 출력시각 — 대면(16:24)보다 5시간 14분 前</div></div>
+  <div class="stat"><div class="big">약 8년</div><div class="lab">사건 발생(2018) ~ 현재. 6개 기관 민원·소송 경과</div></div>
+  <div class="stat"><div class="big">6개 기관</div><div class="lab">민원이 처리되지 않고 재판으로 전가된 기관 수</div></div>
+</div>
+
+<!-- 4대 객관 물증 -->
+<div class="sectit"><span class="bar"></span>4대 객관 물증 (외부 공식기관 발행)</div>
+<div class="ev">
+  <div class="evc"><div class="ic">⏱</div><div><h4>합의서 사전 출력시각</h4><p>디지털포렌식상 2019.2.21 <b>11:05:04</b> 출력. 임진기 방문 통보(11:26)·자택 도착(16:24)보다 앞서 완성 → ‘현장 협의’ 주장과 시간상 충돌.</p><span class="src">디지털포렌식</span></div></div>
+  <div class="evc"><div class="ic">🚗</div><div><h4>하이패스·GPS 체류시간</h4><p>한국도로공사 하이패스 15:40 북대구IC 통과 + 자택 도착 사진 16:24 → 실제 대면 시간이 ‘1~2시간 설명’ 주장과 불일치.</p><span class="src">한국도로공사·GPS</span></div></div>
+  <div class="evc"><div class="ic">📈</div><div><h4>합병 매매거래 정지</h4><p>한국거래소 공시 2018.6.28~7.17 거래정지 → ‘이 기간 매도 가능했으나 원고가 안 했다’는 주장과 충돌.</p><span class="src">한국거래소 공시</span></div></div>
+  <div class="evc"><div class="ic">💬</div><div><h4>세무대리인 계산서</h4><p>양도세 약 7,230만 원은 베스트세무법인이 계산·신고 → ‘세무서 직권 부과’ 주장과 불일치.</p><span class="src">세무법인 계산서</span></div></div>
+</div>
+
+<!-- 흐름도 -->
+<div class="sectit"><span class="bar"></span>사건 구조 (5단계)</div>
+<div class="flow">
+  <div class="fstep"><div class="n">1</div><b>허위 세무안내</b><span>대주주 양도세 ‘비과세·유예’ 오안내 (2017)</span></div>
+  <div class="fstep"><div class="n">2</div><b>매도 봉쇄·손실 확대</b><span>손절 거부·교체매매 유도 (2018)</span></div>
+  <div class="fstep"><div class="n">3</div><b>합의서 서명</b><span>2,000만 원, 출력시각 쟁점 (2019.2)</span></div>
+  <div class="fstep"><div class="n">4</div><b>민원 미처리</b><span>‘민원→불만’ 둔갑·재판 전가 (2020~)</span></div>
+  <div class="fstep end"><div class="n">5</div><b>재판절차 위반 주장</b><span>참고서면 채택·각하 (2024~)</span></div>
+</div>
+
+<!-- 스모킹건 등급 -->
+<div class="sectit"><span class="bar"></span>핵심 증거 등급 (형사 입증력 기준)</div>
+<div class="grades">
+  <div class="gr"><div class="badge" style="background:#b3271e">S</div><h5>객관 물증</h5><p>출력시각·하이패스·거래정지·세무계산서 등 외부기관 기록 (5건)</p></div>
+  <div class="gr"><div class="badge" style="background:#b4641a">A</div><h5>본인 녹취</h5><p>NH 직원·감독관 본인이 발화한 자인성 발언 (5건)</p></div>
+  <div class="gr"><div class="badge" style="background:#9a7d12">B</div><h5>서면 모순</h5><p>NH 측 서면 사이의 자기모순·번복 (5건)</p></div>
+  <div class="gr"><div class="badge" style="background:#5a7a2e">C</div><h5>절차 위반</h5><p>참고서면 채택·민원 미처리 등 절차 사항 (4건)</p></div>
+</div>
+
+<!-- 타임라인 -->
+<div class="sectit"><span class="bar"></span>핵심 타임라인</div>
+<div class="tl">
+  <div class="tlrow"><div class="d">2017.12</div><div class="c">이정미 PB, 대주주 양도세 <b>‘비과세·유예’ 안내</b> → 매도 시점 상실</div></div>
+  <div class="tlrow"><div class="d">2018.01.18</div><div class="c">이정미 <b>오안내 인정</b> “제가 미처 놓쳐서” + ‘매도 봉쇄’ 안내</div></div>
+  <div class="tlrow"><div class="d">2018.06~07</div><div class="c">합병 <b>매매거래 정지</b>(거래소 공시) — 후일 ‘매도 가능’ 주장과 충돌</div></div>
+  <div class="tlrow"><div class="d">2019.02.21</div><div class="c">합의서 <b>출력 11:05:04</b> → 대면 16:24, 2,000만 원 합의</div></div>
+  <div class="tlrow"><div class="d">2020.08.07</div><div class="c">이정미 <b>“법무팀하고 저하고 같이… 제가 합의문을 작성”</b> 자인(녹취)</div></div>
+  <div class="tlrow"><div class="d">2021</div><div class="c">금감원 이병용 팀장 <b>“기망보다 더 나쁘다”</b> 발언(녹취), 그러나 결정 회피</div></div>
+  <div class="tlrow"><div class="d">2024.11.07</div><div class="c">2심, 변론종결 후 <b>참고서면 채택</b> 항소 기각</div></div>
+  <div class="tlrow"><div class="d">2025</div><div class="c">NH, 피해자에게 <b>소송비용 3,342만 원 청구</b> + 강제집행 통보</div></div>
+</div>
+
+<!-- 청구취지 -->
+<div class="sectit"><span class="bar"></span>청구·요구 취지</div>
+<div class="claims">
+  <div class="cl"><div class="nn">1</div><p>증권업 인가취소 (자본시장법 §420)</p></div>
+  <div class="cl"><div class="nn">2</div><p>관련자 형사처벌 (소송사기·위증·위조)</p></div>
+  <div class="cl"><div class="nn">3</div><p>합의서 무효·재심 (민§103, 민소§451)</p></div>
+  <div class="cl"><div class="nn">4</div><p>징벌배상·소송비 청구 철회</p></div>
+  <div class="cl"><div class="nn">5</div><p>법관 징계·금감원 직무유기 책임</p></div>
+</div>
+
+<!-- 법조 -->
+<div class="sectit"><span class="bar"></span>주요 적용 법조</div>
+<div class="law">
+  <b>형사</b> 형법 §347(사기·소송사기)·§231~234(사문서위조행사)·§155(증거인멸)·§152(위증)·§30(공동정범)·§122·§123(직무유기·직권남용) &nbsp;|&nbsp;
+  <b>자본시장법</b> §174·§178(미공개정보·부정거래)·§420(인가취소) &nbsp;|&nbsp;
+  <b>민사</b> §103·§109·§110(합의 무효·취소)·§756·§2(사용자책임·신의칙) &nbsp;|&nbsp;
+  <b>민소법</b> §451(재심) &nbsp;|&nbsp; <b>변호사법</b> §24(진실의무)
+</div>
+
+<div class="note">
+  ※ 본 자료는 원고 측이 보유한 녹취(전사본)·서면·디지털 증거를 정리한 사실관계 요약이다. 인용 발언은 음성 감정 및 원본 대조가 필요하며, 위법 여부 및 각 청구의 인용 여부에 대한 최종 판단은 수사기관·법원·감독당국의 권한에 속한다. 본 자료의 표현은 사실관계 전달을 목적으로 하며 특정인에 대한 단정적 유죄 판단을 의미하지 않는다.
+</div>
+
+<div style="text-align:center;color:#9aa1ad;font-size:11px;margin-top:24px">NH투자증권 사건 사실관계 한눈 요약 · 작성 2026.06.03 · 김성만</div>
+
+</div>
+</body>
+</html>

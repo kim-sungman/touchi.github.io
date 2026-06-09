@@ -1,0 +1,1277 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>주요 기관별 거절 및 배임 행위 정밀 분석 플로우차트</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;600;700;900&display=swap');
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    font-family: 'Noto Sans KR', sans-serif;
+    background: #0a0e1a;
+    color: #e0e6f0;
+    min-height: 100vh;
+    overflow-x: hidden;
+  }
+
+  /* Header */
+  .header {
+    background: linear-gradient(135deg, #1a0a0a 0%, #2a0a0a 50%, #1a0a2a 100%);
+    padding: 40px 20px;
+    text-align: center;
+    border-bottom: 3px solid #c41e3a;
+    position: relative;
+    overflow: hidden;
+  }
+  .header::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background: repeating-linear-gradient(90deg, transparent, transparent 100px, rgba(196,30,58,0.03) 100px, rgba(196,30,58,0.03) 101px);
+  }
+  .header h1 {
+    font-size: 2.2em;
+    font-weight: 900;
+    color: #ff4d6a;
+    text-shadow: 0 0 30px rgba(255,77,106,0.3);
+    margin-bottom: 8px;
+    position: relative;
+  }
+  .header .subtitle {
+    font-size: 1.1em;
+    color: #ff8a9e;
+    font-weight: 500;
+    letter-spacing: 2px;
+  }
+  .header .case-info {
+    margin-top: 15px;
+    font-size: 0.85em;
+    color: #8a8a9e;
+    line-height: 1.8;
+  }
+
+  /* Stats bar */
+  .stats-bar {
+    display: flex;
+    justify-content: center;
+    gap: 30px;
+    padding: 20px;
+    background: #0d1220;
+    border-bottom: 1px solid #1e2640;
+    flex-wrap: wrap;
+  }
+  .stat-item {
+    text-align: center;
+    min-width: 120px;
+  }
+  .stat-num {
+    font-size: 2em;
+    font-weight: 900;
+    color: #ff4d6a;
+  }
+  .stat-label {
+    font-size: 0.75em;
+    color: #6a7090;
+    margin-top: 4px;
+  }
+
+  /* Main flow container */
+  .flow-container {
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 40px 20px;
+  }
+
+  /* Stage sections */
+  .stage {
+    position: relative;
+    margin-bottom: 0;
+  }
+
+  .stage-header {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    padding: 15px 25px;
+    border-radius: 12px 12px 0 0;
+    position: relative;
+    z-index: 2;
+  }
+  .stage-num {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.3em;
+    font-weight: 900;
+    color: #fff;
+    flex-shrink: 0;
+  }
+  .stage-title {
+    font-size: 1.3em;
+    font-weight: 700;
+  }
+  .stage-period {
+    font-size: 0.8em;
+    opacity: 0.7;
+    margin-left: auto;
+  }
+
+  /* Stage color themes */
+  .stage-1 .stage-header { background: linear-gradient(90deg, #1a1a2e, #16213e); }
+  .stage-1 .stage-num { background: #e74c3c; box-shadow: 0 0 20px rgba(231,76,60,0.4); }
+  .stage-1 .stage-title { color: #ff6b6b; }
+
+  .stage-2 .stage-header { background: linear-gradient(90deg, #1a1a2e, #1a2630); }
+  .stage-2 .stage-num { background: #e67e22; box-shadow: 0 0 20px rgba(230,126,34,0.4); }
+  .stage-2 .stage-title { color: #ffa94d; }
+
+  .stage-3 .stage-header { background: linear-gradient(90deg, #1a1a2e, #1a2a1a); }
+  .stage-3 .stage-num { background: #8e44ad; box-shadow: 0 0 20px rgba(142,68,173,0.4); }
+  .stage-3 .stage-title { color: #c084fc; }
+
+  .stage-4 .stage-header { background: linear-gradient(90deg, #1a1a2e, #2a1a1a); }
+  .stage-4 .stage-num { background: #c0392b; box-shadow: 0 0 20px rgba(192,57,43,0.5); }
+  .stage-4 .stage-title { color: #ff4757; }
+
+  /* Flow content */
+  .stage-body {
+    background: #0f1525;
+    border: 1px solid #1e2640;
+    border-top: none;
+    border-radius: 0 0 12px 12px;
+    padding: 25px;
+    margin-bottom: 0;
+  }
+
+  /* Node cards */
+  .node-row {
+    display: flex;
+    gap: 15px;
+    flex-wrap: wrap;
+    margin-bottom: 15px;
+  }
+
+  .node {
+    background: #141b2d;
+    border: 1px solid #2a3350;
+    border-radius: 10px;
+    padding: 18px;
+    flex: 1;
+    min-width: 280px;
+    transition: all 0.3s;
+    position: relative;
+  }
+  .node:hover {
+    border-color: #4a5580;
+    transform: translateY(-2px);
+    box-shadow: 0 8px 25px rgba(0,0,0,0.3);
+  }
+
+  .node-header {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 12px;
+    padding-bottom: 10px;
+    border-bottom: 1px solid #1e2640;
+  }
+  .node-icon {
+    width: 36px;
+    height: 36px;
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.1em;
+    flex-shrink: 0;
+  }
+  .node-name {
+    font-weight: 700;
+    font-size: 0.95em;
+  }
+  .node-role {
+    font-size: 0.75em;
+    color: #6a7090;
+    margin-top: 2px;
+  }
+  .node-date {
+    font-size: 0.7em;
+    color: #4a5a80;
+    margin-left: auto;
+    text-align: right;
+    white-space: nowrap;
+  }
+
+  .node-actions {
+    list-style: none;
+    font-size: 0.82em;
+    line-height: 1.7;
+  }
+  .node-actions li {
+    padding: 3px 0;
+    padding-left: 18px;
+    position: relative;
+    color: #9aa0b8;
+  }
+  .node-actions li::before {
+    content: '▸';
+    position: absolute;
+    left: 0;
+    color: #ff4d6a;
+  }
+
+  .rejection-type {
+    display: inline-block;
+    font-size: 0.7em;
+    padding: 2px 8px;
+    border-radius: 4px;
+    font-weight: 600;
+    margin: 2px;
+  }
+  .rt-deception { background: #3d1520; color: #ff6b81; border: 1px solid #5a1a2e; }
+  .rt-silence { background: #1a2035; color: #7ec8e3; border: 1px solid #1a3050; }
+  .rt-delay { background: #352a15; color: #ffd93d; border: 1px solid #504020; }
+  .rt-selfdismiss { background: #3d1535; color: #e056a0; border: 1px solid #5a1a45; }
+  .rt-pingpong { background: #15352a; color: #4ecdc4; border: 1px solid #1a5040; }
+  .rt-cartel { background: #351515; color: #ff7979; border: 1px solid #502020; }
+  .rt-evidence { background: #2a1535; color: #a78bfa; border: 1px solid #40205a; }
+  .rt-dismiss { background: #35351a; color: #fbbf24; border: 1px solid #505020; }
+
+  .node-tags {
+    margin-top: 10px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 4px;
+  }
+
+  /* Arrow connectors */
+  .flow-arrow {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 15px 0;
+    position: relative;
+  }
+  .flow-arrow .arrow-line {
+    width: 4px;
+    height: 50px;
+    background: linear-gradient(180deg, #ff4d6a, #ff8a40);
+    border-radius: 2px;
+    position: relative;
+  }
+  .flow-arrow .arrow-line::after {
+    content: '▼';
+    position: absolute;
+    bottom: -18px;
+    left: 50%;
+    transform: translateX(-50%);
+    color: #ff8a40;
+    font-size: 1.2em;
+  }
+  .flow-arrow .arrow-label {
+    position: absolute;
+    left: 50%;
+    transform: translateX(20px);
+    background: #1a1025;
+    border: 1px solid #3a2050;
+    padding: 5px 14px;
+    border-radius: 20px;
+    font-size: 0.75em;
+    color: #c084fc;
+    font-weight: 600;
+    white-space: nowrap;
+  }
+
+  /* Ping pong arrows */
+  .pingpong-section {
+    background: #0c0f1a;
+    border: 2px dashed #e67e22;
+    border-radius: 12px;
+    padding: 20px;
+    margin: 15px 0;
+    position: relative;
+  }
+  .pingpong-title {
+    position: absolute;
+    top: -12px;
+    left: 20px;
+    background: #0c0f1a;
+    padding: 0 10px;
+    color: #e67e22;
+    font-weight: 700;
+    font-size: 0.85em;
+  }
+  .pingpong-flow {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 10px;
+    padding: 10px 0;
+  }
+  .pp-node {
+    background: #141b2d;
+    border: 1px solid #2a3350;
+    border-radius: 8px;
+    padding: 10px 16px;
+    text-align: center;
+    min-width: 120px;
+  }
+  .pp-node .pp-name { font-weight: 700; font-size: 0.85em; color: #ffa94d; }
+  .pp-node .pp-action { font-size: 0.7em; color: #6a7090; margin-top: 4px; }
+  .pp-arrow {
+    font-size: 1.5em;
+    color: #e67e22;
+    animation: bounce 1.5s infinite;
+  }
+  @keyframes bounce {
+    0%, 100% { transform: translateX(0); }
+    50% { transform: translateX(5px); }
+  }
+
+  /* Quote blocks */
+  .victim-quote {
+    background: linear-gradient(90deg, #1a0a0a, #0f1525);
+    border-left: 4px solid #ff4d6a;
+    padding: 15px 20px;
+    margin: 15px 0;
+    border-radius: 0 8px 8px 0;
+    font-style: italic;
+    color: #ff8a9e;
+    font-size: 0.85em;
+    line-height: 1.7;
+  }
+  .victim-quote .quote-meta {
+    color: #6a4050;
+    font-size: 0.8em;
+    margin-top: 8px;
+    font-style: normal;
+  }
+
+  /* Result panel */
+  .result-panel {
+    background: linear-gradient(135deg, #1a0505 0%, #200a0a 50%, #1a0a1a 100%);
+    border: 2px solid #c41e3a;
+    border-radius: 12px;
+    padding: 30px;
+    margin-top: 30px;
+    text-align: center;
+  }
+  .result-panel h2 {
+    color: #ff4d6a;
+    font-size: 1.6em;
+    margin-bottom: 15px;
+  }
+  .result-panel .result-text {
+    font-size: 1em;
+    line-height: 1.8;
+    color: #c0a0a8;
+  }
+
+  /* Timeline sidebar */
+  .timeline-bar {
+    position: fixed;
+    right: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+    display: flex;
+    flex-direction: column;
+    gap: 3px;
+    z-index: 100;
+  }
+  .tl-dot {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    cursor: pointer;
+    transition: all 0.3s;
+    border: 2px solid transparent;
+  }
+  .tl-dot:hover {
+    transform: scale(1.5);
+    border-color: #fff;
+  }
+
+  /* Summary table */
+  .summary-table {
+    width: 100%;
+    border-collapse: separate;
+    border-spacing: 0;
+    margin: 20px 0;
+    border-radius: 10px;
+    overflow: hidden;
+  }
+  .summary-table th {
+    background: #1a1035;
+    color: #c084fc;
+    padding: 12px 15px;
+    font-size: 0.8em;
+    font-weight: 600;
+    text-align: left;
+    border-bottom: 2px solid #2a1a50;
+  }
+  .summary-table td {
+    padding: 10px 15px;
+    font-size: 0.8em;
+    border-bottom: 1px solid #1e2640;
+    color: #9aa0b8;
+  }
+  .summary-table tr:nth-child(even) td { background: #0d1220; }
+  .summary-table tr:nth-child(odd) td { background: #0f1525; }
+  .summary-table tr:hover td { background: #141b2d; }
+
+  .damage-highlight {
+    color: #ff4d6a;
+    font-weight: 700;
+  }
+
+  /* Cartel diagram */
+  .cartel-diagram {
+    background: #0c0f1a;
+    border: 1px solid #1e2640;
+    border-radius: 12px;
+    padding: 30px;
+    margin: 30px 0;
+  }
+  .cartel-title {
+    text-align: center;
+    font-size: 1.2em;
+    font-weight: 700;
+    color: #ff4d6a;
+    margin-bottom: 25px;
+  }
+  .cartel-levels {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0;
+  }
+  .cartel-level {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    width: 100%;
+    max-width: 900px;
+  }
+  .cl-stage {
+    width: 35px;
+    height: 35px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 900;
+    font-size: 0.85em;
+    color: #fff;
+    flex-shrink: 0;
+  }
+  .cl-box {
+    flex: 1;
+    background: #141b2d;
+    border-radius: 8px;
+    padding: 14px 20px;
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    border: 1px solid #2a3350;
+  }
+  .cl-org { font-weight: 700; font-size: 0.9em; min-width: 140px; }
+  .cl-method { font-size: 0.8em; color: #6a7090; flex: 1; }
+  .cl-result {
+    font-size: 0.75em;
+    padding: 4px 10px;
+    border-radius: 4px;
+    font-weight: 600;
+    white-space: nowrap;
+  }
+  .cl-connector {
+    width: 4px;
+    height: 25px;
+    margin-left: 15px;
+    border-radius: 2px;
+  }
+
+  /* Legend */
+  .legend {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    padding: 15px;
+    background: #0d1220;
+    border-radius: 10px;
+    margin: 20px 0;
+    justify-content: center;
+  }
+
+  /* Responsive */
+  @media (max-width: 768px) {
+    .header h1 { font-size: 1.4em; }
+    .stats-bar { gap: 15px; }
+    .stat-num { font-size: 1.5em; }
+    .node { min-width: 100%; }
+    .timeline-bar { display: none; }
+    .cl-box { flex-direction: column; gap: 8px; }
+  }
+
+  /* Print styles */
+  @media print {
+    body { background: #fff; color: #000; }
+    .header { background: #f0f0f0; border-bottom-color: #c41e3a; }
+    .header h1 { color: #c41e3a; text-shadow: none; }
+    .stage-body, .node { background: #fff; border-color: #ddd; }
+    .timeline-bar { display: none; }
+  }
+</style>
+</head>
+<body>
+
+<!-- Header -->
+<div class="header">
+  <h1>주요 기관별 거절 및 배임 행위 정밀 분석</h1>
+  <div class="subtitle">INSTITUTIONAL REJECTION & MALFEASANCE FLOWCHART</div>
+  <div class="case-info">
+    피해자: 김성만 | 피고: NH투자증권 주식회사 | 손해액: 약 58억 원<br>
+    사건기간: 2015년 ~ 2026년 현재 (8년 이상) | 분석일: 2026. 3. 3.
+  </div>
+</div>
+
+<!-- Stats bar -->
+<div class="stats-bar">
+  <div class="stat-item">
+    <div class="stat-num">6</div>
+    <div class="stat-label">거절 기관 수</div>
+  </div>
+  <div class="stat-item">
+    <div class="stat-num">25+</div>
+    <div class="stat-label">거절 담당자</div>
+  </div>
+  <div class="stat-item">
+    <div class="stat-num">8년</div>
+    <div class="stat-label">거절 기간</div>
+  </div>
+  <div class="stat-item">
+    <div class="stat-num">58억</div>
+    <div class="stat-label">피해 손해액</div>
+  </div>
+  <div class="stat-item">
+    <div class="stat-num">100%</div>
+    <div class="stat-label">증거 기각률</div>
+  </div>
+  <div class="stat-item">
+    <div class="stat-num">10건+</div>
+    <div class="stat-label">민원/청원 횟수</div>
+  </div>
+</div>
+
+<div class="flow-container">
+
+  <!-- ═══════════════════════ STAGE 1: NH투자증권 ═══════════════════════ -->
+  <div class="stage stage-1" id="stage1">
+    <div class="stage-header">
+      <div class="stage-num">1</div>
+      <div>
+        <div class="stage-title">NH투자증권 — 범죄 발생 및 조직적 은폐</div>
+        <div style="font-size:0.8em; color:#6a7090;">내부 기만 → 허위 경위서 → 증거 조작</div>
+      </div>
+      <div class="stage-period">2015 ~ 현재</div>
+    </div>
+    <div class="stage-body">
+
+      <!-- 구미센터 -->
+      <div class="node-row">
+        <div class="node">
+          <div class="node-header">
+            <div class="node-icon" style="background:#e74c3c;">👤</div>
+            <div>
+              <div class="node-name">이정미 (부장/PB)</div>
+              <div class="node-role">NH투자증권 구미센터</div>
+            </div>
+            <div class="node-date">2015~2022</div>
+          </div>
+          <ul class="node-actions">
+            <li>"편하게 매매하세요" — 기만적 권유로 손실 확정 강요</li>
+            <li>금감원에 "민원 제기 사실 없음" 허위 보고</li>
+            <li>허위 각본 합의서 작성 기획</li>
+            <li>녹취록에서 "법무팀 지원으로 합의문 작성" 실토</li>
+            <li>법원 제출 서류에서 녹취록 선별적 제외</li>
+          </ul>
+          <div class="node-tags">
+            <span class="rejection-type rt-deception">기만</span>
+            <span class="rejection-type rt-evidence">증거은폐</span>
+            <span class="rejection-type rt-deception">허위보고</span>
+          </div>
+        </div>
+
+        <div class="node">
+          <div class="node-header">
+            <div class="node-icon" style="background:#c0392b;">👤</div>
+            <div>
+              <div class="node-name">임진기 (전 센터장)</div>
+              <div class="node-role">NH투자증권 구미센터장</div>
+            </div>
+            <div class="node-date">2018~2020</div>
+          </div>
+          <ul class="node-actions">
+            <li>이정미와 동석하여 기만적 권유 공동 실행</li>
+            <li>"고객이 주식을 안 팔아서 손해" 거짓 경위서</li>
+            <li>"합의서 작성 모른다" 책임 전면 회피</li>
+            <li>경찰 수사에서 거짓 진술</li>
+          </ul>
+          <div class="node-tags">
+            <span class="rejection-type rt-deception">기만</span>
+            <span class="rejection-type rt-deception">위증</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- 본사 -->
+      <div class="node-row">
+        <div class="node">
+          <div class="node-header">
+            <div class="node-icon" style="background:#8e44ad;">🏢</div>
+            <div>
+              <div class="node-name">법무팀 (조직적 기획)</div>
+              <div class="node-role">NH투자증권 법무팀 / 신정대 차장</div>
+            </div>
+            <div class="node-date">2019~2023</div>
+          </div>
+          <ul class="node-actions">
+            <li>합의서 사전 출력(11:05:04) → 시간정보 삭제 후 제출</li>
+            <li>금감원 제출용 거짓 경위서 작성 (5가지 허위사실)</li>
+            <li>"빼고 주는 리스트" — 핵심 녹취록 선별 제외 지시</li>
+            <li>마지막 변론 직전 대량 서류 기습 투하</li>
+            <li>KT 통신사실 조회 방해</li>
+          </ul>
+          <div class="node-tags">
+            <span class="rejection-type rt-evidence">증거조작</span>
+            <span class="rejection-type rt-deception">허위경위서</span>
+            <span class="rejection-type rt-cartel">사법방해</span>
+          </div>
+        </div>
+
+        <div class="node">
+          <div class="node-header">
+            <div class="node-icon" style="background:#e74c3c;">🏛️</div>
+            <div>
+              <div class="node-name">경영진 — 최종 묵인</div>
+              <div class="node-role">고유찬(상무) · 이용한(상무) · 전홍렬(감사위원장) · 윤병운(대표이사)</div>
+            </div>
+            <div class="node-date">2018~2026</div>
+          </div>
+          <ul class="node-actions">
+            <li><strong>고유찬</strong>: 사건 당일 보고받고도 조치 없음</li>
+            <li><strong>이용한</strong>: 내용증명 수령 후 법무팀 뒤에 숨어 무대응</li>
+            <li><strong>전홍렬</strong>: 금감원 출신 감사위원장, 감찰 의무 완전 포기</li>
+            <li><strong>윤병운</strong>: 2026.1.13 최후통첩에도 최종 침묵</li>
+            <li><strong>배성진</strong>: "전부 다 관계되니까" 실토 후 조사 거부</li>
+          </ul>
+          <div class="node-tags">
+            <span class="rejection-type rt-silence">침묵/묵인</span>
+            <span class="rejection-type rt-cartel">조직적은폐</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="victim-quote">
+        "편하게 매매하세요" — 이 한마디로 15년간 보유한 60억 원대 자산이 증발했습니다.
+        사채 8억 원, 연이자 5,000만 원... 이것이 NH투자증권이 고객에게 한 짓입니다.
+        <div class="quote-meta">— 피해자 김성만, NH투자증권에 대한 호소</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Arrow 1→2 -->
+  <div class="flow-arrow">
+    <div class="arrow-line"></div>
+    <div class="arrow-label">피해자 → 금융감독원에 민원 제기 (2020.09.23)</div>
+  </div>
+
+  <!-- ═══════════════════════ STAGE 2: 금융감독원 & 금융위 ═══════════════════════ -->
+  <div class="stage stage-2" id="stage2">
+    <div class="stage-header">
+      <div class="stage-num">2</div>
+      <div>
+        <div class="stage-title">금융감독원 & 금융위원회 — 감독권 포기 및 Ping-Pong</div>
+        <div style="font-size:0.8em; color:#6a7090;">시간끌기 → 인지 후 방기 → 셀프각하 → 카르텔</div>
+      </div>
+      <div class="stage-period">2020.09 ~ 2023.08</div>
+    </div>
+    <div class="stage-body">
+
+      <div class="node-row">
+        <div class="node">
+          <div class="node-header">
+            <div class="node-icon" style="background:#e67e22;">👤</div>
+            <div>
+              <div class="node-name">이상규 (수석조사역)</div>
+              <div class="node-role">금감원 자본시장과</div>
+            </div>
+            <div class="node-date">2020.09.23</div>
+          </div>
+          <ul class="node-actions">
+            <li>피해자의 극절한 호소 수령</li>
+            <li>"시간이 걸린다", "내용이 많다" — <strong>2년간 시간 끌기</strong></li>
+            <li>인사이동으로 도주</li>
+          </ul>
+          <div class="node-tags">
+            <span class="rejection-type rt-delay">시간끌기 2년</span>
+            <span class="rejection-type rt-silence">방관</span>
+          </div>
+        </div>
+
+        <div class="node">
+          <div class="node-header">
+            <div class="node-icon" style="background:#d35400;">👤</div>
+            <div>
+              <div class="node-name">이병용 (팀장)</div>
+              <div class="node-role">금감원 분쟁조정3국</div>
+            </div>
+            <div class="node-date">2021.04.15</div>
+          </div>
+          <ul class="node-actions">
+            <li>"기망보다 더 나쁘다" — <strong>범죄를 인지</strong></li>
+            <li>검사국 이첩 없이 "소송 가라"고 유기</li>
+            <li>수사 의뢰 하지 않음</li>
+          </ul>
+          <div class="node-tags">
+            <span class="rejection-type rt-cartel">인지 후 방기</span>
+            <span class="rejection-type rt-dismiss">직무유기</span>
+          </div>
+        </div>
+
+        <div class="node">
+          <div class="node-header">
+            <div class="node-icon" style="background:#c0392b;">👤</div>
+            <div>
+              <div class="node-name">송병욱 (팀장)</div>
+              <div class="node-role">금감원 분쟁조정3국</div>
+            </div>
+            <div class="node-date">2022.03.31</div>
+          </div>
+          <ul class="node-actions">
+            <li>"합의서가 있으니 어쩔 수 없다"</li>
+            <li>"수사권이 없다" — NH 측 논리 앵무새처럼 반복</li>
+            <li>표준화된 거절 답변 사용</li>
+          </ul>
+          <div class="node-tags">
+            <span class="rejection-type rt-silence">기계적 답변</span>
+            <span class="rejection-type rt-dismiss">감독권 포기</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="node-row">
+        <div class="node" style="border-color: #e74c3c;">
+          <div class="node-header">
+            <div class="node-icon" style="background:#e74c3c;">⚠️</div>
+            <div>
+              <div class="node-name" style="color:#ff4d6a;">유홍근 (수석조사역) — 위법 행위</div>
+              <div class="node-role">금감원 분쟁조정3국</div>
+            </div>
+            <div class="node-date">2023.07.13</div>
+          </div>
+          <ul class="node-actions">
+            <li style="color:#ff6b81;"><strong>자신에 대한 징계 청원을 직접 배당받아 2일 만에 "셀프 각하"</strong></li>
+            <li>부패방지권익위법 정면 위반</li>
+            <li>이해충돌방지법 정면 위반</li>
+            <li>"재판에서 따져라" — 도주</li>
+          </ul>
+          <div class="node-tags">
+            <span class="rejection-type rt-selfdismiss">셀프각하</span>
+            <span class="rejection-type rt-cartel">이해충돌위반</span>
+          </div>
+        </div>
+
+        <div class="node">
+          <div class="node-header">
+            <div class="node-icon" style="background:#8e44ad;">👤</div>
+            <div>
+              <div class="node-name">이형준 (조사역)</div>
+              <div class="node-role">금감원 분쟁조정3국</div>
+            </div>
+            <div class="node-date">2023.08.10</div>
+          </div>
+          <ul class="node-actions">
+            <li>"시스템상 배정" — 전임자 유홍근의 비위 덮어주기</li>
+            <li>"반복 민원이다" — 종결 처리</li>
+            <li>카르텔 행동의 전형</li>
+          </ul>
+          <div class="node-tags">
+            <span class="rejection-type rt-cartel">카르텔</span>
+            <span class="rejection-type rt-dismiss">직무배임</span>
+          </div>
+        </div>
+
+        <div class="node">
+          <div class="node-header">
+            <div class="node-icon" style="background:#e67e22;">🏢</div>
+            <div>
+              <div class="node-name">금융위원회</div>
+              <div class="node-role">김기하(총괄국) · 김필목(담당관)</div>
+            </div>
+            <div class="node-date">2023.08</div>
+          </div>
+          <ul class="node-actions">
+            <li><strong>김기하</strong>: 기피 신청된 유홍근에게 재배정 → 셀프각하 조력</li>
+            <li><strong>김필목</strong>: "청원 심의에 올라가야 된다" 인정하면서도</li>
+            <li>→ 다시 금감원으로 전화 돌림 (Ping-Pong)</li>
+          </ul>
+          <div class="node-tags">
+            <span class="rejection-type rt-pingpong">Ping-Pong</span>
+            <span class="rejection-type rt-dismiss">배정조작</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Ping-Pong diagram -->
+      <div class="pingpong-section">
+        <div class="pingpong-title">🔄 Ping-Pong 게임: 기관 간 책임 떠넘기기</div>
+        <div class="pingpong-flow">
+          <div class="pp-node">
+            <div class="pp-name">피해자 김성만</div>
+            <div class="pp-action">민원 제기</div>
+          </div>
+          <div class="pp-arrow">→</div>
+          <div class="pp-node">
+            <div class="pp-name">금감원</div>
+            <div class="pp-action">"소송 가라"</div>
+          </div>
+          <div class="pp-arrow">→</div>
+          <div class="pp-node">
+            <div class="pp-name">금융위</div>
+            <div class="pp-action">"금감원에 물어봐"</div>
+          </div>
+          <div class="pp-arrow">→</div>
+          <div class="pp-node">
+            <div class="pp-name">감사원</div>
+            <div class="pp-action">"금융위로 이첩"</div>
+          </div>
+          <div class="pp-arrow">→</div>
+          <div class="pp-node">
+            <div class="pp-name">대통령실</div>
+            <div class="pp-action">"재판 중이라 기각"</div>
+          </div>
+          <div class="pp-arrow">→</div>
+          <div class="pp-node" style="border-color:#e74c3c;">
+            <div class="pp-name" style="color:#ff4d6a;">피해자</div>
+            <div class="pp-action" style="color:#ff6b81;">완전 고립</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="victim-quote">
+        "내가 만약에 그 사람들이 잘못됐다 하면 그 회사 파산시키도록 해주세요...
+        내가 녹취록 없으면요, 내가 진짜 자살하게 돼요."
+        <div class="quote-meta">— 피해자 김성만, 금감원 이상규에게 (2020.09.23)</div>
+      </div>
+      <div class="victim-quote">
+        "아니 업무 배임 아니냐고요?" "이거 완전히 이 카르텔 아니에요?"
+        <div class="quote-meta">— 피해자 김성만, 금감원 유홍근에게 (2023.07.13)</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Arrow 2→3 -->
+  <div class="flow-arrow">
+    <div class="arrow-line"></div>
+    <div class="arrow-label">감사원 국민청원 (2023.07.18) · 대통령실 청원 (2024.10.23)</div>
+  </div>
+
+  <!-- ═══════════════════════ STAGE 3: 감사원 & 대통령실 ═══════════════════════ -->
+  <div class="stage stage-3" id="stage3">
+    <div class="stage-header">
+      <div class="stage-num">3</div>
+      <div>
+        <div class="stage-title">감사원 & 대통령실 — 최후의 보루 붕괴</div>
+        <div style="font-size:0.8em; color:#6a7090;">반송 → 기각 → 국가 감독권 포기</div>
+      </div>
+      <div class="stage-period">2023.07 ~ 2024.10</div>
+    </div>
+    <div class="stage-body">
+
+      <div class="node-row">
+        <div class="node">
+          <div class="node-header">
+            <div class="node-icon" style="background:#8e44ad;">🏛️</div>
+            <div>
+              <div class="node-name">감사원 국민청원</div>
+              <div class="node-role">최상위 사정기관</div>
+            </div>
+            <div class="node-date">2023.07.18</div>
+          </div>
+          <ul class="node-actions">
+            <li>청원 내용: "셀프 각하하는 공무원을 징계해주십시오"</li>
+            <li><strong>직접 조사 없이 반송</strong></li>
+            <li>피조사 기관인 금융위/금감원으로 다시 이첩</li>
+            <li>"범인에게 수사를 맡긴" 것과 동일</li>
+          </ul>
+          <div class="node-tags">
+            <span class="rejection-type rt-pingpong">반송</span>
+            <span class="rejection-type rt-cartel">사건덮음 협력</span>
+          </div>
+        </div>
+
+        <div class="node">
+          <div class="node-header">
+            <div class="node-icon" style="background:#9b59b6;">🏛️</div>
+            <div>
+              <div class="node-name">대통령실 공직기강비서실</div>
+              <div class="node-role">행정부 최종 감독</div>
+            </div>
+            <div class="node-date">2024.10.23</div>
+          </div>
+          <ul class="node-actions">
+            <li>청원 내용: "금감원 민원갈질에 대한 공무원 업무처리 기망 고발"</li>
+            <li><strong>"재판 중인 사안" — 기각</strong></li>
+            <li>행정부 감독 권한 스스로 포기</li>
+            <li>민원 종결 — 최종 문 닫힘</li>
+          </ul>
+          <div class="node-tags">
+            <span class="rejection-type rt-dismiss">기각</span>
+            <span class="rejection-type rt-dismiss">감독권 포기</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="victim-quote">
+        "국가의 최상위 감찰 기구까지 '모르쇠'로 일관하며 공모하거나 방조한 '침묵의 카르텔'...
+        국가가 국민의 SOS를 수신 거부한 것과 다름없습니다."
+        <div class="quote-meta">— 분석 평가</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Arrow 3→4 -->
+  <div class="flow-arrow">
+    <div class="arrow-line"></div>
+    <div class="arrow-label">소송 제기 (2022.09.02) → 1심·2심·3심 모두 기각</div>
+  </div>
+
+  <!-- ═══════════════════════ STAGE 4: 사법부 ═══════════════════════ -->
+  <div class="stage stage-4" id="stage4">
+    <div class="stage-header">
+      <div class="stage-num">4</div>
+      <div>
+        <div class="stage-title">사법부 — 적극적 은폐 가담 (1심 → 2심 → 3심)</div>
+        <div style="font-size:0.8em; color:#6a7090;">허위서면 수용 → 증거 무시 → 심리불속행 → 기본권 침해 완성</div>
+      </div>
+      <div class="stage-period">2022.09 ~ 2025</div>
+    </div>
+    <div class="stage-body">
+
+      <div class="node-row">
+        <div class="node" style="border-left: 4px solid #e74c3c;">
+          <div class="node-header">
+            <div class="node-icon" style="background:#c0392b;">⚖️</div>
+            <div>
+              <div class="node-name">1심: 서울남부지방법원</div>
+              <div class="node-role">최정인(재판장) · 임효빈 · 방민우</div>
+            </div>
+            <div class="node-date">2023.11.07<br><span style="color:#ff4d6a;">청구 전부 기각</span></div>
+          </div>
+          <ul class="node-actions">
+            <li><strong>합의서 1장을 정독하지 않음</strong></li>
+            <li>피해자 탄원서 읽지 않음</li>
+            <li>NH 법무팀의 허위 사실 5가지를 무비판적 수용</li>
+            <li>타임라인 증거(고속도로 통행시간) 무시</li>
+            <li>신용카드 사용 내역, 구글 타임라인, 통화 녹취록 전부 무시</li>
+            <li>모순된 판결: "2시간 설명 뒤 5분 만에 50억 합의가 가능"</li>
+          </ul>
+          <div class="node-tags">
+            <span class="rejection-type rt-evidence">증거 전부 무시</span>
+            <span class="rejection-type rt-deception">허위서면 수용</span>
+            <span class="rejection-type rt-cartel">기본권 침해</span>
+          </div>
+        </div>
+
+        <div class="node" style="border-left: 4px solid #e67e22;">
+          <div class="node-header">
+            <div class="node-icon" style="background:#e67e22;">⚖️</div>
+            <div>
+              <div class="node-name">2심: 서울고등법원</div>
+              <div class="node-role">판결문 확인 후 기재 예정</div>
+            </div>
+            <div class="node-date">2024.11.07<br><span style="color:#ffa94d;">항소 기각 (73% 면소)</span></div>
+          </div>
+          <ul class="node-actions">
+            <li>1심의 모든 오류를 그대로 추인</li>
+            <li>피해자 탄원서 명시적으로 비판됨에도 미읽음</li>
+            <li>마지막 변론 직전 대량 문서 투하 용인</li>
+            <li>"빼고 주는 리스트" — 불공정 문서 제출 묵인</li>
+            <li>상급심으로서 심사 역할 완전 방기</li>
+          </ul>
+          <div class="node-tags">
+            <span class="rejection-type rt-cartel">1심 오류 추인</span>
+            <span class="rejection-type rt-dismiss">상급심 방기</span>
+          </div>
+        </div>
+
+        <div class="node" style="border-left: 4px solid #c0392b;">
+          <div class="node-header">
+            <div class="node-icon" style="background:#8b0000;">⚖️</div>
+            <div>
+              <div class="node-name">3심: 대법원</div>
+              <div class="node-role">판결문 확인 후 기재 예정</div>
+            </div>
+            <div class="node-date">2025<br><span style="color:#ff4757;">심리불속행 기각</span></div>
+          </div>
+          <ul class="node-actions">
+            <li><strong>실질적 재판 없이 기각</strong></li>
+            <li>하급심의 명백한 오류 무시</li>
+            <li>피해자의 최후 법정 호소 기회 완전 박탈</li>
+            <li>1심·2심 기본권 침해를 최종 확정</li>
+          </ul>
+          <div class="node-tags">
+            <span class="rejection-type rt-dismiss">심리불속행</span>
+            <span class="rejection-type rt-cartel">기본권침해 완성</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="victim-quote">
+        "제가 합의서 1장을 제발 한번 정독하고 6하원칙의 문서가 맞는지를 한번 검토해달라는
+        울부짖음도 그 잘난 합의서 한번 읽고 생각조차 하지 않은 판결을 한 최고 기관이란게
+        믿어지지 않는 사실"
+        <div class="quote-meta">— 피해자 김성만, 1심 판결에 대한 호소</div>
+      </div>
+      <div class="victim-quote">
+        "미필적 고의로 유도한 정말 악독한 법파리치 행동으로 서울고등법원 판사까지
+        농락하는 재판 방해를 밥먹 듯 한다"
+        <div class="quote-meta">— 피해자 김성만, 2심 재판 과정에 대한 지적</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ═══════════════════════ CARTEL MECHANISM DIAGRAM ═══════════════════════ -->
+  <div class="cartel-diagram">
+    <div class="cartel-title">🔗 침묵의 카르텔 (The Cartel of Silence) — 6단계 은폐 메커니즘</div>
+
+    <div class="cartel-levels">
+      <div class="cartel-level">
+        <div class="cl-stage" style="background:#e74c3c;">1</div>
+        <div class="cl-box">
+          <div class="cl-org" style="color:#ff6b6b;">NH투자증권</div>
+          <div class="cl-method">내부 은폐 → 거짓 경위서 → 증거 조작 → 법무팀 기획</div>
+          <div class="cl-result" style="background:#3d1520; color:#ff6b81;">범죄 은폐</div>
+        </div>
+      </div>
+      <div class="cl-connector" style="background:linear-gradient(#e74c3c, #e67e22);margin-left:32px;"></div>
+
+      <div class="cartel-level">
+        <div class="cl-stage" style="background:#e67e22;">2</div>
+        <div class="cl-box">
+          <div class="cl-org" style="color:#ffa94d;">금융감독원</div>
+          <div class="cl-method">2년 시간끌기 → 인지 후 방기 → 셀프각하 → 카르텔</div>
+          <div class="cl-result" style="background:#352a15; color:#ffd93d;">감독 포기</div>
+        </div>
+      </div>
+      <div class="cl-connector" style="background:linear-gradient(#e67e22, #f39c12);margin-left:32px;"></div>
+
+      <div class="cartel-level">
+        <div class="cl-stage" style="background:#f39c12;">3</div>
+        <div class="cl-box">
+          <div class="cl-org" style="color:#fcd34d;">금융위원회</div>
+          <div class="cl-method">형식적 이첩 → Ping-Pong → 기피 대상 재배정 조작</div>
+          <div class="cl-result" style="background:#35351a; color:#fbbf24;">책임 전가</div>
+        </div>
+      </div>
+      <div class="cl-connector" style="background:linear-gradient(#f39c12, #8e44ad);margin-left:32px;"></div>
+
+      <div class="cartel-level">
+        <div class="cl-stage" style="background:#8e44ad;">4</div>
+        <div class="cl-box">
+          <div class="cl-org" style="color:#c084fc;">감사원</div>
+          <div class="cl-method">직접 조사 없이 반송 → 피조사 기관으로 다시 이첩</div>
+          <div class="cl-result" style="background:#2a1535; color:#a78bfa;">사건 덮음</div>
+        </div>
+      </div>
+      <div class="cl-connector" style="background:linear-gradient(#8e44ad, #9b59b6);margin-left:32px;"></div>
+
+      <div class="cartel-level">
+        <div class="cl-stage" style="background:#9b59b6;">5</div>
+        <div class="cl-box">
+          <div class="cl-org" style="color:#d8b4fe;">대통령실</div>
+          <div class="cl-method">"재판 중" 핑계 → 기각 → 행정부 감독권 자진 포기</div>
+          <div class="cl-result" style="background:#1a2035; color:#7ec8e3;">감독권 포기</div>
+        </div>
+      </div>
+      <div class="cl-connector" style="background:linear-gradient(#9b59b6, #c0392b);margin-left:32px;"></div>
+
+      <div class="cartel-level">
+        <div class="cl-stage" style="background:#c0392b;">6</div>
+        <div class="cl-box" style="border-color:#c0392b;">
+          <div class="cl-org" style="color:#ff4757;">사법부 (3심 전부)</div>
+          <div class="cl-method">증거 무시 → 허위서면 수용 → 부당 판결 → 심리불속행</div>
+          <div class="cl-result" style="background:#3d1520; color:#ff6b81;">기본권 침해</div>
+        </div>
+      </div>
+    </div>
+
+    <div style="text-align:center; margin-top:25px; padding-top:20px; border-top:2px solid #c41e3a;">
+      <div style="font-size:1.3em; font-weight:900; color:#ff4d6a;">▼ 최종 결과 ▼</div>
+      <div style="font-size:1em; color:#ff8a9e; margin-top:10px;">피해자 완전 고립 · 기본권 침해 완성 · 국가 시스템 총체적 파산</div>
+    </div>
+  </div>
+
+  <!-- ═══════════════════════ SUMMARY TABLE ═══════════════════════ -->
+  <h2 style="color:#c084fc; margin:30px 0 15px; font-size:1.3em;">📊 기관별 거절 유형 종합 분석표</h2>
+
+  <table class="summary-table">
+    <thead>
+      <tr>
+        <th>거절 유형</th>
+        <th>기관</th>
+        <th>담당자</th>
+        <th>구체적 방식</th>
+        <th>위법성</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="rejection-type rt-deception">기만</span></td>
+        <td>NH투자증권</td>
+        <td>이정미, 임진기</td>
+        <td>거짓 권유, 허위 경위서, 위증</td>
+        <td class="damage-highlight">형법 §347 사기</td>
+      </tr>
+      <tr>
+        <td><span class="rejection-type rt-evidence">증거 조작</span></td>
+        <td>NH투자증권 법무팀</td>
+        <td>신정대, 법무팀</td>
+        <td>녹취록 선별 제외, 시간정보 삭제, 허위 경위서 5건</td>
+        <td class="damage-highlight">형법 §155 증거인멸</td>
+      </tr>
+      <tr>
+        <td><span class="rejection-type rt-silence">침묵/묵인</span></td>
+        <td>NH투자증권 경영진</td>
+        <td>고유찬, 이용한, 전홍렬, 윤병운</td>
+        <td>내용증명 미답변, 감찰 의무 포기, 최후통첩 묵살</td>
+        <td class="damage-highlight">상법 §401 이사 책임</td>
+      </tr>
+      <tr>
+        <td><span class="rejection-type rt-delay">시간끌기</span></td>
+        <td>금감원</td>
+        <td>이상규</td>
+        <td>2년간 "시간이 걸린다" 반복 후 인사이동 도주</td>
+        <td class="damage-highlight">형법 §122 직무유기</td>
+      </tr>
+      <tr>
+        <td><span class="rejection-type rt-cartel">인지 후 방기</span></td>
+        <td>금감원</td>
+        <td>이병용</td>
+        <td>"기망보다 더 나쁘다" 인지 후 검사국 이첩 없이 유기</td>
+        <td class="damage-highlight">형법 §122 직무유기</td>
+      </tr>
+      <tr>
+        <td><span class="rejection-type rt-selfdismiss">셀프 각하</span></td>
+        <td>금감원</td>
+        <td>유홍근</td>
+        <td>자신에 대한 청원을 2일 만에 직접 각하</td>
+        <td class="damage-highlight">부패방지법 위반</td>
+      </tr>
+      <tr>
+        <td><span class="rejection-type rt-cartel">카르텔</span></td>
+        <td>금감원</td>
+        <td>이형준</td>
+        <td>전임자 비위 덮어주기, "반복 민원" 종결</td>
+        <td class="damage-highlight">형법 §123 직권남용</td>
+      </tr>
+      <tr>
+        <td><span class="rejection-type rt-pingpong">Ping-Pong</span></td>
+        <td>금융위원회</td>
+        <td>김필목, 김기하</td>
+        <td>형식적 이첩, 기피 대상 재배정, 책임 떠넘기기</td>
+        <td class="damage-highlight">금소법 위반</td>
+      </tr>
+      <tr>
+        <td><span class="rejection-type rt-pingpong">반송</span></td>
+        <td>감사원</td>
+        <td>—</td>
+        <td>직접 조사 없이 피조사 기관으로 재이첩</td>
+        <td class="damage-highlight">감사원법 위반</td>
+      </tr>
+      <tr>
+        <td><span class="rejection-type rt-dismiss">기각</span></td>
+        <td>대통령실</td>
+        <td>—</td>
+        <td>"재판 중" 핑계로 기각, 감독권 자진 포기</td>
+        <td class="damage-highlight">헌법 §10 기본권</td>
+      </tr>
+      <tr>
+        <td><span class="rejection-type rt-evidence">증거 무시</span></td>
+        <td>사법부 1심</td>
+        <td>최정인, 임효빈, 방민우</td>
+        <td>타임라인·녹취록·카드내역 전부 무시, 합의서 미정독</td>
+        <td class="damage-highlight">헌법 §27 재판청구권</td>
+      </tr>
+      <tr>
+        <td><span class="rejection-type rt-cartel">1심 추인</span></td>
+        <td>사법부 2심</td>
+        <td>확인 필요</td>
+        <td>1심 오류 그대로 추인, 불공정 문서 투하 묵인</td>
+        <td class="damage-highlight">헌법 §103 독립심판</td>
+      </tr>
+      <tr>
+        <td><span class="rejection-type rt-dismiss">심리불속행</span></td>
+        <td>사법부 3심</td>
+        <td>확인 필요</td>
+        <td>실질적 재판 없이 기각, 기본권 침해 최종 완성</td>
+        <td class="damage-highlight">헌법 §27 재판청구권</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <!-- Legend -->
+  <div class="legend">
+    <span class="rejection-type rt-deception">기만/허위</span>
+    <span class="rejection-type rt-evidence">증거조작/무시</span>
+    <span class="rejection-type rt-silence">침묵/방관</span>
+    <span class="rejection-type rt-delay">시간끌기</span>
+    <span class="rejection-type rt-selfdismiss">셀프각하</span>
+    <span class="rejection-type rt-pingpong">Ping-Pong/반송</span>
+    <span class="rejection-type rt-cartel">카르텔/추인</span>
+    <span class="rejection-type rt-dismiss">기각/직무유기</span>
+  </div>
+
+  <!-- ═══════════════════════ RESULT PANEL ═══════════════════════ -->
+  <div class="result-panel">
+    <h2>⚠️ 결론: 국가 시스템의 총체적 파산</h2>
+    <div class="result-text">
+      <p style="margin-bottom:15px;">
+        <strong style="color:#ff4d6a;">6개 기관</strong>, <strong style="color:#ff4d6a;">25명 이상의 담당자</strong>가
+        <strong style="color:#ff4d6a;">8년간</strong> 연쇄적으로 거절·방관·은폐에 가담했습니다.
+      </p>
+      <p style="margin-bottom:15px;">
+        NH투자증권의 기만 → 금감원의 직무유기 → 금융위의 Ping-Pong → 감사원의 반송 → 대통령실의 기각 → 사법부의 증거 무시까지,<br>
+        <strong style="color:#ff8a9e;">모든 구제 수단이 체계적으로 차단</strong>되었습니다.
+      </p>
+      <p style="margin-bottom:15px;">
+        이것은 단순한 "민사 분쟁"이 아닙니다.<br>
+        <strong style="color:#ff4d6a; font-size:1.1em;">금융사의 조직적 범죄 + 감독기관의 직무유기 + 사법부의 기본권 침해</strong>가 결합된<br>
+        <strong style="color:#ffa94d;">「침묵의 카르텔」</strong>입니다.
+      </p>
+      <p style="color:#6a5070; font-size:0.85em; margin-top:20px;">
+        분석일: 2026. 3. 3. | 피해자: 김성만 | 손해액: 약 58억 원 + 사채 8억 원 + 추가 손실<br>
+        본 플로우차트는 원본 자료에 기반한 재분석·재해석 결과물입니다.
+      </p>
+    </div>
+  </div>
+
+</div>
+
+<!-- Timeline dots -->
+<div class="timeline-bar">
+  <div class="tl-dot" style="background:#e74c3c;" title="1단계: NH투자증권" onclick="document.getElementById('stage1').scrollIntoView({behavior:'smooth'})"></div>
+  <div class="tl-dot" style="background:#e67e22;" title="2단계: 금감원/금융위" onclick="document.getElementById('stage2').scrollIntoView({behavior:'smooth'})"></div>
+  <div class="tl-dot" style="background:#8e44ad;" title="3단계: 감사원/대통령실" onclick="document.getElementById('stage3').scrollIntoView({behavior:'smooth'})"></div>
+  <div class="tl-dot" style="background:#c0392b;" title="4단계: 사법부" onclick="document.getElementById('stage4').scrollIntoView({behavior:'smooth'})"></div>
+</div>
+
+</body>
+</html>

@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>책임 떠넘기기(핑퐁) 전모 — NH지주 내부고발부터 외부 5개 기관까지</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Black+Han+Sans&family=Noto+Sans+KR:wght@400;500;700;900&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#f7f8fb; --ink:#1c2230; --dim:#5b6472;
+  --navy:#1f3864; --navy2:#2e4a7a; --navybg:#e8edf6;
+  --red:#b3271e; --redbg:#fbeae8; --redline:#dfa7a0;
+  --org:#b4641a; --orgbg:#fbeede;
+  --grn:#1f7a3d; --gray:#6b7280; --card:#ffffff; --line:#e3e7ee;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:var(--bg);font-family:'Noto Sans KR',sans-serif;color:var(--ink);line-height:1.6}
+.wrap{max-width:980px;margin:0 auto;padding:0 18px 70px}
+header.hero{background:linear-gradient(135deg,#16233f,#27406e);color:#fff;border-radius:0 0 20px 20px;padding:32px 30px 26px;margin-bottom:24px;box-shadow:0 6px 22px rgba(20,30,55,.22)}
+header.hero .tag{font-size:12px;letter-spacing:3px;color:#9fb4d8;font-weight:700}
+header.hero h1{font-family:'Black Han Sans',sans-serif;font-size:29px;margin:8px 0 6px;line-height:1.28}
+header.hero .sub{font-size:14.5px;color:#cdd9ef}
+.sectit{font-family:'Black Han Sans',sans-serif;font-size:20px;color:var(--navy);margin:32px 0 6px;display:flex;align-items:center;gap:10px}
+.sectit .bar{width:6px;height:22px;background:var(--red);border-radius:3px}
+.lead{color:var(--dim);font-size:14px;margin:4px 0 16px}
+/* node chain */
+.chain{display:flex;flex-direction:column;gap:0}
+.node{background:var(--card);border-radius:12px;padding:14px 18px 14px 56px;position:relative;box-shadow:0 2px 10px rgba(0,0,0,.06);border:1.5px solid var(--line)}
+.node .step{position:absolute;left:12px;top:14px;width:30px;height:30px;border-radius:50%;background:var(--navy);color:#fff;font-weight:900;display:flex;align-items:center;justify-content:center;font-size:14px}
+.node.kim .step{background:var(--grn)}
+.node.bad{border-color:var(--redline);background:var(--redbg)}
+.node.bad .step{background:var(--red)}
+.node h4{font-size:15.5px;margin-bottom:2px}
+.node .meta{font-size:12px;color:var(--dim);margin-bottom:4px}
+.node p{font-size:13px;color:#3a4150}
+.node .q{color:#7a1c12;font-weight:500;font-style:italic}
+.arrow{text-align:center;font-size:22px;color:#c0c5d0;line-height:1;margin:4px 0}
+.arrow.back{color:var(--red);font-weight:900}
+.loopbadge{display:inline-block;background:var(--red);color:#fff;font-size:11px;border-radius:5px;padding:2px 9px;font-weight:700;margin-left:8px}
+.cry{background:#fff;border-left:6px solid var(--red);border-radius:8px;padding:14px 18px;margin:14px 0;box-shadow:0 2px 10px rgba(0,0,0,.05)}
+.cry .t{font-size:16px;color:#7a1c12;font-style:italic;font-weight:500}
+.cry .s{font-size:12px;color:var(--gray);margin-top:6px}
+/* ext agencies */
+.ext{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
+.ag{background:var(--card);border-radius:12px;padding:13px 14px;box-shadow:0 2px 10px rgba(0,0,0,.05);border-top:5px solid var(--org)}
+.ag .n{font-family:'Black Han Sans';font-size:14px;color:var(--navy)}
+.ag p{font-size:12px;color:#444;margin-top:4px}
+.ag .act{display:inline-block;margin-top:6px;font-size:10.5px;color:#fff;background:var(--org);border-radius:4px;padding:1px 7px}
+.summary{background:linear-gradient(135deg,#8e1b12,#b3271e);color:#fff;border-radius:14px;padding:20px 24px;margin-top:18px;box-shadow:0 5px 18px rgba(179,39,30,.3)}
+.summary .t{font-family:'Black Han Sans';font-size:20px}
+.summary p{font-size:14px;margin-top:8px;opacity:.95}
+.note{margin-top:24px;font-size:11px;color:var(--gray);background:#fff;border-radius:8px;padding:12px 16px;border-left:4px solid var(--navy)}
+@media(max-width:680px){.ext{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<header class="hero">
+  <div class="tag">책임 떠넘기기 · PING-PONG MAP</div>
+  <h1>고발장이 피고발인의 책상으로 돌아오다<br><span style="font-size:18px;color:#cdd9ef;font-weight:500">— NH지주 내부고발부터 외부 5개 기관까지, 책임 떠넘기기 전모</span></h1>
+  <div class="sub">한 시민의 직원 비위 내부고발이 어디에서도 처리되지 않고, 결국 피고발 회사·담당자에게 되돌아온 과정을 정리한다.</div>
+</header>
+
+<!-- ===== 내부 핑퐁: NH지주 ↔ NH투자증권 ===== -->
+<div class="sectit"><span class="bar"></span>① NH 내부 핑퐁 — 지주회사가 피고발 회사로 되돌리다</div>
+<p class="lead">김성만은 NH투자증권 직원의 비위를 <b>지주회사(NH지주)</b>에 직접 내부고발했으나, 그 고발은 다시 <b>피고발 회사(NH투자증권)</b>의 컴플라이언스부 담당자에게 배당되었다.</p>
+
+<div class="chain">
+  <div class="node kim">
+    <div class="step">1</div>
+    <h4>김성만 → NH지주 ‘윤리경영’ 내부제보</h4>
+    <div class="meta">2022.6.22 · 직원 비위(허위 컨설팅·합의서·민원 무마) 내부고발</div>
+    <p>피해자가 개별 직원·지점을 넘어, 그룹 차원의 윤리경영 창구에 직원 비위를 정식 제보.</p>
+  </div>
+  <div class="arrow back">↓ &nbsp;되돌림(재배당)&nbsp; <span class="loopbadge">피고발 회사로 회귀</span></div>
+  <div class="node bad">
+    <div class="step">2</div>
+    <h4>NH지주 → 다시 NH투자증권 컴플라이언스부 배성진에게 배당</h4>
+    <div class="meta">2022.8~9 · 배성진(NH투자증권 컴플라이언스부 차장) 통화</div>
+    <p>지주회사가 직접 조사하지 않고, <b>비위가 발생한 바로 그 회사</b>의 내부 부서로 사건을 되돌림 — 사실상 ‘피고발인의 책상으로 회귀’.</p>
+  </div>
+  <div class="arrow back">↓ &nbsp;다시 금소부로 이첩 시도&nbsp; <span class="loopbadge">동일 창구 재회귀</span></div>
+  <div class="node bad">
+    <div class="step">3</div>
+    <h4>컴플라이언스부 → 금융소비자보호부(금소부)로 재이첩</h4>
+    <div class="meta">2022 · 이미 민원이 처리되지 않았던 그 부서로 재차 회송</div>
+    <p>이미 민원을 처리하지 않은 금소부로 위법 행위를 다시 보내는 구조 → 처리 가능성 자체가 봉쇄.</p>
+  </div>
+</div>
+
+<div class="cry">
+  <div class="t">“위법 행위를 (이미 처리 안 한) 금소부에 다시 보내면 일이 처리 되겠어요?”</div>
+  <div class="s">— 김성만 (배성진/내부 처리에 대한 절규)</div>
+</div>
+<div class="cry">
+  <div class="t">“내가 오죽했으면 NH지주까지 민원을 넣었는데, 그것도 NH투자증권 원래 했는 사람 쪽으로 다시 보내 가지고 그렇게 하더라고요.”</div>
+  <div class="s">— 김성만, 2023.7.13 (대통령실 공직기강 제보 통화 중)</div>
+</div>
+<div class="cry">
+  <div class="t">“회사가 전부 다 모여가지고 고객 한 명을 그런 식으로 죽이고, 그 서류 한 장 받으면 끝난다 하는 거… 그게 회사가 그 존립 이유가 있어요?”</div>
+  <div class="s">— 김성만, 2022.9.13 (NH 컴플라이언스 배성진에게)</div>
+</div>
+
+<!-- ===== 외부 핑퐁: 5개 기관 ===== -->
+<div class="sectit"><span class="bar"></span>② 외부 5개 기관 핑퐁 — 어느 기관도 받지 않다</div>
+<p class="lead">내부 회귀로 막힌 뒤, 외부 기관에 호소했으나 동일하게 떠넘겨졌다.</p>
+<div class="ext">
+  <div class="ag"><div class="n">금융감독원</div><p>20개월 지연·대면조사 0회 → 셀프 각하. 이병용 “기망보다 나쁘다” 인정에도 결정 회피.</p><span class="act">지연·각하</span></div>
+  <div class="ag"><div class="n">금융위원회</div><p>청원을 심의 대신 자본시장과→금감원 감찰실·분쟁조정국으로 이첩(피고발인 책상 회귀).</p><span class="act">이첩·전가</span></div>
+  <div class="ag"><div class="n">감사원</div><p>공무원 카르텔 감사 청원을 직접 감사하지 않고 금융위로 이송.</p><span class="act">방기·이송</span></div>
+  <div class="ag"><div class="n">대통령실 공직기강</div><p>제보·청원을 ‘재판 중·사생활’ 사유로 각하.</p><span class="act">각하</span></div>
+  <div class="ag"><div class="n">사법부</div><p>위조 의혹 합의서·일방 참고서면을 채택하여 청구 기각.</p><span class="act">절차 쟁점</span></div>
+</div>
+
+<!-- ===== 결론 ===== -->
+<div class="sectit"><span class="bar"></span>핵심 — 내부·외부 모두 ‘피고발인 책상으로 회귀’</div>
+<div class="summary">
+  <div class="t">고발은 어디로 가도 되돌아왔다.</div>
+  <p>그룹 윤리경영(NH지주)에 낸 직원 비위 고발은 <b>피고발 회사(NH투자증권) 컴플라이언스부 → 금소부</b>로 되돌아왔고, 외부 5개 기관 역시 ‘이미 합의’ 한 줄로 떠넘기거나 각하했다. 내부 자정도, 외부 감독도 작동하지 않은 ‘책임 떠넘기기’ 구조가, 한 시민의 정당한 권리구제를 8년간 봉쇄하였다.</p>
+</div>
+
+<div class="note">
+  ※ 본 자료는 원고 측이 보유한 녹취(전사본)·내부제보 기록·통화 내역을 정리한 사실관계 요약이다. 인용 발언은 음성 감정 및 원본 대조가 필요하며, 표현은 사실관계 전달을 목적으로 하고 특정인에 대한 단정적 유죄 판단을 의미하지 않는다. 처리 절차의 적정성에 대한 최종 판단은 감독당국·수사기관·법원의 권한에 속한다.
+</div>
+<div style="text-align:center;color:#9aa1ad;font-size:11px;margin-top:22px">책임 떠넘기기(핑퐁) 전모 · NH지주 내부고발 포함 · 작성 2026.06.03 · 김성만</div>
+
+</div>
+</body>
+</html>

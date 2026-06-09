@@ -1,0 +1,416 @@
+<!DOCTYPE html>
+<!-- saved from url=(0496)file:///Y:/NAS-%EC%9E%91%EC%97%85%EB%B0%A9/NAS-nh%ED%88%AC%EC%9E%90%EC%A6%9D%EA%B6%8C/7%EC%B0%A8-%EC%B5%9C%EC%A2%85%EC%A0%9C%EC%B6%9C%EC%84%9C%EB%A5%98%EC%B7%A8%ED%95%A9-8%EB%85%84%EA%B0%84%EC%A2%85%EC%A7%80%EB%B6%80-260519/cowork-%EA%B3%B5%EC%9C%A0%ED%8F%B4%EB%93%9C/%EB%B6%84%EC%84%9D%EB%B3%B4%EA%B3%A0%EC%84%9C/cowork-claude/html/NH%ED%88%AC%EC%9E%90%EC%A6%9D%EA%B6%8C%20%EB%AF%BC%EC%9B%90%EC%B2%98%EB%A6%AC%C2%B7%EB%B0%B0%EC%83%81%20YES_NO%20%ED%94%8C%EB%A1%9C%EC%9A%B0%EC%B0%A8%ED%8A%B8.html -->
+<html lang="ko"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>NH투자증권 민원처리·배상 YES/NO 플로우차트</title>
+<link href="./NH투자증권 민원처리·배상 YES_NO 플로우차트-260603_files/css2" rel="stylesheet">
+<style>
+  :root {
+    --bg: #faf9f6;
+    --line: #2b2b2b;
+    --process-bg: #fff;
+    --process-border: #333;
+    --decision-bg: #fff;
+    --decision-border: #333;
+    --start-bg: #fff;
+    --yes-color: #2e7d32;
+    --no-color: #c62828;
+    --yes-bg: #e8f5e9;
+    --no-bg: #ffebee;
+    --end-good: #2e7d32;
+    --end-bad: #c62828;
+    --dim: #777;
+    --accent: #1565c0;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    background: var(--bg);
+    font-family: 'Noto Sans KR', sans-serif;
+    color: var(--line);
+    min-height: 100vh;
+  }
+
+  .page-title {
+    text-align: center;
+    padding: 36px 20px 10px;
+  }
+  .page-title h1 {
+    font-family: 'Black Han Sans', sans-serif;
+    font-size: 26px;
+    letter-spacing: 1px;
+    color: #1a1a1a;
+  }
+  .page-title .sub {
+    font-size: 13px;
+    color: var(--dim);
+    margin-top: 6px;
+  }
+
+  svg {
+    display: block;
+    margin: 0 auto;
+  }
+
+  /* Tooltip */
+  .node:hover { cursor: pointer; }
+  .node:hover .box { filter: drop-shadow(0 2px 8px rgba(0,0,0,0.12)); }
+</style>
+</head>
+<body>
+
+<div class="page-title">
+  <h1>NH투자증권 민원처리·배상 YES / NO 플로우차트</h1>
+  <div class="sub">2017.11 ~ 2026 현재 | 모든 분기점에서 NO → 피해 확대 · 권리구제 거부</div>
+</div>
+
+<svg viewBox="0 0 920 2350" width="920" height="2350" xmlns="http://www.w3.org/2000/svg" style="max-width:100%;">
+  <defs>
+    <marker id="arrow" markerWidth="10" markerHeight="7" refX="10" refY="3.5" orient="auto">
+      <polygon points="0 0, 10 3.5, 0 7" fill="#333"></polygon>
+    </marker>
+    <marker id="arrow-green" markerWidth="10" markerHeight="7" refX="10" refY="3.5" orient="auto">
+      <polygon points="0 0, 10 3.5, 0 7" fill="#2e7d32"></polygon>
+    </marker>
+    <marker id="arrow-red" markerWidth="10" markerHeight="7" refX="10" refY="3.5" orient="auto">
+      <polygon points="0 0, 10 3.5, 0 7" fill="#c62828"></polygon>
+    </marker>
+    <filter id="shadow" x="-4%" y="-4%" width="108%" height="108%">
+      <fedropshadow dx="1" dy="2" stdDeviation="2" flood-opacity="0.08"></fedropshadow>
+    </filter>
+    <style>
+      .label { font-family: 'Noto Sans KR', sans-serif; font-size: 13px; fill: #333; text-anchor: middle; }
+      .label-sm { font-family: 'Noto Sans KR', sans-serif; font-size: 11px; fill: #777; text-anchor: middle; }
+      .label-date { font-family: 'Noto Sans KR', sans-serif; font-size: 10px; fill: #999; text-anchor: middle; }
+      .label-yes { font-family: 'Noto Sans KR', sans-serif; font-size: 12px; fill: #2e7d32; font-weight: 700; }
+      .label-no { font-family: 'Noto Sans KR', sans-serif; font-size: 12px; fill: #c62828; font-weight: 700; }
+      .label-bold { font-family: 'Noto Sans KR', sans-serif; font-size: 13px; fill: #333; font-weight: 700; text-anchor: middle; }
+      .label-end { font-family: 'Noto Sans KR', sans-serif; font-size: 12px; fill: #fff; text-anchor: middle; font-weight: 700; }
+      .label-end-text { font-family: 'Noto Sans KR', sans-serif; font-size: 10px; fill: #fff; text-anchor: middle; }
+      .process-text { font-family: 'Noto Sans KR', sans-serif; font-size: 12.5px; fill: #333; text-anchor: middle; }
+      .decision-text { font-family: 'Noto Sans KR', sans-serif; font-size: 12px; fill: #333; text-anchor: middle; font-weight: 500; }
+      .person-text { font-family: 'Noto Sans KR', sans-serif; font-size: 10.5px; fill: #c62828; text-anchor: middle; font-weight: 700; }
+    </style>
+  </defs>
+
+  <!-- ================= START ================= -->
+  <ellipse cx="340" cy="40" rx="70" ry="28" fill="#fff" stroke="#333" stroke-width="2" filter="url(#shadow)"></ellipse>
+  <text x="340" y="44" class="label-bold">Start</text>
+  <text x="340" y="58" class="label-date">2017.11</text>
+
+  <!-- Arrow down -->
+  <line x1="340" y1="68" x2="340" y2="100" stroke="#333" stroke-width="2" marker-end="url(#arrow)"></line>
+
+  <!-- ================= PROCESS: 투자시작 ================= -->
+  <rect x="210" y="100" width="260" height="54" rx="4" fill="#fff" stroke="#333" stroke-width="2" filter="url(#shadow)"></rect>
+  <text x="340" y="122" class="process-text">이정미: 허위 수익률 보장 발언</text>
+  <text x="340" y="140" class="label-sm">"대주주 회피 가능, 수익 보장"</text>
+
+  <line x1="340" y1="154" x2="340" y2="190" stroke="#333" stroke-width="2" marker-end="url(#arrow)"></line>
+
+  <!-- ================= DECISION 1: 매도 가능? ================= -->
+  <polygon points="340,190 470,245 340,300 210,245" fill="#fff" stroke="#333" stroke-width="2" filter="url(#shadow)"></polygon>
+  <text x="340" y="240" class="decision-text">매도 지시</text>
+  <text x="340" y="256" class="decision-text">이행 여부?</text>
+
+  <!-- YES → right -->
+  <line x1="470" y1="245" x2="600" y2="245" stroke="#2e7d32" stroke-width="2" marker-end="url(#arrow-green)"></line>
+  <text x="520" y="237" class="label-yes">YES</text>
+  <rect x="600" y="222" width="200" height="46" rx="4" fill="#e8f5e9" stroke="#2e7d32" stroke-width="1.5"></rect>
+  <text x="700" y="243" class="process-text" style="fill:#2e7d32">정상 매도 → 손실 최소화</text>
+  <text x="700" y="258" class="label-date" style="fill:#2e7d32">예상 손실: 0원</text>
+  <!-- end circle -->
+  <line x1="800" y1="245" x2="860" y2="245" stroke="#2e7d32" stroke-width="1.5" marker-end="url(#arrow-green)"></line>
+  <circle cx="885" cy="245" r="22" fill="#2e7d32"></circle>
+  <text x="885" y="249" class="label-end">End</text>
+
+  <!-- NO → down -->
+  <line x1="340" y1="300" x2="340" y2="340" stroke="#c62828" stroke-width="2" marker-end="url(#arrow-red)"></line>
+  <text x="355" y="320" class="label-no">NO</text>
+
+  <!-- ================= PROCESS: 본사 승인 대기 ================= -->
+  <rect x="210" y="340" width="260" height="54" rx="4" fill="#ffebee" stroke="#c62828" stroke-width="1.5" filter="url(#shadow)"></rect>
+  <text x="340" y="362" class="process-text">임진기: "본사 승인 대기" 거짓말</text>
+  <text x="340" y="380" class="person-text">1년간 반복 → 54.5억 추가 손실</text>
+
+  <line x1="340" y1="394" x2="340" y2="430" stroke="#333" stroke-width="2" marker-end="url(#arrow)"></line>
+
+  <!-- ================= DECISION 2: 합의서 공정? ================= -->
+  <polygon points="340,430 470,485 340,540 210,485" fill="#fff" stroke="#333" stroke-width="2" filter="url(#shadow)"></polygon>
+  <text x="340" y="480" class="decision-text">합의서</text>
+  <text x="340" y="496" class="decision-text">공정 체결?</text>
+
+  <!-- YES → right -->
+  <line x1="470" y1="485" x2="600" y2="485" stroke="#2e7d32" stroke-width="2" marker-end="url(#arrow-green)"></line>
+  <text x="520" y="477" class="label-yes">YES</text>
+  <rect x="600" y="462" width="200" height="46" rx="4" fill="#e8f5e9" stroke="#2e7d32" stroke-width="1.5"></rect>
+  <text x="700" y="483" class="process-text" style="fill:#2e7d32">적정 배상금 합의</text>
+  <text x="700" y="498" class="label-date" style="fill:#2e7d32">예상 배상: 약 60억원</text>
+  <line x1="800" y1="485" x2="860" y2="485" stroke="#2e7d32" stroke-width="1.5" marker-end="url(#arrow-green)"></line>
+  <circle cx="885" cy="485" r="22" fill="#2e7d32"></circle>
+  <text x="885" y="489" class="label-end">End</text>
+
+  <!-- NO → down -->
+  <line x1="340" y1="540" x2="340" y2="580" stroke="#c62828" stroke-width="2" marker-end="url(#arrow-red)"></line>
+  <text x="355" y="560" class="label-no">NO</text>
+
+  <!-- ================= PROCESS: 10분 강압 서명 ================= -->
+  <rect x="200" y="580" width="280" height="58" rx="4" fill="#ffebee" stroke="#c62828" stroke-width="1.5" filter="url(#shadow)"></rect>
+  <text x="340" y="600" class="process-text">10분 강압 서명 · 출력시각 삭제</text>
+  <text x="340" y="616" class="person-text">60억 → 2,000만원(0.033%) 포기 강요</text>
+  <text x="340" y="630" class="label-date">2019.02.21 | 부제소 조항 은폐</text>
+
+  <line x1="340" y1="638" x2="340" y2="674" stroke="#333" stroke-width="2" marker-end="url(#arrow)"></line>
+
+  <!-- ================= DECISION 3: NH 본사 민원 수용? ================= -->
+  <polygon points="340,674 470,729 340,784 210,729" fill="#fff" stroke="#333" stroke-width="2" filter="url(#shadow)"></polygon>
+  <text x="340" y="722" class="decision-text">NH 본사</text>
+  <text x="340" y="738" class="decision-text">민원 수용?</text>
+
+  <!-- YES → right -->
+  <line x1="470" y1="729" x2="600" y2="729" stroke="#2e7d32" stroke-width="2" marker-end="url(#arrow-green)"></line>
+  <text x="520" y="721" class="label-yes">YES</text>
+  <rect x="600" y="706" width="200" height="46" rx="4" fill="#e8f5e9" stroke="#2e7d32" stroke-width="1.5"></rect>
+  <text x="700" y="727" class="process-text" style="fill:#2e7d32">내부 조사 → 배상 처리</text>
+  <text x="700" y="742" class="label-date" style="fill:#2e7d32">피해 구제 완료</text>
+  <line x1="800" y1="729" x2="860" y2="729" stroke="#2e7d32" stroke-width="1.5" marker-end="url(#arrow-green)"></line>
+  <circle cx="885" cy="729" r="22" fill="#2e7d32"></circle>
+  <text x="885" y="733" class="label-end">End</text>
+
+  <!-- NO → down -->
+  <line x1="340" y1="784" x2="340" y2="824" stroke="#c62828" stroke-width="2" marker-end="url(#arrow-red)"></line>
+  <text x="355" y="804" class="label-no">NO</text>
+
+  <!-- ================= PROCESS: 이한길 셀프 각하 ================= -->
+  <rect x="210" y="824" width="260" height="48" rx="4" fill="#ffebee" stroke="#c62828" stroke-width="1.5" filter="url(#shadow)"></rect>
+  <text x="340" y="844" class="process-text">이한길: 민원 1년 지연 · 셀프 각하</text>
+  <text x="340" y="860" class="person-text">지점↔본사 돌림 처리</text>
+
+  <line x1="340" y1="872" x2="340" y2="908" stroke="#333" stroke-width="2" marker-end="url(#arrow)"></line>
+
+  <!-- ================= DECISION 4: 금감원 분쟁조정? ================= -->
+  <polygon points="340,908 470,963 340,1018 210,963" fill="#fff" stroke="#333" stroke-width="2" filter="url(#shadow)"></polygon>
+  <text x="340" y="956" class="decision-text">금감원</text>
+  <text x="340" y="972" class="decision-text">분쟁조정 수용?</text>
+
+  <!-- YES → right -->
+  <line x1="470" y1="963" x2="600" y2="963" stroke="#2e7d32" stroke-width="2" marker-end="url(#arrow-green)"></line>
+  <text x="520" y="955" class="label-yes">YES</text>
+  <rect x="600" y="940" width="200" height="46" rx="4" fill="#e8f5e9" stroke="#2e7d32" stroke-width="1.5"></rect>
+  <text x="700" y="961" class="process-text" style="fill:#2e7d32">조정 배상 결정</text>
+  <text x="700" y="976" class="label-date" style="fill:#2e7d32">분쟁조정 해결</text>
+  <line x1="800" y1="963" x2="860" y2="963" stroke="#2e7d32" stroke-width="1.5" marker-end="url(#arrow-green)"></line>
+  <circle cx="885" cy="963" r="22" fill="#2e7d32"></circle>
+  <text x="885" y="967" class="label-end">End</text>
+
+  <!-- NO → down -->
+  <line x1="340" y1="1018" x2="340" y2="1058" stroke="#c62828" stroke-width="2" marker-end="url(#arrow-red)"></line>
+  <text x="355" y="1038" class="label-no">NO</text>
+
+  <!-- ================= PROCESS: 금감원 기각 ================= -->
+  <rect x="210" y="1058" width="260" height="48" rx="4" fill="#ffebee" stroke="#c62828" stroke-width="1.5" filter="url(#shadow)"></rect>
+  <text x="340" y="1078" class="process-text">분쟁조정 기각</text>
+  <text x="340" y="1094" class="person-text">전홍렬 前 부위원장 규정 설계 관여</text>
+
+  <line x1="340" y1="1106" x2="340" y2="1142" stroke="#333" stroke-width="2" marker-end="url(#arrow)"></line>
+
+  <!-- ================= DECISION 5: 1심 승소? ================= -->
+  <polygon points="340,1142 470,1197 340,1252 210,1197" fill="#fff" stroke="#333" stroke-width="2" filter="url(#shadow)"></polygon>
+  <text x="340" y="1192" class="decision-text">1심 법원</text>
+  <text x="340" y="1208" class="decision-text">원고 승소?</text>
+
+  <!-- YES → right -->
+  <line x1="470" y1="1197" x2="600" y2="1197" stroke="#2e7d32" stroke-width="2" marker-end="url(#arrow-green)"></line>
+  <text x="520" y="1189" class="label-yes">YES</text>
+  <rect x="600" y="1174" width="200" height="46" rx="4" fill="#e8f5e9" stroke="#2e7d32" stroke-width="1.5"></rect>
+  <text x="700" y="1195" class="process-text" style="fill:#2e7d32">1심 승소 → 배상 판결</text>
+  <text x="700" y="1210" class="label-date" style="fill:#2e7d32">사법적 구제</text>
+  <line x1="800" y1="1197" x2="860" y2="1197" stroke="#2e7d32" stroke-width="1.5" marker-end="url(#arrow-green)"></line>
+  <circle cx="885" cy="1197" r="22" fill="#2e7d32"></circle>
+  <text x="885" y="1201" class="label-end">End</text>
+
+  <!-- NO → down -->
+  <line x1="340" y1="1252" x2="340" y2="1292" stroke="#c62828" stroke-width="2" marker-end="url(#arrow-red)"></line>
+  <text x="355" y="1272" class="label-no">NO</text>
+
+  <!-- ================= PROCESS: 1심 패소 ================= -->
+  <rect x="195" y="1292" width="290" height="58" rx="4" fill="#ffebee" stroke="#c62828" stroke-width="1.5" filter="url(#shadow)"></rect>
+  <text x="340" y="1312" class="process-text">1심 패소: 피고 서면 97~100% 복사</text>
+  <text x="340" y="1328" class="person-text">USB 9개·징비록 569p 전산열람 0회</text>
+  <text x="340" y="1342" class="label-date">송창영·소제인 "믿기 어렵다" 5회 반복</text>
+
+  <line x1="340" y1="1350" x2="340" y2="1390" stroke="#333" stroke-width="2" marker-end="url(#arrow)"></line>
+
+  <!-- ================= DECISION 6: 2심 승소? ================= -->
+  <polygon points="340,1390 470,1445 340,1500 210,1445" fill="#fff" stroke="#333" stroke-width="2" filter="url(#shadow)"></polygon>
+  <text x="340" y="1440" class="decision-text">2심 항소심</text>
+  <text x="340" y="1456" class="decision-text">원고 승소?</text>
+
+  <!-- YES → right -->
+  <line x1="470" y1="1445" x2="600" y2="1445" stroke="#2e7d32" stroke-width="2" marker-end="url(#arrow-green)"></line>
+  <text x="520" y="1437" class="label-yes">YES</text>
+  <rect x="600" y="1422" width="200" height="46" rx="4" fill="#e8f5e9" stroke="#2e7d32" stroke-width="1.5"></rect>
+  <text x="700" y="1443" class="process-text" style="fill:#2e7d32">2심 역전 승소</text>
+  <text x="700" y="1458" class="label-date" style="fill:#2e7d32">항소심 구제</text>
+  <line x1="800" y1="1445" x2="860" y2="1445" stroke="#2e7d32" stroke-width="1.5" marker-end="url(#arrow-green)"></line>
+  <circle cx="885" cy="1445" r="22" fill="#2e7d32"></circle>
+  <text x="885" y="1449" class="label-end">End</text>
+
+  <!-- NO → down -->
+  <line x1="340" y1="1500" x2="340" y2="1540" stroke="#c62828" stroke-width="2" marker-end="url(#arrow-red)"></line>
+  <text x="355" y="1520" class="label-no">NO</text>
+
+  <!-- ================= PROCESS: 2심 패소 ================= -->
+  <rect x="195" y="1540" width="290" height="54" rx="4" fill="#ffebee" stroke="#c62828" stroke-width="1.5" filter="url(#shadow)"></rect>
+  <text x="340" y="1560" class="process-text">2심 패소: 하이패스 기록 판결문 미언급</text>
+  <text x="340" y="1576" class="person-text">192건 녹취록 전체 묵살 · 변론 시간 제한</text>
+  <text x="340" y="1588" class="label-date">채증법칙 위반 · 석명명령 남용 의심</text>
+
+  <line x1="340" y1="1594" x2="340" y2="1634" stroke="#333" stroke-width="2" marker-end="url(#arrow)"></line>
+
+  <!-- ================= DECISION 7: 3심 상고? ================= -->
+  <polygon points="340,1634 470,1689 340,1744 210,1689" fill="#fff" stroke="#333" stroke-width="2" filter="url(#shadow)"></polygon>
+  <text x="340" y="1682" class="decision-text">3심 대법원</text>
+  <text x="340" y="1698" class="decision-text">실체 심리?</text>
+
+  <!-- YES → right -->
+  <line x1="470" y1="1689" x2="600" y2="1689" stroke="#2e7d32" stroke-width="2" marker-end="url(#arrow-green)"></line>
+  <text x="520" y="1681" class="label-yes">YES</text>
+  <rect x="600" y="1666" width="200" height="46" rx="4" fill="#e8f5e9" stroke="#2e7d32" stroke-width="1.5"></rect>
+  <text x="700" y="1687" class="process-text" style="fill:#2e7d32">파기환송 → 재심리</text>
+  <text x="700" y="1702" class="label-date" style="fill:#2e7d32">대법원 구제</text>
+  <line x1="800" y1="1689" x2="860" y2="1689" stroke="#2e7d32" stroke-width="1.5" marker-end="url(#arrow-green)"></line>
+  <circle cx="885" cy="1689" r="22" fill="#2e7d32"></circle>
+  <text x="885" y="1693" class="label-end">End</text>
+
+  <!-- NO → down -->
+  <line x1="340" y1="1744" x2="340" y2="1784" stroke="#c62828" stroke-width="2" marker-end="url(#arrow-red)"></line>
+  <text x="355" y="1764" class="label-no">NO</text>
+
+  <!-- ================= PROCESS: 심리불속행 ================= -->
+  <rect x="210" y="1784" width="260" height="48" rx="4" fill="#ffebee" stroke="#c62828" stroke-width="1.5" filter="url(#shadow)"></rect>
+  <text x="340" y="1804" class="process-text">심리불속행 기각</text>
+  <text x="340" y="1820" class="person-text">실체 심리 자체를 전면 거부</text>
+
+  <line x1="340" y1="1832" x2="340" y2="1872" stroke="#333" stroke-width="2" marker-end="url(#arrow)"></line>
+
+  <!-- ================= DECISION 8: 재심 인용? ================= -->
+  <polygon points="340,1872 470,1927 340,1982 210,1927" fill="#fff" stroke="#333" stroke-width="2" filter="url(#shadow)"></polygon>
+  <text x="340" y="1920" class="decision-text">재심·국가배상</text>
+  <text x="340" y="1936" class="decision-text">청구 인용?</text>
+
+  <!-- YES → right -->
+  <line x1="470" y1="1927" x2="600" y2="1927" stroke="#2e7d32" stroke-width="2" marker-end="url(#arrow-green)"></line>
+  <text x="520" y="1919" class="label-yes">YES</text>
+  <rect x="600" y="1904" width="200" height="46" rx="4" fill="#e8f5e9" stroke="#2e7d32" stroke-width="1.5"></rect>
+  <text x="700" y="1925" class="process-text" style="fill:#2e7d32">재심 인용 → 전액 배상</text>
+  <text x="700" y="1940" class="label-date" style="fill:#2e7d32">주청구 2,821억원</text>
+  <line x1="800" y1="1927" x2="860" y2="1927" stroke="#2e7d32" stroke-width="1.5" marker-end="url(#arrow-green)"></line>
+  <circle cx="885" cy="1927" r="22" fill="#2e7d32"></circle>
+  <text x="885" y="1931" class="label-end">End</text>
+
+  <!-- NO → down -->
+  <line x1="340" y1="1982" x2="340" y2="2020" stroke="#c62828" stroke-width="2" marker-end="url(#arrow-red)"></line>
+  <text x="355" y="2002" class="label-no">NO</text>
+
+  <!-- ================= FINAL PROCESS ================= -->
+  <rect x="195" y="2020" width="290" height="64" rx="4" fill="#fff3e0" stroke="#e65100" stroke-width="2" filter="url(#shadow)"></rect>
+  <text x="340" y="2040" class="process-text" style="font-weight:700">형사 고발 + 입법 청원 + 언론 공론화</text>
+  <text x="340" y="2058" class="label-sm">검찰 고발 · 금감원 면허취소 청원</text>
+  <text x="340" y="2074" class="label-sm">국민연금 수탁자의무 위반 문제 제기</text>
+
+  <line x1="340" y1="2084" x2="340" y2="2120" stroke="#333" stroke-width="2" marker-end="url(#arrow)"></line>
+
+  <!-- ================= END (현재) ================= -->
+  <ellipse cx="340" cy="2150" rx="80" ry="30" fill="#c62828" stroke="#8b0000" stroke-width="2"></ellipse>
+  <text x="340" y="2146" class="label-end">현재 진행중</text>
+  <text x="340" y="2160" class="label-end-text">2026.03</text>
+
+  <!-- ======== LEFT SIDE: NO count indicator ======== -->
+  <rect x="20" y="200" width="120" height="1980" rx="8" fill="none" stroke="rgba(198,40,40,0.15)" stroke-width="1" stroke-dasharray="6,4"></rect>
+
+  <text x="80" y="240" style="font-family:&#39;Black Han Sans&#39;;font-size:14px;fill:#c62828;text-anchor:middle;">NO 연속 횟수</text>
+
+  <circle cx="80" cy="305" r="16" fill="#ffebee" stroke="#c62828" stroke-width="1.5"></circle>
+  <text x="80" y="310" style="font-family:&#39;Black Han Sans&#39;;font-size:14px;fill:#c62828;text-anchor:middle;">1</text>
+  <text x="80" y="332" class="label-date" style="fill:#c62828">매도 거부</text>
+
+  <circle cx="80" cy="545" r="16" fill="#ffebee" stroke="#c62828" stroke-width="1.5"></circle>
+  <text x="80" y="550" style="font-family:&#39;Black Han Sans&#39;;font-size:14px;fill:#c62828;text-anchor:middle;">2</text>
+  <text x="80" y="572" class="label-date" style="fill:#c62828">합의 강압</text>
+
+  <circle cx="80" cy="789" r="16" fill="#ffebee" stroke="#c62828" stroke-width="1.5"></circle>
+  <text x="80" y="794" style="font-family:&#39;Black Han Sans&#39;;font-size:14px;fill:#c62828;text-anchor:middle;">3</text>
+  <text x="80" y="816" class="label-date" style="fill:#c62828">본사 거부</text>
+
+  <circle cx="80" cy="1023" r="16" fill="#ffebee" stroke="#c62828" stroke-width="1.5"></circle>
+  <text x="80" y="1028" style="font-family:&#39;Black Han Sans&#39;;font-size:14px;fill:#c62828;text-anchor:middle;">4</text>
+  <text x="80" y="1050" class="label-date" style="fill:#c62828">금감원 기각</text>
+
+  <circle cx="80" cy="1257" r="16" fill="#ffebee" stroke="#c62828" stroke-width="1.5"></circle>
+  <text x="80" y="1262" style="font-family:&#39;Black Han Sans&#39;;font-size:14px;fill:#c62828;text-anchor:middle;">5</text>
+  <text x="80" y="1284" class="label-date" style="fill:#c62828">1심 패소</text>
+
+  <circle cx="80" cy="1505" r="16" fill="#ffebee" stroke="#c62828" stroke-width="1.5"></circle>
+  <text x="80" y="1510" style="font-family:&#39;Black Han Sans&#39;;font-size:14px;fill:#c62828;text-anchor:middle;">6</text>
+  <text x="80" y="1532" class="label-date" style="fill:#c62828">2심 패소</text>
+
+  <circle cx="80" cy="1749" r="16" fill="#ffcdd2" stroke="#c62828" stroke-width="2"></circle>
+  <text x="80" y="1754" style="font-family:&#39;Black Han Sans&#39;;font-size:14px;fill:#c62828;text-anchor:middle;">7</text>
+  <text x="80" y="1776" class="label-date" style="fill:#c62828">3심 기각</text>
+
+  <circle cx="80" cy="1987" r="18" fill="#c62828" stroke="#8b0000" stroke-width="2"></circle>
+  <text x="80" y="1992" style="font-family:&#39;Black Han Sans&#39;;font-size:14px;fill:#fff;text-anchor:middle;">8</text>
+  <text x="80" y="2018" class="label-date" style="fill:#c62828">재심 진행중</text>
+
+  <!-- ======== RIGHT SIDE: 누적 손실 ======== -->
+  <text x="885" y="330" style="font-family:&#39;Noto Sans KR&#39;;font-size:10px;fill:#999;text-anchor:middle;">누적 손실</text>
+  <text x="885" y="350" style="font-family:&#39;Black Han Sans&#39;;font-size:13px;fill:#c62828;text-anchor:middle;">▼ 7,230만</text>
+
+  <text x="885" y="570" style="font-family:&#39;Noto Sans KR&#39;;font-size:10px;fill:#999;text-anchor:middle;">누적 손실</text>
+  <text x="885" y="590" style="font-family:&#39;Black Han Sans&#39;;font-size:13px;fill:#c62828;text-anchor:middle;">▼ 54.5억</text>
+
+  <text x="885" y="814" style="font-family:&#39;Noto Sans KR&#39;;font-size:10px;fill:#999;text-anchor:middle;">누적 손실</text>
+  <text x="885" y="834" style="font-family:&#39;Black Han Sans&#39;;font-size:13px;fill:#c62828;text-anchor:middle;">▼ 약 60억</text>
+
+  <text x="885" y="1058" style="font-family:&#39;Noto Sans KR&#39;;font-size:10px;fill:#999;text-anchor:middle;">누적 손실</text>
+  <text x="885" y="1078" style="font-family:&#39;Black Han Sans&#39;;font-size:13px;fill:#c62828;text-anchor:middle;">▼ 약 564억</text>
+
+  <!-- ======== LEGEND ======== -->
+  <rect x="20" y="2210" width="880" height="120" rx="8" fill="#f5f5f5" stroke="#ddd" stroke-width="1"></rect>
+  <text x="460" y="2236" style="font-family:&#39;Noto Sans KR&#39;;font-size:12px;fill:#333;text-anchor:middle;font-weight:700;">범례 (Legend)</text>
+
+  <ellipse cx="80" cy="2270" rx="30" ry="14" fill="#fff" stroke="#333" stroke-width="1.5"></ellipse>
+  <text x="80" y="2274" style="font-size:10px;fill:#333;text-anchor:middle;">Start/End</text>
+  <text x="80" y="2300" style="font-size:10px;fill:#777;text-anchor:middle;">시작/종료</text>
+
+  <rect x="170" y="2256" width="70" height="28" rx="3" fill="#fff" stroke="#333" stroke-width="1.5"></rect>
+  <text x="205" y="2274" style="font-size:10px;fill:#333;text-anchor:middle;">Process</text>
+  <text x="205" y="2300" style="font-size:10px;fill:#777;text-anchor:middle;">처리/사건</text>
+
+  <polygon points="340,2256 375,2270 340,2284 305,2270" fill="#fff" stroke="#333" stroke-width="1.5"></polygon>
+  <text x="340" y="2300" style="font-size:10px;fill:#777;text-anchor:middle;">분기(YES/NO)</text>
+
+  <line x1="430" y1="2270" x2="490" y2="2270" stroke="#2e7d32" stroke-width="2" marker-end="url(#arrow-green)"></line>
+  <text x="460" y="2264" style="font-size:10px;fill:#2e7d32;text-anchor:middle;font-weight:700;">YES</text>
+  <text x="460" y="2300" style="font-size:10px;fill:#2e7d32;text-anchor:middle;">배상 · 구제</text>
+
+  <line x1="540" y1="2270" x2="600" y2="2270" stroke="#c62828" stroke-width="2" marker-end="url(#arrow-red)"></line>
+  <text x="570" y="2264" style="font-size:10px;fill:#c62828;text-anchor:middle;font-weight:700;">NO</text>
+  <text x="570" y="2300" style="font-size:10px;fill:#c62828;text-anchor:middle;">거부 · 피해확대</text>
+
+  <rect x="650" y="2256" width="80" height="28" rx="3" fill="#ffebee" stroke="#c62828" stroke-width="1"></rect>
+  <text x="690" y="2274" style="font-size:10px;fill:#c62828;text-anchor:middle;">거부 결과</text>
+  <text x="690" y="2300" style="font-size:10px;fill:#777;text-anchor:middle;">NO 경로 상세</text>
+
+  <rect x="780" y="2256" width="80" height="28" rx="3" fill="#e8f5e9" stroke="#2e7d32" stroke-width="1"></rect>
+  <text x="820" y="2274" style="font-size:10px;fill:#2e7d32;text-anchor:middle;">구제 결과</text>
+  <text x="820" y="2300" style="font-size:10px;fill:#777;text-anchor:middle;">YES 경로 (미실현)</text>
+
+</svg>
+
+
+
+</body></html>
