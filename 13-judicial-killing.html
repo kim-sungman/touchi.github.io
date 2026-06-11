@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>60억을 2천만원으로 — 8년에 걸친 조용한 사법살인의 기록</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Black+Han+Sans&family=Noto+Sans+KR:wght@400;500;700;900&display=swap" rel="stylesheet">
+<style>
+:root{
+ --bg:#0e1014;--ink:#ececf0;--dim:#9aa0ac;--card:#171a21;--line:#262b35;
+ --red:#e23b30;--red2:#b3271e;--redbg:#2a1413;--gold:#d9a441;--steel:#7f8aa0;--navy:#2c4a7d;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:var(--bg);font-family:'Noto Sans KR',sans-serif;color:var(--ink);line-height:1.65}
+.wrap{max-width:1000px;margin:0 auto;padding:0 18px 80px}
+header.hero{position:relative;background:radial-gradient(120% 120% at 50% 0,#3a0f0c 0,#16080a 55%,#0b0c10 100%);border-radius:0 0 24px 24px;padding:48px 30px 40px;margin-bottom:8px;overflow:hidden;border-bottom:2px solid #3a1a17}
+header.hero .knife{position:absolute;right:-20px;top:-10px;font-size:160px;opacity:.06;transform:rotate(18deg)}
+.tag{font-size:12px;letter-spacing:4px;color:#e0897f;font-weight:700}
+header.hero h1{font-family:'Black Han Sans',sans-serif;font-size:33px;line-height:1.34;margin:14px 0 6px}
+header.hero h1 .hl{color:var(--red)}
+header.hero .sub{font-size:15px;color:#cdb4b0;margin-top:10px;max-width:840px}
+.deck{display:flex;gap:12px;flex-wrap:wrap;margin-top:24px}
+.chip{background:rgba(226,59,48,.12);border:1px solid rgba(226,59,48,.4);border-radius:999px;padding:7px 15px;font-size:12.5px;color:#f1c3bd;font-weight:700}
+.sectit{font-family:'Black Han Sans',sans-serif;font-size:21px;color:#fff;margin:42px 0 6px;display:flex;align-items:center;gap:10px}
+.sectit .bar{width:6px;height:23px;background:var(--red);border-radius:3px}
+.lead{color:var(--dim);font-size:14px;margin:4px 0 18px;max-width:880px}
+/* 칼: 60억 vs 2천만원 */
+.weapon{background:var(--card);border:1px solid var(--line);border-radius:18px;padding:26px;box-shadow:0 4px 18px rgba(0,0,0,.4)}
+.bars{display:flex;flex-direction:column;gap:16px;margin-top:6px}
+.barrow .lab{display:flex;justify-content:space-between;font-size:13px;margin-bottom:6px}
+.barrow .lab b{font-family:'Black Han Sans';font-size:16px}
+.track{height:34px;background:#11141a;border-radius:8px;overflow:hidden;border:1px solid #232833}
+.fill{height:100%;display:flex;align-items:center;padding-left:12px;font-weight:900;font-size:13px;color:#fff;white-space:nowrap}
+.fill.loss{width:100%;background:linear-gradient(90deg,#7a1c12,#e23b30)}
+.fill.pay{width:0.33%;min-width:120px;background:linear-gradient(90deg,#6b6f12,#d9a441);color:#1a1a1a}
+.ratio{text-align:center;margin-top:18px;font-size:14px;color:#cdb4b0}
+.ratio b{font-family:'Black Han Sans';font-size:30px;color:var(--gold);display:block}
+.paperline{margin-top:16px;font-size:13px;color:#e0897f;text-align:center;font-style:italic}
+/* 10명 법관 */
+.courts{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
+.court{background:var(--card);border:1px solid var(--line);border-top:4px solid var(--red);border-radius:14px;padding:16px 16px 14px}
+.court h3{font-family:'Black Han Sans';font-size:16px;color:#fff}
+.court .meta{font-size:11.5px;color:var(--dim);margin:2px 0 10px}
+.judge{display:flex;align-items:center;gap:8px;padding:5px 0;border-bottom:1px dashed #262b35;font-size:13px}
+.judge:last-child{border-bottom:none}
+.judge .k{width:9px;height:9px;border-radius:50%;background:var(--red);flex:0 0 9px}
+.court .act{margin-top:10px;font-size:11.5px;color:#f1c3bd;background:var(--redbg);border:1px solid #3a1a17;border-radius:8px;padding:7px 9px}
+.tally{text-align:center;font-family:'Black Han Sans';font-size:19px;color:#fff;margin-top:18px}
+.tally .big{color:var(--red);font-size:30px}
+/* 8년 반복 패턴 */
+.repeat{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:8px 6px}
+.rrow{display:flex;align-items:center;gap:12px;padding:12px 16px;border-bottom:1px solid #20242d}
+.rrow:last-child{border-bottom:none}
+.rrow .ic{flex:0 0 34px;height:34px;border-radius:9px;background:#20242d;display:flex;align-items:center;justify-content:center;font-weight:900;color:#e0897f;font-size:13px}
+.rrow .bd{flex:1;font-size:13px}
+.rrow .bd b{color:#fff}
+.rrow .same{flex:0 0 auto;font-size:11px;font-weight:700;color:#fff;background:var(--red2);border-radius:6px;padding:3px 9px}
+/* 결론 */
+.verdict{background:linear-gradient(135deg,#7a1c12,#16080a);border:1px solid #3a1a17;border-radius:18px;padding:26px 28px;margin-top:22px}
+.verdict .t{font-family:'Black Han Sans';font-size:22px;color:#fff}
+.verdict p{font-size:14.5px;color:#e7cfcb;margin-top:10px}
+.verdict .eq{font-family:'Black Han Sans';font-size:18px;color:var(--gold);margin-top:14px;text-align:center;line-height:1.6}
+.note{margin-top:26px;font-size:11px;color:#7e8492;background:#13161c;border-radius:8px;padding:13px 16px;border-left:4px solid var(--steel)}
+.foot{text-align:center;color:#596073;font-size:11px;margin-top:22px}
+@media(max-width:740px){.courts{grid-template-columns:1fr}header.hero h1{font-size:26px}}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<header class="hero">
+ <div class="knife">🗡️</div>
+ <div class="tag">기 록 · A QUIET JUDICIAL KILLING</div>
+ <h1>60억을 <span class="hl">2천만원</span>으로 묻으려 한 금융 마피아,<br>그 칼을 받아든 <span class="hl">10명 법관</span><br>— 8년에 걸친 조용한 사법살인의 기록</h1>
+ <div class="sub">한 시민(김성만)의 60억대 손해가 2천만원짜리 합의서 한 장으로 덮이고, 그 종이를 1·2·3심 10명의 법관이 그대로 받아들인 8년. 이것은 한 사람의 권리가 ‘조용히’ 사라진 과정의 기록이다.</div>
+ <div class="deck">
+   <span class="chip">손해 60억대</span>
+   <span class="chip">제시 보상 2천만원 (0.33%)</span>
+   <span class="chip">관여 법관 10명</span>
+   <span class="chip">외면 기관 5곳</span>
+   <span class="chip">8년</span>
+ </div>
+</header>
+
+<!-- 칼 -->
+<div class="sectit"><span class="bar"></span>① 칼 — 합의서 한 장, 60억을 2천만원으로</div>
+<p class="lead">기망적으로 받아낸 합의서 한 장이 60억대 손해를 ‘없던 일’로 만드는 칼이 되었다. 손해 대비 제시 보상은 단 0.33%.</p>
+<div class="weapon">
+ <div class="bars">
+   <div class="barrow">
+     <div class="lab"><span>피해자 손해</span><b style="color:#e23b30">약 60억 원</b></div>
+     <div class="track"><div class="fill loss">60억 원 — 30년 노력과 전 재산</div></div>
+   </div>
+   <div class="barrow">
+     <div class="lab"><span>제시된 보상(합의서)</span><b style="color:#d9a441">2,000만 원</b></div>
+     <div class="track"><div class="fill pay">2천만 원</div></div>
+   </div>
+ </div>
+ <div class="ratio">손해 대비 보상 비율<b>0.33%</b></div>
+ <div class="paperline">“이렇게 중요한 서류를 하루 전에 줬어요. 내가 도대체 몇 초 봤냐고.” — 합의서 기망의 직접 진술</div>
+</div>
+
+<!-- 10명 법관 -->
+<div class="sectit"><span class="bar"></span>② 칼을 받아든 10명 — 1·2·3심 법관</div>
+<p class="lead">세 심급 10명의 법관이 같은 종이를 받아들고, 18종의 객관 증거를 평가하지 않았다. 빨간 점 하나가 한 명의 법관이다.</p>
+<div class="courts">
+ <div class="court">
+   <h3>1심 · 서울중앙지법</h3>
+   <div class="meta">2022가합108719</div>
+   <div class="judge"><span class="k"></span>최정인 (재판장)</div>
+   <div class="judge"><span class="k"></span>임효빈</div>
+   <div class="judge"><span class="k"></span>방민우</div>
+   <div class="act">18종 물증·192녹취 평가 거부, 주문-이유 불일치</div>
+ </div>
+ <div class="court">
+   <h3>2심 · 서울고법</h3>
+   <div class="meta">2023나2052728</div>
+   <div class="judge"><span class="k"></span>홍성욱 (재판장)</div>
+   <div class="judge"><span class="k"></span>채동수</div>
+   <div class="judge"><span class="k"></span>남양우</div>
+   <div class="act">변론종결 후 피고 참고서면 채택, 원고 반론권 박탈</div>
+ </div>
+ <div class="court">
+   <h3>3심 · 대법원</h3>
+   <div class="meta">2024다321102</div>
+   <div class="judge"><span class="k"></span>노경필</div>
+   <div class="judge"><span class="k"></span>노태악</div>
+   <div class="judge"><span class="k"></span>서경환</div>
+   <div class="judge"><span class="k"></span>신숙희</div>
+   <div class="act">19개 위법을 ‘사유 미해당’ 1문장으로 봉인</div>
+ </div>
+</div>
+<div class="tally">받아든 칼 — <span class="big">10명</span> · 통과한 객관 증거 평가 — <span class="big">0건</span></div>
+
+<!-- 8년 반복 -->
+<div class="sectit"><span class="bar"></span>③ 8년 — 어디에 호소해도 같은 답이 돌아왔다</div>
+<p class="lead">민원·감독·재판의 모든 단계에서 ‘약속한 듯’ 같은 결론이 반복되었다. 우연이 여덟 번 반복되면, 그것은 더 이상 우연이 아니다.</p>
+<div class="repeat">
+ <div class="rrow"><div class="ic">민원</div><div class="bd"><b>NH 금소부 · 컴플라이언스부</b> — 민원 무마, 회신문 “민원 제기한 적 없다”·“가정의 평화를 기원”</div><span class="same">무마·조롱</span></div>
+ <div class="rrow"><div class="ic">지주</div><div class="bd"><b>NH지주 윤리경영 제보</b> — 다시 피고발 회사 컴플라이언스부로 재배당</div><span class="same">책상 회귀</span></div>
+ <div class="rrow"><div class="ic">금감</div><div class="bd"><b>금융감독원</b> — 20개월 지연·대면조사 0회 → 셀프 각하</div><span class="same">지연·각하</span></div>
+ <div class="rrow"><div class="ic">국가</div><div class="bd"><b>금융위·감사원·권익위·대통령실</b> — 심의·감사 대신 이첩·각하 반복</div><span class="same">이첩·각하</span></div>
+ <div class="rrow"><div class="ic">1·2·3심</div><div class="bd"><b>법원 10명 법관</b> — 증거 미평가·일방서면 채택·1문장 봉인</div><span class="same">기각·봉인</span></div>
+</div>
+
+<!-- 결론 -->
+<div class="sectit"><span class="bar"></span>④ 결론 — 이것을 무엇이라 불러야 하는가</div>
+<div class="verdict">
+ <div class="t">총성 없는 처형 — ‘조용한 사법살인’</div>
+ <p>피 한 방울 흐르지 않았지만, 한 시민의 30년과 60억, 그리고 ‘공정한 재판을 받을 권리’가 8년에 걸쳐 사라졌다. 가해는 한 사람의 손이 아니라, 자본의 청부·감독의 묵인·법원의 봉인이 맞물린 ‘구조’의 손이었다.</p>
+ <div class="eq">합의서 한 장(2천만원) × 10명 법관 × 5개 기관 × 8년<br>= 우연을 가장한 한 사람의 사회적 처형</div>
+</div>
+
+<div class="note">
+ ※ 본 자료는 원고(김성만) 측이 보유한 녹취·기록·회신문 등 사실관계를 바탕으로 한 ‘피해자의 관점’ 자료이다. ‘금융 마피아’·‘사법살인’ 등은 피해자가 자신의 피해를 표현한 강한 비유(의견)이며, 특정인에 대한 확정된 형사상 유죄 판단을 의미하지 않는다. 인용 발언은 음성·원본 대조가 필요할 수 있고, 처리 절차의 적정성에 관한 최종 판단은 수사기관·법원·감독당국의 권한에 속한다.
+</div>
+<div class="foot">8년에 걸친 조용한 사법살인의 기록 · 작성 2026.06.10 · 김성만</div>
+
+</div>
+</body>
+</html>

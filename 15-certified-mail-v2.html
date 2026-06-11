@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>내용증명 11건 V2 — 발송일·수신인·발언원문 정밀 분석</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Black+Han+Sans&family=Noto+Sans+KR:wght@400;500;700;900&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#f5f6fa;--ink:#1a2130;--dim:#5a6473;--card:#fff;--line:#e3e7ef;
+ --navy:#1f3864;--red:#b3271e;--redbg:#fbeae8;--redline:#dca69f;--org:#b4641a;--orgbg:#fbeede;--grn:#1f7a3d;--gold:#caa23a;--pur:#5a2a86}
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:var(--bg);font-family:'Noto Sans KR',sans-serif;color:var(--ink);line-height:1.62}
+.wrap{max-width:1000px;margin:0 auto;padding:0 16px 80px}
+header{background:linear-gradient(135deg,#15233f,#27406e);color:#fff;border-radius:0 0 22px 22px;padding:36px 30px 28px;margin-bottom:8px;box-shadow:0 8px 26px rgba(20,30,55,.25);position:relative}
+.v2{position:absolute;right:26px;top:26px;background:var(--gold);color:#1a1a1a;font-family:'Black Han Sans';font-size:15px;border-radius:9px;padding:5px 13px;box-shadow:0 3px 10px rgba(0,0,0,.25)}
+header .tag{font-size:12px;letter-spacing:3px;color:#9fb4d8;font-weight:700}
+header h1{font-family:'Black Han Sans',sans-serif;font-size:29px;margin:9px 0 8px;line-height:1.3}
+header .sub{font-size:14px;color:#cdd9ef;max-width:840px}
+.kpis{display:grid;grid-template-columns:repeat(5,1fr);gap:10px;margin-top:20px}
+.kpi{background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.18);border-radius:11px;padding:11px 12px}
+.kpi .n{font-family:'Black Han Sans';font-size:18px}
+.kpi .l{font-size:10.5px;color:#cdd9ef;margin-top:2px}
+.sectit{font-family:'Black Han Sans',sans-serif;font-size:20px;color:var(--navy);margin:34px 0 6px;display:flex;align-items:center;gap:10px}
+.sectit .bar{width:6px;height:22px;background:var(--red);border-radius:3px}
+.lead{color:var(--dim);font-size:13.5px;margin:4px 0 16px;max-width:900px}
+/* timeline */
+.tl{background:#fff;border:1px solid var(--line);border-radius:14px;padding:6px 4px;box-shadow:0 2px 10px rgba(0,0,0,.05)}
+.tlrow{display:flex;align-items:center;gap:12px;padding:9px 16px;border-bottom:1px solid #eef1f6;font-size:12.5px}
+.tlrow:last-child{border-bottom:none}
+.tlrow .d{flex:0 0 86px;font-family:'Black Han Sans';font-size:12.5px;color:var(--navy)}
+.tlrow .d.r{color:var(--red)}
+.tlrow .to{flex:0 0 130px;font-weight:700}
+.tlrow .ds{flex:1;color:#3a4350}
+.tlrow .nw{flex:0 0 auto;font-size:9.5px;font-weight:700;color:#fff;background:var(--red);border-radius:5px;padding:1px 6px}
+/* cards */
+.card{background:var(--card);border:1px solid var(--line);border-radius:14px;margin-bottom:13px;box-shadow:0 2px 10px rgba(0,0,0,.06);overflow:hidden;border-left:6px solid var(--navy)}
+.card.late{border-left-color:var(--red)} .card.new{border-left-color:var(--gold)}
+.chead{display:flex;align-items:center;gap:11px;padding:12px 16px 9px;flex-wrap:wrap}
+.no{flex:0 0 auto;width:29px;height:29px;border-radius:8px;background:var(--navy);color:#fff;font-weight:900;display:flex;align-items:center;justify-content:center;font-size:13px}
+.card.late .no{background:var(--red)} .card.new .no{background:var(--gold);color:#1a1a1a}
+.date{font-family:'Black Han Sans';font-size:14.5px;color:var(--navy)}
+.card.late .date{color:var(--red)} .card.new .date{color:#9a7a14}
+.to{font-size:12.5px;color:#3a4350}.to b{font-weight:800}
+.newbadge{font-size:9.5px;font-weight:700;color:#1a1a1a;background:var(--gold);border-radius:5px;padding:1px 7px;margin-left:4px}
+.recv{font-size:9.5px;font-weight:700;color:#fff;background:var(--org);border-radius:5px;padding:1px 7px;margin-left:4px}
+.cbody{padding:0 16px 13px}
+.quote{background:var(--redbg);border-left:4px solid var(--redline);border-radius:8px;padding:9px 12px;font-size:12.5px;color:#7a1c12;font-style:italic}
+.purpose{margin-top:8px;font-size:12px;color:#3a4350}.purpose b{color:var(--navy)}
+.tagrow{margin-top:7px;display:flex;gap:5px;flex-wrap:wrap}
+.t2{font-size:10px;font-weight:700;color:#fff;border-radius:5px;padding:1px 7px}
+.t2.r{background:var(--red)}.t2.o{background:var(--org)}.t2.n{background:var(--navy)}.t2.g{background:var(--grn)}.t2.p{background:var(--pur)}
+/* smoking guns */
+.guns{display:grid;grid-template-columns:repeat(3,1fr);gap:13px}
+.gun{background:#fff;border:1px solid var(--line);border-top:5px solid var(--red);border-radius:13px;padding:15px}
+.gun .gt{font-family:'Black Han Sans';font-size:15px;color:var(--red)}
+.gun .fact{font-size:12px;color:#3a4350;margin-top:7px}
+.gun .fact b{color:var(--navy)}
+.gun .law{margin-top:9px;font-size:11px;color:#fff;background:var(--red);border-radius:6px;padding:4px 9px;display:inline-block;font-weight:700}
+/* escalation */
+.esc{background:linear-gradient(135deg,#5e130d,#b3271e);color:#fff;border-radius:16px;padding:22px 24px}
+.esc .dl{font-family:'Black Han Sans';font-size:19px}
+.esc .dl span{color:#ffd9a8}
+.escrow{display:flex;gap:10px;margin-top:14px;flex-wrap:wrap}
+.escbox{flex:1;min-width:150px;background:rgba(255,255,255,.12);border:1px solid rgba(255,255,255,.2);border-radius:10px;padding:11px 13px;font-size:12px}
+.escbox b{font-family:'Black Han Sans';font-size:13.5px;display:block;margin-bottom:3px}
+/* analysis */
+.analysis{background:#fff;border:1px solid var(--line);border-radius:16px;padding:6px 4px;box-shadow:0 2px 12px rgba(0,0,0,.05)}
+.arow{display:flex;gap:12px;padding:13px 18px;border-bottom:1px solid #eef1f6}
+.arow:last-child{border-bottom:none}
+.arow .ic{flex:0 0 38px;height:38px;border-radius:10px;background:var(--navy);color:#fff;display:flex;align-items:center;justify-content:center;font-family:'Black Han Sans';font-size:16px}
+.arow.r .ic{background:var(--red)}.arow.o .ic{background:var(--org)}.arow.g .ic{background:var(--grn)}.arow.p .ic{background:var(--pur)}
+.arow .bd .h{font-size:14px;font-weight:700;color:var(--navy)}
+.arow .bd .p{font-size:12.5px;color:#3a4350;margin-top:3px}
+.summary{background:linear-gradient(135deg,#1f3864,#2c4a7d);color:#fff;border-radius:16px;padding:22px 26px;margin-top:18px;box-shadow:0 6px 20px rgba(31,56,100,.3)}
+.summary .t{font-family:'Black Han Sans';font-size:20px}
+.summary p{font-size:13.5px;margin-top:9px;opacity:.96}
+.note{margin-top:24px;font-size:11px;color:#6b7280;background:#fff;border-radius:8px;padding:13px 16px;border-left:4px solid var(--navy)}
+.foot{text-align:center;color:#9aa1ad;font-size:11px;margin-top:20px}
+@media(max-width:740px){.kpis{grid-template-columns:repeat(2,1fr)}.guns{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<header>
+ <div class="v2">VERSION 2</div>
+ <div class="tag">내용증명 전수 정밀 분석 · 11건 · UPGRADED</div>
+ <h1>내용증명 11건 — 누구에게, 언제, 무엇을 통지했는가</h1>
+ <div class="sub">2020년 8월(사기 합의 인지 직후)부터 2026년 1월(8주년 최후통첩)까지, 피해자 김성만이 가해 직원·관리자·감사·준법감시·대표이사·소송대리인에게 보낸(또는 받은) 내용증명 11건의 발송일·수신인·발언 원문과 법적 취지를 정밀 분석한다.</div>
+ <div class="kpis">
+   <div class="kpi"><div class="n">11건</div><div class="l">발송 10 · 수신 1</div></div>
+   <div class="kpi"><div class="n">2020.8~2026.1</div><div class="l">통지 기간</div></div>
+   <div class="kpi"><div class="n">2026.1.18</div><div class="l">8주년 최후통첩 시한</div></div>
+   <div class="kpi"><div class="n">75% / 6,630주</div><div class="l">부당 면책 · 잔여 청구</div></div>
+   <div class="kpi"><div class="n">3대</div><div class="l">변호사 재판방해 스모킹건</div></div>
+ </div>
+</header>
+
+<!-- 타임라인 -->
+<div class="sectit"><span class="bar"></span>① 11건 한눈 타임라인</div>
+<div class="tl">
+ <div class="tlrow"><span class="d">2020.08.21</span><span class="to">이정미</span><span class="ds">사기 합의 파기 통보(민법 §110·§104)</span></div>
+ <div class="tlrow"><span class="d">2020.08.28</span><span class="to">임진기</span><span class="ds">허위 경위서 수정 요구·형사고발 예고</span></div>
+ <div class="tlrow"><span class="d">2020.08.31</span><span class="to">고유찬 상무</span><span class="ds">조직적 민원 무마 책임 추궁</span></div>
+ <div class="tlrow"><span class="d">2020.09.01</span><span class="to">이용한 전 상무</span><span class="ds">비공식 민원 처리 기망 고발</span></div>
+ <div class="tlrow"><span class="d">2020.09.02</span><span class="to">전홍열 감사</span><span class="ds">사내 감사위 실질 조사 청원</span></div>
+ <div class="tlrow"><span class="d">2020.09.02</span><span class="to">박철·박상호 등</span><span class="ds">준법감시위 감찰 요구(조직적 공모 적시)</span></div>
+ <div class="tlrow"><span class="d r">2024.10.29</span><span class="to">소제인 변호사</span><span class="ds">허위서면·재판방해 경고</span></div>
+ <div class="tlrow"><span class="d r">2024.11.14</span><span class="to">이정미</span><span class="ds">잔여 27%(6,630주·약 16억) 손해배상 청구</span></div>
+ <div class="tlrow"><span class="d r">2025.07.10</span><span class="to">법무법인 세한</span><span class="ds">소송비용 3,342만원 청구(원고가 받음)</span></div>
+ <div class="tlrow"><span class="d r">2026.01.13</span><span class="to">윤병운 대표이사</span><span class="ds">자체 감찰·형사고소·재심청구 요구 + 8주년 최후통첩</span><span class="nw">NEW</span></div>
+ <div class="tlrow"><span class="d r">2026.01.14</span><span class="to">소제인·송창영 변호사</span><span class="ds">미필적 고의 재판방해·악의적 허위변론 최후통첩</span><span class="nw">NEW</span></div>
+</div>
+
+<!-- 상세 카드 -->
+<div class="sectit"><span class="bar"></span>② 11건 상세 — 발송일·수신인·발언원문·취지</div>
+
+<div class="card"><div class="chead"><span class="no">1</span><span class="date">2020.08.21</span><span class="to">수신 <b>이정미</b> (가해 직원)</span></div>
+ <div class="cbody"><div class="quote">“고객과 협의도 없이 양도세 계산 미끼로 작성된 이 합의서는 무효임을 오늘로써 파기하고 … 이 회사는 증권업 허가증을 증권감독원에 반납해야 합니다.”</div>
+ <div class="purpose"><b>취지</b> · 사기 합의 파기 통보 — 사전 협의 없는 합의서의 불법성, 계약 무효·파기 공식 선언</div>
+ <div class="tagrow"><span class="t2 r">민법 §110</span><span class="t2 r">§104</span><span class="t2 n">합의 취소</span></div></div></div>
+
+<div class="card"><div class="chead"><span class="no">2</span><span class="date">2020.08.28</span><span class="to">수신 <b>임진기</b> (가해 직원)</span></div>
+ <div class="cbody"><div class="quote">“회사에 제출한 엉터리 경위서를 바로 잡을 것을 간곡히 부탁드렸으나 모두 거절하고 … 거짓 진술을 해서 나를 자살하게 만든 방조죄로 고발할 것이다.”</div>
+ <div class="purpose"><b>취지</b> · 허위 경위서 수정 요구 — 민원 고의 지연·금감원 허위 제출 경고, 형사 고발 예고</div>
+ <div class="tagrow"><span class="t2 r">허위 경위서</span><span class="t2 o">금감원 허위제출</span></div></div></div>
+
+<div class="card"><div class="chead"><span class="no">3</span><span class="date">2020.08.31</span><span class="to">수신 <b>고유찬</b> (상무)</span></div>
+ <div class="cbody"><div class="quote">“임진기·이정미 녹취록에 고유찬 상무님이 거론되어 보고받았는지 확인 차 보냅니다. 미약한 고객을 개돼지로 보고 사건을 무마하는 서류를 보냈습니다.”</div>
+ <div class="purpose"><b>취지</b> · 조직적 민원 무마 책임 추궁 — 본부 보고에도 묵살·방치한 직무유기 지적</div>
+ <div class="tagrow"><span class="t2 n">본부 보고</span><span class="t2 r">직무유기</span></div></div></div>
+
+<div class="card"><div class="chead"><span class="no">4</span><span class="date">2020.09.01</span><span class="to">수신 <b>이용한</b> (전 상무)</span></div>
+ <div class="cbody"><div class="quote">“WM본부장 비서실로 제가 전화를 2번 하고 ‘민원이 묵살되고 있으니 꼭 처리를 부탁한다’고 한 바 있습니다. … 답변이 없을 경우 무마로 간주하겠습니다.”</div>
+ <div class="purpose"><b>취지</b> · 비공식 민원 처리 기망 고발 — 비서실 경유 민원 묵살 경위, 무마 공모 책임 추궁</div>
+ <div class="tagrow"><span class="t2 o">민원 묵살</span><span class="t2 r">무마 공모</span></div></div></div>
+
+<div class="card"><div class="chead"><span class="no">5</span><span class="date">2020.09.02</span><span class="to">수신 <b>전홍열</b> (감사)</span></div>
+ <div class="cbody"><div class="quote">“이정미와 임진기는 고객에게 책임을 미루는 기망행위를 불법인 것을 알고도 저질렀습니다. … 회사 차원의 조사를 요구합니다.”</div>
+ <div class="purpose"><b>취지</b> · 사내 감사·감찰 요청 — 관련자 범죄 행위에 대한 감사위 실질 조사 청원</div>
+ <div class="tagrow"><span class="t2 g">감사위 청원</span><span class="t2 r">기망 인지</span></div></div></div>
+
+<div class="card"><div class="chead"><span class="no">6</span><span class="date">2020.09.02</span><span class="to">수신 <b>박철·박상호 등</b> (준법감시)</span></div>
+ <div class="cbody"><div class="quote">“법무팀·전략팀·고유찬 상무까지 보고되었음에도 … 공동 모의하고 고객을 수렁으로 몬 사건입니다.”</div>
+ <div class="purpose"><b>취지</b> · 준법감시위 감찰 요구 — 조직적 민원 기망에 대한 공식 감찰 요청(사법방해 문서화)</div>
+ <div class="tagrow"><span class="t2 g">준법감시</span><span class="t2 r">조직적 공모</span></div></div></div>
+
+<div class="card late"><div class="chead"><span class="no">7</span><span class="date">2024.10.29</span><span class="to">수신 <b>소제인</b> (피고 측 변호사)</span></div>
+ <div class="cbody"><div class="quote">“귀하가 재판부에 제출한 변론에서 허위 사실을 무한 반복 계속 주장한 바 … 허위사실에 의한 재판 방해에 대한 법적·사회적 책임을 명백히 묻을 것입니다.”</div>
+ <div class="purpose"><b>취지</b> · 허위 사실 주장 경고 — 피고 대리인의 반복 허위서면 정정 요청 및 법적 책임 경고</div>
+ <div class="tagrow"><span class="t2 r">허위서면</span><span class="t2 r">재판 방해</span><span class="t2 n">변호사법 §24</span></div></div></div>
+
+<div class="card late"><div class="chead"><span class="no">8</span><span class="date">2024.11.14</span><span class="to">수신 <b>이정미</b> (가해 직원)</span></div>
+ <div class="cbody"><div class="quote">“양도세 미끼로 ‘수익 실현’이라는 (서류를) 금감원에 제출하고 … 면책 받지 못한 총 6,630주 … 그 송금 계좌로 입금을 부탁드립니다.”</div>
+ <div class="purpose"><b>취지</b> · 잔여 27%(6,630주) 손해배상 청구 — 1심 면책 안 된 시가 손실분(약 16억) 2주 내 송금 최고</div>
+ <div class="tagrow"><span class="t2 r">6,630주</span><span class="t2 o">시가손해 16억</span></div></div></div>
+
+<div class="card late"><div class="chead"><span class="no">9</span><span class="date">2025.07.10</span><span class="to">수신(받음) <b>법무법인 세한</b><span class="recv">원고 수신</span></span></div>
+ <div class="cbody"><div class="quote">“출력시각이 삭제된 위조 합의서 제출 … 결정적인 ‘서류 살인’ … 허위 증거를 인용하여 소송비용 33,420,000원을 청구.”</div>
+ <div class="purpose"><b>취지</b> · 소송비용 약 3,342만원 청구(원고가 받은 통지) — 위조 의혹 합의서로 승소 후 범죄수익 청구라는 원고의 반박</div>
+ <div class="tagrow"><span class="t2 o">소송비용 3,342만</span><span class="t2 r">위조 합의서</span></div></div></div>
+
+<div class="card new"><div class="chead"><span class="no">10</span><span class="date">2026.01.13</span><span class="to">수신 <b>윤병운</b> (NH투자증권 대표이사)<span class="newbadge">NEW</span></span></div>
+ <div class="cbody"><div class="quote">“직원들(이정미·임진기·법무팀·컴플라이언스부)이 조직적으로 재판을 방해하여 1심·2심에서 75%를 부당하게 면책 받았습니다. … 2026년 1월 18일 이내 불응 시 형사고소·전체 녹음 공익 공개·주주대표소송·당국 고발을 병행할 것을 최후 통첩합니다.”</div>
+ <div class="purpose"><b>취지</b> · 대표이사 직접 통지 — 자체 감찰·징계, 직원 및 소제인 변호사 형사고소, <b>재심청구서 법원 제출 요구</b>, 자본시장법 위반·소송사기 범죄수익 배상 최후통첩(사건 8주년 시한)</div>
+ <div class="tagrow"><span class="t2 p">대표이사 책임</span><span class="t2 r">자체 재심 요구</span><span class="t2 o">자본시장법 위반</span><span class="t2 n">주주대표소송</span></div></div></div>
+
+<div class="card new"><div class="chead"><span class="no">11</span><span class="date">2026.01.14</span><span class="to">수신 <b>소제인·송창영 변호사</b> (법무법인 세한)<span class="newbadge">NEW</span></span></div>
+ <div class="cbody"><div class="quote">“고도의 법률 지식을 무기로 한 시민의 삶을 파괴하는 악마적 기술 … 그 전문성을 정의 구현이 아닌, 거대 자본의 면책과 피해자의 권리 영구 박탈을 위해 사용했습니다.”</div>
+ <div class="purpose"><b>취지</b> · 미필적 고의 재판방해·악의적 허위변론 최후통첩 — 미필적 고의(대법원 2004도7027), 증거위조(형법 §155) 방조, 소송사기(형법 §347). 참조: NH 대표이사·대한변협. 2026.1.18까지 시정 없으면 법적·사회적 단죄 개시</div>
+ <div class="tagrow"><span class="t2 r">미필적 고의</span><span class="t2 r">증거위조 §155</span><span class="t2 r">소송사기 §347</span><span class="t2 n">변협 참조</span></div></div></div>
+
+<!-- 스모킹건 -->
+<div class="sectit"><span class="bar"></span>③ 11번 통지의 핵심 — 변호사 재판방해 3대 스모킹건</div>
+<p class="lead">2026.1.14 변호사 최후통첩이 적시한 ‘반박 불가’ 객관 증거 3가지. 금융법 전문가가 ‘몰랐을 리 없는’ 허위를 법원에 제출했다는 미필적 고의의 핵심이다.</p>
+<div class="guns">
+ <div class="gun"><div class="gt">① 위조 합의서</div><div class="fact">합의서 출력 <b>2019.2.21 11:05:04</b>(대면 약 5시간 전). 법원 제출본은 <b>출력시각 완전 삭제</b> → “현장에서 충분히 협의” 허구 완성.</div><div class="law">증거위조(형법 §155) 방조</div></div>
+ <div class="gun"><div class="gt">② ‘2시간 대면’ 물리 불가</div><div class="fact">하이패스 <b>15:40 북대구IC</b> → 자택 도착 사진 <b>16:24</b>(GPS). 이동 44분, 실제 대면 최대 10분. 그런데 “1~2시간 설명” 변론.</div><div class="law">소송사기(형법 §347)</div></div>
+ <div class="gun"><div class="gt">③ 존재하지 않는 ‘매도 기회’</div><div class="fact"><b>2018.6.28~7.17 매매거래 정지</b>(합병, 거래소 공시). 그런데 항소심 답변서(2024.4.16) “주가 상승 때 매도 가능했으나 미뤘다”.</div><div class="law">허위 주장·재판방해</div></div>
+</div>
+
+<!-- 에스컬레이션 -->
+<div class="sectit"><span class="bar"></span>④ 에스컬레이션 — 8주년 최후통첩(2026.1.18)</div>
+<div class="esc">
+ <div class="dl">사건 발생 <span>8년</span>이 되는 <span>2026년 1월 18일</span> — 불응 시 동시 개시</div>
+ <div class="escrow">
+   <div class="escbox"><b>형사고소</b>직원·소제인 변호사 등 재판방해·소송사기 고소</div>
+   <div class="escbox"><b>언론·SNS 공개</b>전체 녹취 공익 목적 유튜브·언론 공개</div>
+   <div class="escbox"><b>주주대표소송</b>대표이사 배임 등 주주대표소송</div>
+   <div class="escbox"><b>당국 고발</b>금융위 자본시장법 위반 등 당국 고발</div>
+   <div class="escbox"><b>재심 청구</b>위조 증거에 기한 판결 재심(민소 §451)</div>
+ </div>
+</div>
+
+<!-- 분석 -->
+<div class="sectit"><span class="bar"></span>⑤ 분석 — 11건이 증명하는 7가지</div>
+<div class="analysis">
+ <div class="arow"><div class="ic">1</div><div class="bd"><div class="h">‘권리 위에 잠자지 않는 자’ — 인지 직후 6건 연속</div><div class="p">사기 합의 인지(2020.8) 직후 2주 만에 가해자·관리자·감사·준법감시에 6건 발송. 권리 보전 시점을 확정.</div></div></div>
+ <div class="arow o"><div class="ic">2</div><div class="bd"><div class="h">‘직원 실수’가 아닌 ‘조직적 사법방해’ 문서화</div><div class="p">감사·준법감시 통지로 법무팀·전략팀·상무까지 보고된 ‘조직적 공모’를 서면 박제.</div></div></div>
+ <div class="arow r"><div class="ic">3</div><div class="bd"><div class="h">사기 합의 취소 — 민법 §110·§104 문헌 증거</div><div class="p">2020.8.21 통지가 ‘협의 없는 미끼 합의서’를 사기·불공정으로 파기 선언. 재심·상고심의 ‘의사표시 취소’ 입증 자료.</div></div></div>
+ <div class="arow p"><div class="ic">4</div><div class="bd"><div class="h">책임의 정점까지 — 대표이사 직접 통지(NEW)</div><div class="p">2026.1.13 대표이사 윤병운에게 ‘자체 재심청구·감찰·형사고소’를 직접 요구해, 책임을 직원에서 경영진(배임)으로 끌어올림.</div></div></div>
+ <div class="arow r"><div class="ic">5</div><div class="bd"><div class="h">소송대리인 정조준 — 미필적 고의의 입증(NEW)</div><div class="p">2026.1.14 통지가 출력시각 삭제·2시간 대면·매도기회 3대 스모킹건으로 변호사의 미필적 고의(대법원 2004도7027)와 증거위조·소송사기를 적시.</div></div></div>
+ <div class="arow g"><div class="ic">6</div><div class="bd"><div class="h">소멸시효 차단·잔여 청구의 연속성</div><div class="p">2024.11.14·2026.1.13 통지로 면책되지 않은 27%(6,630주, 약 16억)와 75% 소송사기 부분의 청구권을 시효 내 보전.</div></div></div>
+ <div class="arow"><div class="ic">7</div><div class="bd"><div class="h">‘위조 합의서’ 대 ‘일자 분명한 11건’의 대조</div><div class="p">출력시각을 지운 합의서 한 장 대(對) 5년 5개월에 걸친 일자 명확한 통지 11건. 이 대조 자체가 실체적 진실의 증거.</div></div></div>
+</div>
+
+<div class="summary">
+ <div class="t">11장의 종이 — ‘시점·진실·정점’을 모두 못박다</div>
+ <p>V2는 단순 항의를 넘어, 책임의 정점(대표이사 윤병운)과 실행자(소제인·송창영 변호사)를 직접 정조준하고, 출력시각 삭제·2시간 대면·매도기회라는 3대 객관 증거로 ‘미필적 고의에 의한 재판방해·소송사기’를 적시했다. 출력시각을 지운 합의서 한 장으로 모든 것을 덮으려 한 피고와, 일자가 분명한 11건의 서면을 남긴 피해자 — 사법부는 이 대조 앞에서 실체적 진실을 가려야 한다.</p>
+</div>
+
+<div class="note">
+ ※ 본 자료는 원고(김성만) 측이 보유한 내용증명 발송·수신 기록과 발언 원문을 정리·분석한 ‘피해자 관점’ 자료이다. 인용 발언은 원본 대조가 필요할 수 있으며, ‘기망·위조·재판방해·소송사기’ 등은 원고의 법적 주장(의견)으로 특정인에 대한 확정된 유죄 판단을 의미하지 않는다. 수신인명·금액·일자는 자료 간 차이가 있을 수 있어 원본 확인이 필요하다. 최종 판단은 수사기관·법원의 권한에 속한다.
+</div>
+<div class="foot">내용증명 11건 V2 발송일·수신인·발언원문 정밀 분석 · 작성 2026.06.10 · 김성만</div>
+
+</div>
+</body>
+</html>
