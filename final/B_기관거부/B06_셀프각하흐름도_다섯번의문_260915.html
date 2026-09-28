@@ -1,0 +1,276 @@
+<!DOCTYPE html><html lang="ko"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>셀프각하 흐름도 — 다섯 번의 문</title><style>
+:root{color-scheme:light;
+ --ok:#1b7f5a; --bad:#b3282a; --warn:#c07414; --end:#4a2b2b; --navy:#16324f; --ink:#141a20; --mute:#5c6670; --line:#d4d9de;}
+*{box-sizing:border-box}
+@page{size:A4;margin:0}
+body{font-family:'Noto Sans CJK KR',sans-serif;background:#fff;color:var(--ink);margin:0;font-size:9.6pt;line-height:1.55}
+.page{width:210mm;min-height:297mm;padding:13mm 13mm 16mm;page-break-after:always;position:relative;background:#fff}
+.page:last-child{page-break-after:auto}
+.hero{background:var(--navy);color:#fff;border-radius:3mm;padding:6mm 7mm;margin-bottom:4mm}
+.hero h1{margin:0 0 1.5mm;font-size:19pt;letter-spacing:-.5px;line-height:1.3}
+.hero .s1{margin:0;font-size:10pt;color:#c5d8ea}
+.hero .s2{margin:2mm 0 0;font-size:8.6pt;color:#93b0cc;line-height:1.5}
+h2{font-size:12pt;margin:6mm 0 2.5mm;padding:1.8mm 0 1.4mm;border-top:2px solid var(--ink);border-bottom:1px solid #b8bfc6}
+h2 .n{color:var(--bad)}
+.kpi{display:grid;grid-template-columns:repeat(5,1fr);gap:2.4mm;margin:3.5mm 0}
+.k{background:#f7f8f9;border:1px solid var(--line);border-radius:2mm;padding:2.6mm 2.4mm;text-align:center}
+.k .n{font-size:15.5pt;font-weight:800;line-height:1.15;color:var(--bad)}
+.k .n.sm{font-size:12pt}
+.k .l{font-size:7.4pt;color:var(--mute);margin-top:1mm;line-height:1.35}
+.legend{display:flex;flex-wrap:wrap;gap:5mm;font-size:8.2pt;margin:2.5mm 1mm 3mm;color:#444}
+.sw2{display:inline-block;width:2.6mm;height:2.6mm;border-radius:.6mm;vertical-align:-.3mm;margin-right:1.2mm}
+.spine{border:1px solid var(--line);border-radius:2mm;overflow:hidden;margin:3mm 0 0}
+.spine table{width:100%;border-collapse:collapse;font-size:8.5pt}
+.spine th{background:#eceff2;padding:1.8mm 2mm;text-align:left;font-size:8.2pt;border-bottom:1px solid var(--line)}
+.spine td{padding:1.8mm 2mm;border-bottom:1px solid #e8ebee;vertical-align:top}
+.spine tr:last-child td{border-bottom:none}
+.spine .d{white-space:nowrap;font-weight:700;color:#333;width:26mm}
+.spine .g{width:16mm;text-align:center;font-weight:800}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:4mm;align-items:start}
+.pet{background:#fff;border:1px solid var(--line);border-radius:2mm;padding:3.4mm 3.6mm;break-inside:avoid}
+.pet.wide{grid-column:1 / -1}
+.ptitle{font-size:10.2pt;font-weight:800;color:var(--navy);line-height:1.38}
+.ptitle .tag{display:inline-block;background:var(--navy);color:#fff;border-radius:1mm;padding:.4mm 1.6mm;font-size:8pt;margin-right:1.5mm;vertical-align:1px}
+.psub{font-size:8.2pt;color:var(--mute);margin:1.2mm 0 2.6mm;line-height:1.45}
+.step{background:#f8f9fa;border-radius:1.4mm;padding:1.8mm 2.4mm;border-left:1.1mm solid #ccc}
+.sd{font-size:7.6pt;color:#7a838c;font-weight:700}
+.sw{font-size:9.2pt;font-weight:800;margin:.3mm 0}
+.st{font-size:8.5pt;color:#2b3238;line-height:1.42}
+.arrow{text-align:center;color:#b9bfc5;font-size:9pt;line-height:1;margin:.7mm 0}
+.pv{margin-top:2.4mm;background:#fbeeee;border:1px solid #edc9c9;border-radius:1.4mm;padding:2mm 2.4mm;font-size:8.4pt;color:#932426;font-weight:700;line-height:1.45}
+.pv.amber{background:#fdf6e6;border-color:#ead9b0;color:#7d5a11}
+.note{background:#fdf9ec;border:1px solid #e6dcbc;border-radius:2mm;padding:3.4mm 4mm;font-size:9pt;line-height:1.7;margin-top:4mm;color:#41381a}
+.note b{color:#2a2410}
+.punch{background:var(--ink);color:#fff;border-radius:2mm;padding:4mm 5mm;margin:4mm 0;font-size:11pt;font-weight:700;line-height:1.55;text-align:center;letter-spacing:-.3px}
+.punch span{color:#ffd469}
+.tb{width:100%;border-collapse:collapse;font-size:8.6pt;margin:2.5mm 0}
+.tb th,.tb td{border:1px solid #a9b0b6;padding:1.8mm 2.2mm;vertical-align:top;text-align:left;line-height:1.45}
+.tb th{background:#eceff2;font-weight:700;font-size:8.3pt}
+.tb td.c{text-align:center;white-space:nowrap}
+.q{background:#fff2c9;padding:0 .6mm;font-weight:700}
+.s{font-weight:800}
+.q{background:#fff2c9;padding:0 .6mm;font-weight:700;border-radius:.5mm}
+.foot{position:absolute;left:13mm;right:13mm;bottom:7mm;display:flex;justify-content:space-between;align-items:center;font-size:7.6pt;color:#8a9199;border-top:1px solid #e3e6e9;padding-top:1.8mm}
+.foot .pg{font-weight:800;color:#3a4148}
+.src{font-size:7.8pt;color:#79828a;line-height:1.6;margin-top:3mm}
+.chk{border:1.6px solid var(--ink);border-radius:2mm;padding:3.4mm 4mm;margin-top:4mm;font-size:8.8pt;line-height:1.65}
+.chk .h{font-weight:800;font-size:10pt;margin-bottom:2mm;display:block}
+.chk ol{margin:0;padding-left:5mm}
+.chk li{margin-bottom:1.4mm}
+.bar{display:flex;height:5.5mm;border-radius:1mm;overflow:hidden;margin:1.5mm 0 1mm;border:1px solid var(--line)}
+.tight h2{margin:4mm 0 2mm}
+.tight .punch{padding:2.8mm 4mm;margin:3mm 0;font-size:9.8pt;line-height:1.5}
+.tight .chk{padding:2.6mm 3.4mm;margin-top:3mm;font-size:8.4pt;line-height:1.5}
+.tight .chk .h{font-size:9.4pt;margin-bottom:1.4mm}
+.tight .chk li{margin-bottom:1mm}
+.tight .src{font-size:7.2pt;line-height:1.5;margin-top:2.5mm}
+.tight .tb th,.tight .tb td{padding:1.4mm 2mm;line-height:1.4}
+.tight .pet{padding:2.8mm 3.2mm}
+.tight .psub{margin:1mm 0 2mm}
+.tight .step{padding:1.5mm 2.2mm}
+.tight .pv{margin-top:2mm;padding:1.7mm 2.2mm}
+.bar i{display:block;font-style:normal;font-size:7.2pt;color:#fff;text-align:center;line-height:5.5mm;font-weight:700}
+</style></head><body>
+
+<!-- ================= PAGE 1 ================= -->
+<div class="page">
+<div class="hero">
+<h1>다섯 번의 문, 다섯 번의 회귀</h1>
+<p class="s1">신고를 받은 창구가 <b>신고당한 쪽</b>으로 사건을 되돌린 6년의 기록 — 김성만 사건 2020~2026</p>
+<p class="s2">회사 이첩(2020) · 국민청원 ①②(2023) · 대통령실 공직기강(2024) · 그리고 2026년 9월, 같은 통지가 다시 왔습니다.</p>
+</div>
+
+<div class="kpi">
+<div class="k"><div class="n">2일</div><div class="l">청원 ①·② 각각<br>배정 → 각하</div></div>
+<div class="k"><div class="n sm">5시간 48분</div><div class="l">2023. 8. 8. 배정변경<br>2회 사이의 간격</div></div>
+<div class="k"><div class="n">640일</div><div class="l">시효 1,095일 중<br>민원 단계가 소비</div></div>
+<div class="k"><div class="n">154일</div><div class="l">대통령실 제보<br>→ 권익위 종결</div></div>
+<div class="k"><div class="n">0건</div><div class="l">6년간 실시된<br>검사</div></div>
+</div>
+
+<div class="legend">
+<span><span class="sw2" style="background:var(--ok)"></span>정상 배정 · 중립 창구</span>
+<span><span class="sw2" style="background:var(--bad)"></span>신고당한 쪽으로 회귀</span>
+<span><span class="sw2" style="background:var(--warn)"></span>지연 · 기한 연장</span>
+<span><span class="sw2" style="background:var(--end)"></span>각하 · 종결</span>
+</div>
+
+<h2>한눈에 — 여섯 해 동안 같은 일이 <span class="n">다섯 번</span></h2>
+<div class="spine"><table>
+<tr><th class="d">시기</th><th class="g">문</th><th>어디에 냈는가</th><th>어디로 갔는가</th><th style="width:34mm">결과</th></tr>
+<tr><td class="d">2020. 6.~2022. 4.</td><td class="g" style="color:var(--bad)">①</td><td>금융감독원 민원</td><td><span class="s">NH투자증권(피민원인)에 이첩</span> — 회사가 직접 회신문 작성</td><td><span class="s">기각</span> · 「민원 제기 사실이 없다」</td></tr>
+<tr><td class="d">2023. 6. 30.~7. 13.</td><td class="g" style="color:var(--bad)">②</td><td>국민청원 — 금감원 담당자 고발</td><td><span class="s">분쟁조정3국(피청원 부서)</span>으로 배정 변경</td><td><span class="s">각하</span> · 배정 2일</td></tr>
+<tr><td class="d">2023. 7. 18.~8. 10.</td><td class="g" style="color:var(--bad)">③</td><td>국민청원 — ②의 셀프각하를 고발</td><td>감찰실 14일 유지 → <span class="s">하루에 두 번 변경</span> → 분쟁조정3국</td><td><span class="s">각하</span> · 배정 2일</td></tr>
+<tr><td class="d">2024. 10. 23.~2025. 3. 26.</td><td class="g" style="color:var(--warn)">④</td><td>대통령실 공직기강비서실</td><td>접수 <span class="s">익일</span> 권익위 이첩 → 재정세무민원과</td><td><span class="s">답변완료</span> · 154일</td></tr>
+<tr><td class="d">2026. 9. 10.~9. 15.</td><td class="g" style="color:var(--bad)">⑤</td><td>검사실시요청서 107면<br>(금감원장·금융위원장)</td><td><span class="s">「민원」으로 분류</span> → 소비자 부문 배정<br>→ <span class="s">NH 이첩 예정 통지</span></td><td><span class="s">진행 중</span> · 접수번호 통지 0건</td></tr>
+</table></div>
+
+<div class="punch">신고를 받은 창구가 <span>신고당한 쪽</span>으로 사건을 돌려보내면,<br>그 사건은 <span>언제나 「해당 없음」</span>으로 끝납니다.</div>
+
+<div class="note"><b>이 문서가 주장하는 것과 주장하지 않는 것</b><br>
+<b>주장합니다</b> — 위 다섯 건은 모두 <b>사건을 판단할 창구가 「그 사건의 상대방 또는 당사자」였다</b>는 공통점을 갖습니다. 날짜·시각·담당자는 배정내역 원본과 알림톡 발신현황 그대로입니다.<br>
+<b>주장하지 않습니다</b> — 개별 담당자의 고의나 비위를 단정하지 않습니다. 이 문서에 이름이 적힌 분들은 <b>참고인</b>이며, 제가 구하는 것은 처벌이 아니라 <b>배정 기록의 확인</b>입니다.</div>
+
+<div class="foot"><span>셀프각하 흐름도 — 다섯 번의 문 · 김성만 · 2026. 9. 15.</span><span class="pg">- 1 / 4 -</span></div>
+</div>
+
+<!-- ================= PAGE 2 ================= -->
+<div class="page">
+<h2>문 ① — 2020년 6월, <span class="n">회사가 자기 사건에 답했습니다</span></h2>
+<div class="grid2">
+<div class="pet wide">
+<div class="ptitle"><span class="tag">문 ①</span>금융감독원 민원 → NH투자증권 이첩</div>
+<div class="psub">2020. 6. 접수 · 이 구조의 <b>원형(原型)</b>입니다. 뒤의 네 번은 모두 이 경로의 반복입니다.</div>
+<div class="grid2" style="gap:3mm">
+<div>
+<div class="step" style="border-left-color:var(--ok)"><div class="sd">2020. 6.</div><div class="sw" style="color:var(--ok)">금융감독원</div><div class="st">민원 접수 — 분쟁조정 절차 개시</div></div>
+<div class="arrow">↓</div>
+<div class="step" style="border-left-color:var(--bad)"><div class="sd">2020. 6.~7.</div><div class="sw" style="color:var(--bad)">NH투자증권으로 이첩</div><div class="st">회사가 <span class="s">직접 회신문을 작성</span> — 확인의 대상이 확인의 주체가 됨</div></div>
+<div class="arrow">↓</div>
+<div class="step" style="border-left-color:var(--bad)"><div class="sd">2020. 7. 21.</div><div class="sw" style="color:var(--bad)">회사 회신문</div><div class="st">「<span class="q">민원 제기 사실이 없다</span>」는 취지 기재</div></div>
+</div>
+<div>
+<div class="step" style="border-left-color:var(--bad)"><div class="sd">2020. 11. 12.</div><div class="sw" style="color:var(--bad)">회사 직원 통화</div><div class="st">「<span class="q">언제 민원을 제기하셨습니까?</span>」</div></div>
+<div class="arrow">↓</div>
+<div class="step" style="border-left-color:var(--end)"><div class="sd">2022. 4.</div><div class="sw" style="color:var(--end)">기각</div><div class="st">소멸시효 1,095일 중 <span class="s">640일</span>을 이 단계가 소비</div></div>
+<div class="arrow">↓</div>
+<div class="step" style="border-left-color:var(--end)"><div class="sd">2022. 9. 2.</div><div class="sw" style="color:var(--end)">강제된 제소</div><div class="st">시효에 쫓겨 <span class="s">원하지 않은 소송</span>의 원고가 됨 — 제1심 판결문도 「민원 기각 → 제소」의 경위를 적음</div></div>
+</div>
+</div>
+<div class="bar">
+<i style="background:#b3282a;flex:640" title="민원 단계 소비">640일 — 민원 단계가 소비</i>
+<i style="background:#9aa3ab;flex:455">455일 — 남은 기간</i>
+</div>
+<div style="font-size:7.6pt;color:var(--mute);margin-bottom:1mm">손해배상청구권 소멸시효 1,095일 중 <b>58.4%</b>가 민원 절차에서 소진되었습니다.</div>
+<div class="pv">회사에 물으면 회사가 답합니다 — 그 답이 「민원을 낸 적이 없다」였고, 그 문장이 이후 법정에서 인용되었습니다.</div>
+</div>
+</div>
+
+<h2>문 ② — 2023년, <span class="n">고발당한 부서가 그 고발을 받았습니다</span></h2>
+<div class="pet wide">
+<div class="ptitle"><span class="tag">문 ②</span>국민청원 「금감원 담당자·NH 민원 갑질 기망 고발」</div>
+<div class="psub">2023. 6. 30. 01:54 접수 · 처리기간 90일(~10. 2.) · <b>3일차에 종결</b></div>
+<div class="grid2" style="gap:3mm">
+<div>
+<div class="step" style="border-left-color:var(--ok)"><div class="sd">6. 30.</div><div class="sw" style="color:var(--ok)">금융위 금융위 직원 T1</div><div class="st">규제개혁법무담당관 → 금감원 이송 <span style="color:var(--mute)">(정상)</span></div></div>
+<div class="arrow">↓</div>
+<div class="step" style="border-left-color:var(--ok)"><div class="sd">7. 4.</div><div class="sw" style="color:var(--ok)">금감원 금융위 직원 T2</div><div class="st">금융민원총괄국 배정 <span style="color:var(--mute)">(중립 창구)</span></div></div>
+</div>
+<div>
+<div class="step" style="border-left-color:var(--bad)"><div class="sd">7. 11.</div><div class="sw" style="color:var(--bad)">배정 변경</div><div class="st"><span class="s">분쟁조정3국 = 청원의 대상 부서</span>로 이동</div></div>
+<div class="arrow">↓</div>
+<div class="step" style="border-left-color:var(--end)"><div class="sd">7. 13. 16:15</div><div class="sw" style="color:var(--end)">각하</div><div class="st">「<span class="q">기각 회신을 드린 거라고요</span>」</div></div>
+</div>
+</div>
+<div class="bar" style="margin-top:2.5mm">
+<i style="background:#b3282a;flex:3">3일</i>
+<i style="background:#dfe3e7;color:#5c6670;flex:87">87일 — 남은 처리기간</i>
+</div>
+<div class="pv">90일이 주어진 청원이 <span style="font-weight:800">3일차</span>에, 배정 <span style="font-weight:800">2일</span> 만에 끝났습니다.</div>
+</div>
+
+<div class="foot"><span>셀프각하 흐름도 — 다섯 번의 문 · 김성만 · 2026. 9. 15.</span><span class="pg">- 2 / 4 -</span></div>
+</div>
+
+<!-- ================= PAGE 3 ================= -->
+<div class="page">
+<h2>문 ③ — <span class="n">하루에 두 번</span> 배정이 바뀌었습니다</h2>
+<div class="pet wide">
+<div class="ptitle"><span class="tag">문 ③</span>국민청원 「배정 후 2일 만에 셀프 각하하는 공무원을 징계해달라」</div>
+<div class="psub">2023. 7. 18. 감사원 접수 · <b>문 ②의 셀프각하 자체를 고발한 청원</b>입니다.</div>
+<div class="grid2" style="gap:3mm">
+<div>
+<div class="step" style="border-left-color:var(--ok)"><div class="sd">7. 18.</div><div class="sw" style="color:var(--ok)">감사원 하정림</div><div class="st">국민제안감사2국 → 금융위 이송</div></div>
+<div class="arrow">↓</div>
+<div class="step" style="border-left-color:var(--ok)"><div class="sd">7. 19.</div><div class="sw" style="color:var(--ok)">금융위 금융위 직원 T3</div><div class="st">자본시장과 → 「<span class="q">감사실 혹은 감찰실로</span>」 이송 요청</div></div>
+<div class="arrow">↓</div>
+<div class="step" style="border-left-color:var(--ok)"><div class="sd">7. 25.</div><div class="sw" style="color:var(--ok)">금감원 금감원 직원 S6</div><div class="st"><span class="s">감찰실 배정</span> — 올바른 배정, <span class="s">14일간 유지</span></div></div>
+</div>
+<div>
+<div class="step" style="border-left-color:var(--bad)"><div class="sd">8. 8. <span style="color:var(--bad)">09:40</span></div><div class="sw" style="color:var(--bad)">1차 변경 — 금감원 금융위 직원 T2</div><div class="st">분쟁조정3국으로 변경 <span class="s">(감찰실 이탈)</span></div></div>
+<div class="arrow">↓ <span style="font-size:7.4pt;color:var(--bad);font-weight:700">5시간 48분</span></div>
+<div class="step" style="border-left-color:var(--bad)"><div class="sd">8. 8. <span style="color:var(--bad)">15:28</span></div><div class="sw" style="color:var(--bad)">2차 변경 — 금감원 금감원 직원 S5</div><div class="st"><span class="s">같은 날 재변경</span></div></div>
+<div class="arrow">↓</div>
+<div class="step" style="border-left-color:var(--end)"><div class="sd">8. 10.</div><div class="sw" style="color:var(--end)">각하</div><div class="st">「<span class="q">각하를 한 건데</span>」 · 「<span class="q">저희 쪽으로 배정이 됐어요</span>」</div></div>
+</div>
+</div>
+<div class="pv">감찰실에 14일간 정상 배정되어 있던 청원이, <span style="font-weight:800">하루에 두 번의 변경</span>으로 고발 대상 부서에 되돌아가 2일 만에 각하되었습니다.</div>
+</div>
+
+<h2>문 ④ — 공직기강 감찰이 <span class="n">「민원」이 되었습니다</span></h2>
+<div class="pet wide">
+<div class="ptitle"><span class="tag">문 ④</span>대통령실 공직기강비서실 (신청번호 PC-2410-0039531)</div>
+<div class="psub">2024. 10. 23. 신청 · 공무원 감찰 제보</div>
+<div class="grid2" style="gap:3mm">
+<div>
+<div class="step" style="border-left-color:var(--ok)"><div class="sd">2024. 10. 23.</div><div class="sw" style="color:var(--ok)">대통령실</div><div class="st">공직기강 제보 신청</div></div>
+<div class="arrow">↓</div>
+<div class="step" style="border-left-color:var(--bad)"><div class="sd">10. 24.</div><div class="sw" style="color:var(--bad)">권익위 이첩</div><div class="st">접수 <span class="s">익일</span> 국민권익위원회로</div></div>
+<div class="arrow">↓</div>
+<div class="step" style="border-left-color:var(--bad)"><div class="sd">10. 28.</div><div class="sw" style="color:var(--bad)">권익위 권익위 직원 W3</div><div class="st">재정세무민원과 배정 — <span class="s">감찰 제보가 「민원」으로 분류</span></div></div>
+</div>
+<div>
+<div class="step" style="border-left-color:var(--warn)"><div class="sd">2025. 1. 16. · 3. 5.</div><div class="sw" style="color:var(--warn)">기한 2회 연장</div><div class="st">→ 3. 7. → 4. 18.</div></div>
+<div class="arrow">↓</div>
+<div class="step" style="border-left-color:var(--end)"><div class="sd">2025. 3. 13.</div><div class="sw" style="color:var(--end)">대법원 판결 확정</div><div class="st">민사 3심 종결 — 이 사건의 재판이 끝난 날</div></div>
+<div class="arrow">↓ <span style="font-size:7.4pt;color:var(--bad);font-weight:700">13일</span></div>
+<div class="step" style="border-left-color:var(--end)"><div class="sd">2025. 3. 26.</div><div class="sw" style="color:var(--end)">「답변완료」</div><div class="st">연장기한(4. 18.)을 <span class="s">3주 남기고</span> 종결 — 총 <span class="s">154일</span></div></div>
+</div>
+</div>
+<div class="pv amber">★ 두 번이나 연장해 둔 기한(2025. 4. 18.)을 <span style="font-weight:800">3주 남기고</span> 종결하였고, 그 날짜는 <span style="font-weight:800">대법원 확정(3. 13.)의 13일 뒤</span>였습니다. 저는 「재판이 끝나기를 기다렸다」고 단정하지 않습니다. <span style="font-weight:800">그 순서가 기록에 남아 있다</span>는 사실만 적습니다.</div>
+</div>
+
+<div class="foot"><span>셀프각하 흐름도 — 다섯 번의 문 · 김성만 · 2026. 9. 15.</span><span class="pg">- 3 / 4 -</span></div>
+</div>
+
+<!-- ================= PAGE 4 ================= -->
+<div class="page tight">
+<h2>문 ⑤ — <span class="n">2026년 9월, 같은 통지가 다시 왔습니다</span></h2>
+<div class="pet wide">
+<div class="ptitle"><span class="tag">문 ⑤</span>「NH투자증권 검사실시요청서 및 조치 요청 탄원서」 전 107면</div>
+<div class="psub">2026. 9. 10. 금융감독원장 수신 · 금융위원회 위원장 병수신 · 문서번호 김성만-금감-26-01호<br>본문 38면 + 첨부 1 범죄사실 연대기 230건 69면</div>
+<div class="grid2" style="gap:3mm">
+<div>
+<div class="step" style="border-left-color:var(--ok)"><div class="sd">2026. 9. 10.</div><div class="sw" style="color:var(--ok)">제출</div><div class="st">표제부터 「<span class="s">검사실시요청</span>」 — 근거 조문(규정 §8·§9③·§41·§17①7호나(6))을 명시하고, <span class="s">제3장에서 제척·회피와 검사 부서 처리를 미리 요청</span></div></div>
+<div class="arrow">↓</div>
+<div class="step" style="border-left-color:var(--bad)"><div class="sd">2026. 9. 15.</div><div class="sw" style="color:var(--bad)">「민원」으로 분류</div><div class="st">접수 단계에서 <span class="s">민원으로 재분류</span>되어 <span class="s">소비자 부문</span>에 배정되었다는 안내를 받음</div></div>
+</div>
+<div>
+<div class="step" style="border-left-color:var(--bad)"><div class="sd">2026. 9. 15.</div><div class="sw" style="color:var(--bad)">NH 이첩 예정 통지</div><div class="st">★ <span class="s">피검사자인 회사로 이첩하겠다</span>는 통지 — <span class="s">문 ①과 동일한 경로</span></div></div>
+<div class="arrow">↓</div>
+<div class="step" style="border-left-color:var(--warn)"><div class="sd">현재</div><div class="sw" style="color:var(--warn)">접수번호 통지 0건</div><div class="st">접수번호·담당 부서·처리 단계 <span class="s">어느 것도 통지받지 못함</span></div></div>
+</div>
+</div>
+<div class="pv">2020년에는 이첩을 <span style="font-weight:800">사후에</span> 알았고, 2026년에는 <span style="font-weight:800">사전에</span> 들었습니다. 그 차이가 이 그림을 다시 그리는 이유입니다.</div>
+</div>
+
+<h2>이 그림이 증명하는 것</h2>
+<table class="tb">
+<tr><th style="width:30mm">공통 구조</th><th>다섯 번에서 반복된 것</th></tr>
+<tr><td class="s">① 회귀</td><td>사건을 판단할 창구가 <span class="s">그 사건의 상대방 또는 당사자</span>였습니다 — 문 ①·⑤는 회사, 문 ②·③은 고발 대상 부서.</td></tr>
+<tr><td class="s">② 속도의 비대칭</td><td>배정에서 각하까지 <span class="s">2일</span>. 그러나 그 전후의 대기는 <span class="s">640일</span>(문 ①)과 <span class="s">154일</span>(문 ④)이었습니다. <span class="s">빠를 때와 느릴 때가 정해져 있습니다.</span></td></tr>
+<tr><td class="s">③ 분류의 힘</td><td>「검사 요청」이 <span class="s">「민원」</span>으로, 「공직기강 감찰 제보」가 <span class="s">「민원」</span>으로 바뀝니다. <span class="s">표제가 아니라 접수 단계의 분류가 경로를 결정</span>합니다.</td></tr>
+<tr><td class="s">④ 작위</td><td>문 ③에서 감찰실 배정이 <span class="s">하루에 두 번(09:40 · 15:28)</span> 바뀌었습니다. <span class="s">게으른 조직은 배정을 두 번 바꾸지 않습니다</span> — 부작위가 아니라 작위입니다.</td></tr>
+</table>
+
+<div class="chk"><span class="h">확인을 요청드리는 것 — 처벌이 아니라 기록입니다</span>
+<ol>
+<li><span class="s">2023. 7. 11. 및 8. 8. 배정 변경(2회)의 지시자·결재선</span> — 누가, 어떤 근거로 중립 창구·감찰실에서 대상 부서로 옮겼는지.</li>
+<li><span class="s">청원 ②·③의 심의 상정 기록</span> — 상정 없이 종결되었다면 그 근거 조문.</li>
+<li><span class="s">「공직자의 이해충돌 방지법」 제5조의 적용 여부와 회피·기피 신청의 존부</span> — 금융감독원 임직원에 대한 적용 여부 자체를 «확인 요청»드리며, 위반이라고 단정하지 않습니다.</li>
+<li><span class="s">2026. 9. 10.자 107면의 접수번호 · 배정 부서 · 담당자 · 처리 단계</span>, 그리고 <span class="s">NH투자증권 이첩의 중지</span>.</li>
+<li><span class="s">2020. 7. 21. 회사 회신문의 작성자·검토자·근거자료</span>와 회사 민원관리 시스템의 접수 이력.</li>
+</ol></div>
+
+<div class="punch">저는 이 다섯 개의 문에서 <span>한 번도 「아니오」라는 답을 듣지 못했습니다.</span><br>
+제가 들은 것은 언제나 <span>「여기가 아닙니다」</span>였습니다.</div>
+
+<p class="src"><b>자료</b> — 청원 배정내역 원본(2023. 6. 30.~8. 8.) · 대통령실 알림톡 발신현황(PC-2410-0039531, 2024. 10. 23.~2025. 3. 26.) · 국민권익위원회 민원 처리결과(2025. 3. 25.자, 민원번호 2AA-2410-0857724) · 금융감독원 통화 녹취 · NH투자증권 회신문(2020. 7. 21.) · 2026. 9. 10.자 제출본 정본. <b>배정일·시각·담당자는 원자료 그대로이며 원본 전부를 보유합니다.</b><br>
+<b>유보</b> — ① 문 ④의 종결일은 알림톡 기준 2025. 3. 26.이고 권익위 처리결과 문서는 2025. 3. 25.자입니다. ② 이름이 적힌 담당자는 모두 <b>참고인</b>이며 비위를 단정하지 않습니다. ③ 조문 적용 여부는 각 기관의 판단 사항으로, 이 문서는 <b>확인을 요청</b>할 뿐입니다.<br>
+ⓒ 김성만 · 2026. 9. 15. · 대구광역시 북구 서변동 72, 102동 305호 · 010-6511-1389 · touchi@hanmail.net · touchi.oopy.io</p>
+
+<div class="foot"><span>셀프각하 흐름도 — 다섯 번의 문 · 김성만 · 2026. 9. 15.</span><span class="pg">- 4 / 4 -</span></div>
+</div>
+
+</body></html>

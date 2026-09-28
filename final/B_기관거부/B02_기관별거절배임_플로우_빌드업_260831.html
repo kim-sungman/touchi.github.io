@@ -1,0 +1,121 @@
+<!DOCTYPE html><html lang="ko"><head><meta charset="utf-8">
+<style>
+@page { size: A4 landscape; margin: 8mm 9mm 12mm 9mm;
+  @bottom-center { content: "- " counter(page) " / " counter(pages) " -"; font-size: 8pt; color:#556; font-family:'Noto Sans CJK KR'; } }
+*{box-sizing:border-box;margin:0;padding:0;}
+body{font-family:'Noto Sans CJK KR','Malgun Gothic',sans-serif;background:#fff;color:#16223a;font-size:8.6pt;line-height:1.38;}
+h1{font-size:16pt;color:#0d2149;text-align:center;margin:1mm 0 0.5mm;}
+.sub{text-align:center;color:#8a2020;font-weight:700;font-size:9.5pt;margin-bottom:2.5mm;}
+.kpis{display:flex;gap:2.5mm;margin-bottom:3mm;}
+.kpi{flex:1;border:1.6pt solid #0d2149;border-radius:8px;text-align:center;padding:1.8mm 1mm;background:#f7f9fd;}
+.kpi b{display:block;font-size:14pt;color:#b02020;}
+.kpi span{font-size:7.6pt;color:#334;}
+.steps{display:flex;gap:2mm;align-items:stretch;}
+table.grid{width:100%;border-collapse:separate;border-spacing:1.6mm 1mm;}
+td.box{border:1.5pt solid #b02020;border-radius:7px;background:#fdf6f6;padding:1.5mm 2mm;vertical-align:top;}
+td.boxg{border:1.5pt solid #7a5800;border-radius:7px;background:#fffdf2;padding:1.5mm 2mm;vertical-align:top;}
+td.ar{width:5mm;text-align:center;color:#b02020;font-weight:900;font-size:12pt;vertical-align:middle;padding:0;}
+td.box h3, td.boxg h3{font-size:8.8pt;border-bottom:1pt solid #e2b7b7;padding-bottom:0.5mm;margin-bottom:0.7mm;color:#b02020;}
+td.boxg h3{color:#7a5800;border-color:#e6d9a8;}
+td.box p, td.boxg p{font-size:7.2pt;}
+.col{flex:1;display:flex;flex-direction:column;}
+.step{border:1.5pt solid #b02020;border-radius:7px;background:#fdf6f6;padding:1.6mm 2mm;flex:1;}
+.step h3{font-size:9pt;color:#b02020;border-bottom:1pt solid #e2b7b7;padding-bottom:0.6mm;margin-bottom:0.8mm;}
+.step h3 .no{display:inline-block;background:#b02020;color:#fff;border-radius:50%;width:5mm;height:5mm;line-height:5mm;text-align:center;font-size:8pt;margin-right:1.2mm;}
+.step p{font-size:7.5pt;}
+.q{display:block;background:#eef2fa;border-left:2.2pt solid #0d2149;color:#0d2149;padding:0.7mm 1.4mm;margin-top:0.9mm;border-radius:2px;font-size:7.3pt;}
+.arr{align-self:center;color:#b02020;font-weight:900;font-size:13pt;padding:0 0.4mm;}
+.band{border:2pt solid #0d2149;background:#0d2149;color:#fff;border-radius:7px;text-align:center;padding:1.4mm;margin-top:2mm;font-size:9pt;font-weight:700;}
+.band b{color:#ffd54d;}
+h2{font-size:11pt;color:#0d2149;border-bottom:2pt solid #0d2149;margin:0.5mm 0 1.4mm;page-break-after:avoid;}
+table.ny{width:100%;border-collapse:collapse;font-size:6.9pt;}
+table.ny th{background:#0d2149;color:#fff;padding:1mm 1.6mm;border:0.8pt solid #33415e;}
+table.ny td{border:0.8pt solid #9aa7bd;padding:0.5mm 1.3mm;vertical-align:top;}
+table.ny tr.hl td{background:#fdf6f6;font-weight:700;}
+.legend{font-size:7.4pt;color:#445;margin-top:1.6mm;}
+.foot{text-align:center;color:#667;font-size:7.4pt;margin-top:2mm;border-top:0.8pt solid #cbd5e1;padding-top:1mm;}
+.pb{page-break-before:always;}
+.twocol{display:flex;gap:3mm;}
+.twocol>div{flex:1;}
+.note{border:1.3pt solid #b8860b;background:#fffdf2;border-radius:6px;padding:1.3mm 2mm;font-size:7.4pt;margin-top:1.6mm;}
+</style></head><body>
+
+<h1>기관별 거절·배임 플로우 인포그래픽 — 침묵의 카르텔 6단계</h1>
+<div class="sub">2017.12 ~ 2026.9 | 여섯 기관 · 25명 이상 · 3,180일 — 그리고 스무 차례 내용증명에 돌아온 침묵 [영등포경찰서 수사과 제출본]</div>
+
+<div class="kpis">
+<div class="kpi"><b>6</b><span>거절 기관</span></div>
+<div class="kpi"><b>25+</b><span>관련 담당자</span></div>
+<div class="kpi"><b>3,180일</b><span>경과 (9년, 실측)</span></div>
+<div class="kpi"><b>54.58억</b><span>시가손해 (검증)</span></div>
+<div class="kpi"><b>474건</b><span>합의일까지 신용이자<br>148,019,255원 [갑10-2]</span></div>
+<div class="kpi"><b>30인+</b><span>내용증명 수신인<br>실질 답변 <b style="font-size:9pt">0</b></span></div>
+</div>
+
+<table class="grid"><tr>
+<td class="box" style="width:31%"><h3><span class="no">1</span>NH투자증권 — 은폐·축소</h3>
+<p>정식 민원화 지연 · 기망적 합의서(11:05:04 사전 출력·대면 7~12분) · 「공식 민원 없음」 서면화</p>
+<span class="q">회신문(2020.7.21 · 담당 민원부서 직원 G/민원부서 부장 H): "공식적으로 민원을 제기한 사실은 없었음" ↔ 센터장 B(2018.2.1): "금소부한테 전화를 하고 …다 위에까지 보고가 되고"</span></td>
+<td class="ar">▶</td>
+<td class="box" style="width:31%"><h3><span class="no">2</span>금융감독원 — 조사 방기</h3>
+<p>시효 1,095일 중 <b>640일</b> 소비 · 3자대면 거부 · 「소송 가라」</p>
+<span class="q">금감원 직원 S1(2021.4.15): "기망하고 처리한 거보다 더 죄질상 더 나빠요" — 인지하고도 기각</span></td>
+<td class="ar">▶</td>
+<td class="box" style="width:31%"><h3><span class="no">3</span>금감원 — 셀프 각하</h3>
+<p>징계 대상자(금감원 직원 S4) <b>본인에게 본인 징계 청원 배당</b> → 2일 만에 각하 → 후임(금감원 직원 S5) 「반복 민원」 종결</p>
+<span class="q">제척·회피 원칙 정면 배치 — 경위 자체가 수사 대상</span></td>
+</tr><tr>
+<td class="box"><h3><span class="no">4</span>감사원·금융위 — 핑퐁</h3>
+<p>감사원: 직접 감찰 없이 금융위 이송(2023.7.18 청원) → 금융위(금융위 직원 T1): 「심의위 올라가야」 인정 후 금감원으로 재하달 — 고발장이 피고발 라인으로 회귀</p></td>
+<td class="ar">▶</td>
+<td class="box"><h3><span class="no">5</span>대통령실·권익위 — 최종 기각</h3>
+<p>공직기강비서실(2024.10.23) → 권익위 단순 이첩 → 권익위(2025.3.25): ①대법 확정 ②인가취소 사유 아님 ③고의성 불입증 — 종결</p>
+<span class="q">기망으로 생성된 문서가 뿌리인 판결이, 행정 구제를 막는 방패가 됨 — 오염의 순환</span></td>
+<td class="ar">▶</td>
+<td class="box"><h3><span class="no">6</span>법원 1·2·3심 — 오염된 재판</h3>
+<p>을가1(기망 생성)·창작 인용(「갈팡질팡」)·모순 서면(083001↔을가11-2)이 걸러지지 않은 채 판결의 뿌리 — 2023.11.10 기각 → 2024.11.7 항소기각 → 2025.3.13 심리불속행</p>
+<span class="q">법원은 기망의 «피해자» (대법원 97도2430) — 책임은 법원을 속인 쪽에</span></td>
+</tr></table>
+<div class="band">여섯 단계의 공통 문법 — 어느 기관도 <b>«사실»</b>을 확인하지 않았다 · 각 단계의 거절이 다음 단계의 <b>면책 근거</b>가 되었다 → 현재: 영등포경찰서 고소 (<b>2026.9.3 고소인 조사</b>) · 반부패수사부 고발 · 감사원·권익위 신고</div>
+
+<div class="pb"></div>
+<h2>소송사기 빌드업 — 2022. 9. 2. 소장 접수를 향한 설계</h2>
+<table class="grid" style="margin-bottom:1mm;"><tr>
+<td class="boxg" style="width:18%"><h3><span class="no" style="background:#7a5800;">B1</span>기망 문서의 생성 (2019.2.21)</h3>
+<p>11:05:04 사전 출력 · 세무 서류 70장 속 면책 1장 · 「주식회사와」 · 대면 7~12분(EXIF) — 훗날의 «을가1호증»</p></td>
+<td class="ar" style="color:#7a5800;">▶</td>
+<td class="boxg" style="width:18%"><h3><span class="no" style="background:#7a5800;">B2</span>외형의 서면화 (2020.7.21)</h3>
+<p>회신문 "잘못을 인정하고 …원만한 합의" · "공식적으로 민원을 제기한 사실은 없었음" — 「합의 종결」 프레임의 문서적 토대</p></td>
+<td class="ar" style="color:#7a5800;">▶</td>
+<td class="boxg" style="width:18%"><h3><span class="no" style="background:#7a5800;">B3</span>출구의 소진 (2020~2022)</h3>
+<p>3자대면 거부 · 「직접 만나세요」 · 시효 1,095일 중 <b>640일</b> 소비 → 민원 기각 — 남는 길은 하나</p></td>
+<td class="ar">▶</td>
+<td class="box" style="width:19%"><h3><span class="no">★</span>2022. 9. 2. — 강제된 제소 (기점)</h3>
+<p>소장 접수(2022가합108719) — <b>1심 판결문 자체가 「민원 기각 → 제소」 경위를 인정</b>: 제소는 자의가 아니라 설계된 통로</p></td>
+<td class="ar">▶</td>
+<td class="box" style="width:19%"><h3><span class="no">B5</span>소송사기의 실행 (2022~2025)</h3>
+<p>을가1 제출 · 「충분히 설명」 · 「갈팡질팡」 창작 인용 · 「특별 승인」↔을가11-2 → 판결 편취(97도2430) · 소송비 청구(2025.7.10)</p></td>
+</tr></table>
+<div class="note" style="margin-bottom:2.5mm;"><b>빌드업의 논리</b> — 소송은 사고가 아니라 «설계의 종착역»이었다: 문서를 만들고(B1) 유효해 보이는 외형을 서면화하고(B2) 다른 출구를 전부 막아(B3) 준비한 링(법정)으로 밀어 넣은 뒤(★2022.9.2) 준비된 문서와 창작 인용으로 판결을 받아냈다(B5). 센터장 B(2020.3.12→김성만): "합의를 차라리 그 상태로 안 하고 내가 놔놨으면 지금이라도 할 수는 있는데요" — «양도세로 몰고 → 소송으로 끌고 → 문서로 이긴다», 이것이 빌드업의 전모다.</div>
+<h2>내용증명 전수 타임라인 (2020.8 ~ 2026.8) — 「몰랐다」가 불가능한 이유</h2>
+<table class="ny">
+<tr><th style="width:16mm">발송일</th><th style="width:52mm">수신인</th><th>요지</th></tr>
+<tr class="hl"><td>2020.8.21</td><td>담당 직원 A (○○WM센터 부장)</td><td>합의서의 기망성 적시 · <b>파기 통보</b> — 이후 「유효 합의」 주장은 통보 수령 후의 주장</td></tr>
+<tr><td>2020.8.28</td><td>센터장 B (전 센터장)</td><td>허위 경위 추궁 · 형사 처리 경고</td></tr>
+<tr><td>2020.8.31</td><td>임원 V1 (상무)</td><td>사건 당일 보고 수령 확인 요구 (담당 직원 A 육성 「보고가 다 됐었습니다」 접합)</td></tr>
+<tr><td>2020.9.1</td><td>임원 V2 (상무)</td><td>결자해지 촉구 · 9.4까지 답변 요구 — 무응답</td></tr>
+<tr><td>2020.9.2</td><td>임원 V4(감사위원·前 금융위 부위원장) · 임원 V6(감사) · 임원 V5(감사위 이사)</td><td>감사기구 전원에 감사 요청 3건 — 착수 없음</td></tr>
+<tr class="hl"><td>2024.10.29</td><td>피고 측 대리인 변호사 D2 (피고 측 법무법인)</td><td>허위 변론 정정 요구 → 무시하고 변론 유지 — 진실의무 위반의 서면 증거</td></tr>
+<tr><td>2024.11.14</td><td>담당 직원 A (서대구WM 부장)</td><td>손해배상 최고 · 2주 기한 — 무응답</td></tr>
+<tr class="hl"><td>2026.1.13</td><td>현 대표이사 (당시 대표이사)</td><td>최후통첩 — "본인이 원하는 것은 누군가를 처벌하는 것이 아니라, 진실에 기반한 공정한 재판입니다" — 침묵</td></tr>
+<tr><td>2026.1.14</td><td>피고 측 대리인 변호사 D2·피고 측 대리인 변호사 D1 (피고 측 법무법인)</td><td>허위 변론 인정·수임료 반납·재심 협조 요구(1.18 기한) — 무응답</td></tr>
+<tr><td>2026.7.2</td><td>동문 관계 수취인 4인</td><td>이해충돌 고지·시정 요구 (V68-1, 6부)</td></tr>
+<tr><td>2026.7.6 / 7.14 / 7.16</td><td>NH투자증권</td><td>보완최고서(메타데이터 증명) · 종합최고서(공익 역사기록) · 주주의 최후통첩 완전최고서 58면</td></tr>
+<tr class="hl"><td>2026.7.20</td><td><b>등기 11인 개별 발송</b> — 신재욱·배광수(각자대표) · 김이배·민승규(감사위원) · 신진영·강주영·송규종·안성욱(독립이사) · 손승현(준법감시인) · 현 대표이사(前 대표) · 법인</td><td>주주로서의 최고서 Ver.3 (62면·배달증명 부가) — 현 이사회·감사위·준법감시 <b>전원</b>에 개인 자격 도달: 이후 부작위는 개인 책임</td></tr>
+<tr><td>2026.7.29 · 7.31</td><td>서울남부지검</td><td>검사장 앞 의견서 · 고소보충의견서 (내용증명 접수)</td></tr>
+<tr class="hl"><td>2026.8.25</td><td>서울지방변호사회 · 대한변호사협회 (4종)</td><td>징계 각하 재발방지 · 시효잔존 재신청 · 면죄부 거부 재신청(증거·법조·소송비 박제 완결본)</td></tr>
+</table>
+<div class="note"><b>법적 의미</b> — 수신인들은 각 발송일에 기망·허위의 «구체적 지적»을 서면으로 받았고, 그럼에도 시정 없이 같은 주장을 유지했다. ① 선의(善意) 항변의 원천 차단 ② 미필적 고의의 서면 증거 ③ 등기·배달증명으로 도달이 «기계적으로» 입증됨 — 합계: 6년간 20여 차례 · 수신인 연 30인 이상 · <b>실질 답변 0</b>.</div>
+<div class="band" style="margin-top:2.5mm;">카르텔은 침묵했지만, <b>기록은 침묵하지 않았습니다</b> — 회신문 · 육성 · 등기 대장이 여섯 단계 전부를 증언합니다</div>
+<div class="foot">작성 2026. 8. 31. 고소인 김성만 · 영등포경찰서 수사과 제출 (2026.9.3 고소인 조사 지참) · 원판: 정밀분석 보고서+플로우차트(2026.3.3) 통합·검증 보정 — 상세 근거는 「기관별 거절·배임 통합본」(제출 19번) · NH투자증권 증거사이트 www.touchi.oopy.io (열람 비밀번호는 요청 시 별도 제공)</div>
+</body></html>

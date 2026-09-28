@@ -1,0 +1,241 @@
+<!DOCTYPE html><html lang="ko"><head><meta charset="utf-8">
+<title>소송사기 — 접합의 해부</title><style>
+:root{color-scheme:light;--ok:#1b7f5a;--bad:#b3282a;--warn:#c07414;--end:#4a2b2b;--navy:#16324f;--ink:#141a20;--mute:#5c6670;--line:#d4d9de}
+*{box-sizing:border-box}
+@page{size:A4;margin:0}
+body{font-family:'Noto Sans CJK KR',sans-serif;background:#fff;color:var(--ink);margin:0;font-size:9.5pt;line-height:1.55}
+.page{width:210mm;min-height:297mm;padding:13mm 13mm 16mm;page-break-after:always;position:relative;background:#fff}
+.page:last-child{page-break-after:auto}
+.hero{background:var(--navy);color:#fff;border-radius:3mm;padding:6mm 7mm;margin-bottom:4mm}
+.hero h1{margin:0 0 1.5mm;font-size:19pt;letter-spacing:-.5px;line-height:1.3}
+.hero .s1{margin:0;font-size:10pt;color:#c5d8ea}
+.hero .s2{margin:2mm 0 0;font-size:8.5pt;color:#93b0cc;line-height:1.5}
+h2{font-size:12pt;margin:6mm 0 2.5mm;padding:1.8mm 0 1.4mm;border-top:2px solid var(--ink);border-bottom:1px solid #b8bfc6}
+h2 .n{color:var(--bad)}
+h3{font-size:10pt;margin:4mm 0 1.8mm;color:var(--navy)}
+.kpi{display:grid;grid-template-columns:repeat(4,1fr);gap:2.4mm;margin:3.5mm 0}
+.k{background:#f7f8f9;border:1px solid var(--line);border-radius:2mm;padding:2.6mm 2.4mm;text-align:center}
+.k .n{font-size:14.5pt;font-weight:800;line-height:1.15;color:var(--bad)}
+.k .n.sm{font-size:11.5pt}
+.k .l{font-size:7.4pt;color:var(--mute);margin-top:1mm;line-height:1.35}
+.tb{width:100%;border-collapse:collapse;font-size:8.6pt;margin:2.5mm 0}
+.tb th,.tb td{border:1px solid #a9b0b6;padding:1.7mm 2.2mm;vertical-align:top;text-align:left;line-height:1.45}
+.tb th{background:#eceff2;font-weight:700;font-size:8.3pt}
+.tb td.c{text-align:center;white-space:nowrap}
+.gr{font-weight:800;font-size:11pt;text-align:center}
+.q{background:#fff2c9;padding:0 .6mm;font-weight:700;border-radius:.5mm}
+.s{font-weight:800}
+.cite{border:1px solid #9aa2a9;background:#fbfcfc;border-radius:1.6mm;padding:2.4mm 3mm;font-size:8.6pt;line-height:1.62;margin:2mm 0}
+.cite .src{display:block;text-align:right;font-size:7.6pt;color:#5c6670;margin-top:1.4mm}
+.frag{border:1px solid var(--line);border-radius:2mm;padding:2.6mm 3mm;background:#fff}
+.frag .lbl{font-size:8pt;font-weight:800;color:#fff;background:var(--navy);display:inline-block;padding:.4mm 1.8mm;border-radius:1mm;margin-bottom:1.5mm}
+.frag .meta{font-size:7.6pt;color:var(--mute);line-height:1.45;margin-bottom:1.5mm}
+.merge{display:grid;grid-template-columns:1fr 1fr;gap:3.5mm}
+.mergearrow{text-align:center;font-size:13pt;color:var(--bad);font-weight:800;margin:2mm 0 1.5mm;letter-spacing:6px}
+.result{border:2px solid var(--bad);border-radius:2mm;padding:2.8mm 3.2mm;background:#fdf4f4}
+.punch{background:var(--ink);color:#fff;border-radius:2mm;padding:3.6mm 5mm;margin:3.5mm 0;font-size:10.6pt;font-weight:700;line-height:1.55;text-align:center;letter-spacing:-.3px}
+.punch span{color:#ffd469}
+.note{background:#fdf9ec;border:1px solid #e6dcbc;border-radius:2mm;padding:3mm 3.8mm;font-size:8.7pt;line-height:1.65;margin-top:3.5mm;color:#41381a}
+.warn{border:1.8px solid var(--bad);border-radius:2mm;padding:3mm 3.8mm;margin:3.5mm 0;font-size:8.8pt;line-height:1.6;background:#fffafa}
+.warn .h{font-weight:800;font-size:10pt;color:var(--bad);display:block;margin-bottom:1.8mm}
+.chk{border:1.6px solid var(--ink);border-radius:2mm;padding:3mm 3.8mm;margin-top:3.5mm;font-size:8.7pt;line-height:1.6}
+.chk .h{font-weight:800;font-size:10pt;margin-bottom:1.8mm;display:block}
+.chk ol{margin:0;padding-left:5mm}.chk li{margin-bottom:1.2mm}
+.foot{position:absolute;left:13mm;right:13mm;bottom:7mm;display:flex;justify-content:space-between;align-items:center;font-size:7.6pt;color:#8a9199;border-top:1px solid #e3e6e9;padding-top:1.8mm}
+.foot .pg{font-weight:800;color:#3a4148}
+.src{font-size:7.2pt;color:#79828a;line-height:1.55;margin-top:2.5mm}
+.tight h2{margin:4mm 0 2mm;padding:1.5mm 0 1.2mm}
+.tight h3{margin:3mm 0 1.4mm}
+.tight .kpi{margin:3mm 0}
+.tight .k{padding:2.2mm 2mm}
+.tight .cite{padding:2mm 2.6mm;line-height:1.55;margin:1.6mm 0}
+.tight .frag{padding:2.2mm 2.6mm}
+.tight .note{padding:2.4mm 3.2mm;margin-top:2.5mm;line-height:1.55}
+.tight .result{padding:2.4mm 2.8mm}
+.tight .mergearrow{margin:1.5mm 0 1.2mm}
+.tight .src{margin-top:2mm}
+.p1 .hero{padding:4.6mm 6mm;margin-bottom:3mm}
+.p1 .hero h1{font-size:17pt;margin-bottom:1.2mm}
+.p1 .hero .s1{font-size:9.4pt}
+.p1 .hero .s2{font-size:8.1pt;margin-top:1.5mm}
+.p1 .kpi{margin:2.6mm 0}
+.p1 .k{padding:1.9mm 1.8mm}
+.p1 .k .n{font-size:13pt}
+.p1 .k .n.sm{font-size:10.6pt}
+.p1 .tb{font-size:8pt;margin:1.8mm 0}
+.p1 .tb th,.p1 .tb td{padding:1.15mm 1.7mm;line-height:1.34}
+.p1 .src{font-size:7pt;line-height:1.45;margin-top:1.6mm}
+.p1 .punch{padding:2.4mm 4mm;margin:2.2mm 0;font-size:9.4pt}
+.tight .punch{padding:2.8mm 4mm;margin:3mm 0;font-size:9.8pt}
+.tight .chk,.tight .warn{padding:2.4mm 3.2mm;margin-top:2.5mm;font-size:8.3pt;line-height:1.5}
+.tight .tb th,.tight .tb td{padding:1.4mm 2mm;line-height:1.4}
+</style></head><body>
+
+<!-- ========== PAGE 1 ========== -->
+<div class="page tight p1">
+<div class="hero">
+<h1>기록에 없는 것을 있다 하고,<br>기록에 있는 것을 없다 합니다</h1>
+<p class="s1">소송사기 검토 — 서울영등포경찰서 2026형제29726 · 김성만 사건</p>
+<p class="s2">이 문서는 <b>유죄를 단정하지 않습니다.</b> 판례가 요구하는 요건에 이 사건의 어느 행위가 닿고 어느 행위가 닿지 않는지를, <b>등급을 나누어</b> 적습니다.</p>
+</div>
+
+<div class="kpi">
+<div class="k"><div class="n">2회</div><div class="l">같은 접합 인용이<br>법원에 제출된 횟수</div></div>
+<div class="k"><div class="n">13일</div><div class="l">하나로 묶인 두 발언<br>사이의 실제 간격</div></div>
+<div class="k"><div class="n sm">5억 232만원</div><div class="l">이득액 = 전소 청구액<br>502,323,582원</div></div>
+<div class="k"><div class="n">10건</div><div class="l">같은 대리인의<br>서면 (2022~2025)</div></div>
+</div>
+
+<h2>제1. 판례가 요구하는 것 — <span class="n">네 개의 문턱</span></h2>
+<table class="tb">
+<tr><th style="width:26mm">요건</th><th style="width:62mm">판례 문언</th><th>이 사건에서</th></tr>
+<tr><td class="s">① 적극적 방법</td><td>피고도 주체가 될 수 있으나 「<span class="q">허위내용의 서류를 작성하여 증거로 제출하거나 위증을 시키는 등의 적극적인 방법</span>」이 필요</td><td><span class="s">가장 높은 문턱.</span> 단순한 서면상 주장은 여기에 닿지 않습니다. <span class="s">그래서 이 문서는 「서면 주장」과 「증거 취급」을 구분합니다</span>(제2·3장)</td></tr>
+<tr><td class="s">② 고의</td><td>「<span class="q">권리가 존재하지 않는다는 사실을 인식하면서</span>」 — 단순 사실오인·법률평가의 착오는 불성립</td><td>★ <span class="s">최대 관문.</span> 단일 행위로는 「착오」 항변이 가능합니다. <span class="s">반복 패턴</span>으로만 다툴 수 있습니다(제3장)</td></tr>
+<tr><td class="s">③ 제한 법리</td><td>「<span class="q">필요한 최소한도의 범위 내에서</span>」, 「<span class="q">명백히 거짓이거나 증거 조작</span>이 인정되지 않는 한」 처벌 불가</td><td>변론주의상 허용되는 반박과 구분되어야 합니다. <span class="s">「선별 인용」은 여기서 걸러집니다</span></td></tr>
+<tr><td class="s">④ 처분행위</td><td>판결이 「<span class="q">처분행위에 갈음하는 내용과 효력</span>」을 가질 것</td><td>전부 기각 판결 확정(2025. 3. 13.) — 피고가 <span class="s">면한 지급의무</span>가 이득액</td></tr>
+</table>
+<p class="src">※ 판례 번호는 대판 1987. 9. 22. 87도1090 / 2004. 3. 12. 2003도333 / 2004. 6. 25. 2003도7124 · 2022. 5. 26. 2022도1227 / 1997. 12. 23. 97도2430. <b>서면에 인용하기 전 대법원 종합법률정보에서 한 번 더 확인할 것 — 이 문서에서는 «유보»로 표시합니다.</b></p>
+
+<h2>제2. 어느 행위가 어디에 닿는가 — <span class="n">등급표</span></h2>
+<table class="tb">
+<tr><th class="c" style="width:12mm">등급</th><th style="width:46mm">행위</th><th style="width:34mm">근거 서면</th><th>판정 이유</th></tr>
+<tr><td class="c gr" style="color:var(--bad)">A</td><td class="s">「갈팡질팡」 접합 인용<br><span style="font-weight:400;font-size:8.2pt">다른 날·다른 화자의 발언을 하나의 따옴표로 묶어 인용</span></td><td>037001 제3쪽<br>(2023. 8. 28.)<br>080001 제2쪽<br>(2024. 6. 26.)</td><td>★ <span class="s">가장 유력.</span> 갑12 원문에 「올랐을 때 팔고 싶어서」가 <span class="s">없습니다</span>. 두 녹취록 모두 표지에 <span class="s">녹음일시·대화자가 명기된 별개 문서</span>여서 「혼동」 항변이 어렵습니다. 그리고 <span class="s">2심 판시 가)에 같은 구조가 재현</span>되었습니다(제3장)</td></tr>
+<tr><td class="c gr" style="color:var(--warn)">B</td><td class="s">「원본 미보유」 ↔ 원본 제출</td><td>025001 제8쪽 각주<br>(2023. 1. 20.)<br>↔ 을가9~11<br>(2024. 8. 9.)</td><td><span class="s">증거 취급의 선별성</span>. 회사 직원이 <span class="s">2022. 8. 22.·8. 26. 이메일로 녹취 12건을 전송</span>한 사실이 확정되어 있습니다. 다만 「회사가 대리인에게 잘못 전달」 항변의 여지가 있습니다</td></tr>
+<tr><td class="c gr" style="color:var(--warn)">B</td><td class="s">「특별 승인」 진술</td><td>083001 제4쪽·제10쪽<br>(2024. 8. 9.)<br>002001 (2025. 2. 27.)</td><td><span class="s">서면상 주장이라 ①요건(허위 서류의 증거 제출)에 직접 닿지 않습니다.</span> <span class="s">주된 공소사실이 아니라 고의·반복성의 정황</span>으로 배치할 것</td></tr>
+<tr><td class="c gr" style="color:var(--warn)">B</td><td class="s">거래정지기간을<br>「차익실현 기회」로 기재</td><td>070001 제4쪽·제12쪽<br>(2024. 4. 16.)</td><td>2018. 7. 13.은 <span class="s">매매거래정지기간(6. 28.~7. 17.)의 16일째</span>이고, <span class="s">담당 직원 A 본인이 그 정지를 두 번 안내</span>(2018. 4. 30. · 6. 1.)했습니다</td></tr>
+<tr><td class="c gr" style="color:var(--mute)">C</td><td>갑12 선별 발췌</td><td>—</td><td><span class="s">주장하지 않습니다.</span> 변론주의상 적법한 반박이라는 항변이 강합니다 — <span class="s">제가 먼저 배제합니다</span></td></tr>
+</table>
+
+<div class="punch">단일 행위로는 <span>「착오였다」</span>가 통합니다.<br>그래서 이 사건은 <span>「같은 대리인의 반복 패턴」</span>으로만 다툴 수 있습니다.</div>
+
+<div class="foot"><span>소송사기 — 접합의 해부 · 김성만 · 2026. 9. 15.</span><span class="pg">- 1 / 5 -</span></div>
+</div>
+
+<!-- ========== PAGE 2 ========== -->
+<div class="page tight">
+<h2>제3. <span class="n">접합(接合)의 해부</span> — 두 조각이 한 따옴표가 되기까지</h2>
+<p style="margin:0 0 2.5mm;font-size:8.8pt">법원에 제출된 인용문은 <span class="s">한 사람이 한 번에 한 말처럼</span> 적혀 있습니다. 그러나 그 안의 두 조각은 <span class="s">서로 다른 날, 서로 다른 사람, 서로 다른 상대</span>에게서 왔습니다.</p>
+
+<div class="merge">
+<div class="frag">
+<span class="lbl">조각 ①  「올라갔을 때 매도」</span>
+<div class="meta"><b>말한 사람 — 담당 직원 A(피고)</b> · 2018. 1. 18.<br>갑 제6호증 · 전자소송 정본 003006 제18면<br>표지 제14면: 「녹음일시 2018년 1월 18일 / 대화자 김성만, 담당 직원 A」</div>
+<div class="cite" style="margin:0">「그거 대비해서 한 5,000원 정도 가격이 오르면 그 돈만큼 나오게 되는 거예요. … 그렇게 해서 가격을 지켜보고 <span class="q">올라갔을 때 좀 매도를 하면 어느 정도는 상쇄가 되니까</span> 그 부분에서 <span class="q">제가 보상해드릴 게 있으면 보상을 해드리면 어떨까</span>, 저는 그런 생각을 해봤거든요.」</div>
+<div style="font-size:8pt;color:var(--ok);font-weight:700;margin-top:1.5mm">→ 회사 측이 제시한 <b>손실 상쇄 방안</b>입니다.</div>
+</div>
+<div class="frag">
+<span class="lbl">조각 ②  「갈팡질팡」</span>
+<div class="meta"><b>말한 사람 — 김성만(원고)</b> · 2018. 1. 31.<br>갑 제12호증 · 전자소송 정본 034021 제7면<br>표지 제1면: 「대화자 김성만, <b>센터장 B</b> / 표지 외 16매」</div>
+<div class="cite" style="margin:0">바로 다음 쪽(제8면)에 그 이유가 적혀 있습니다 — 「<span class="q">아무 얘기도 안 하고 자꾸 하니까 나도 그런 거예요. 들고 있으면 오르면 저 미안하고, 내려가 바꾸자니 나도 속이 아깝고</span>」 · 「픽스를 시키세요」</div>
+<div style="font-size:8pt;color:var(--ok);font-weight:700;margin-top:1.5mm">→ 「갈팡질팡」의 원인은 <b>회사의 무응답</b>이었습니다.</div>
+</div>
+</div>
+
+<div class="mergearrow">↓ &nbsp; ↓</div>
+
+<div class="result">
+<div style="font-size:8.4pt;font-weight:800;color:var(--bad);margin-bottom:1.5mm">법원에 제출된 문장 — 두 조각이 하나의 따옴표 안으로</div>
+<div class="cite" style="margin:0;border-color:#c98b8b;background:#fff">「그리고 해당 녹취록에 따르면, 원고는 <span class="q">피고 센터장 B의 설명을 듣고, 그 의미를 정확히 이해하며</span> ‘(주가가 좀 더 <span class="q">올랐을 때 팔고 싶어서</span>) <span class="q">갈팡질팡</span>하며 팔지 못하고 있다’라고 <span class="q">언급하기까지 한 것으로 확인됩니다</span>(갑 제12호증 녹취록 참조).」
+<span class="src">— 피고 대리인 피고 측 법무법인, 2023. 8. 28.자 준비서면 <b>037001 제3쪽</b></span></div>
+<div style="font-size:8.2pt;margin-top:1.5mm">같은 인용문이 <b>10개월 뒤 다시</b> — 「…‘(주가가 좀 더 올랐을 때 팔고 싶어서) 갈팡질팡하며 팔지 못하고 있다’라고 <span class="q">대답하였습니다</span>.」 <span style="color:var(--mute)">(080001 제2쪽 · 2024. 6. 26. — 맺음말만 「언급하기까지」→「대답하였습니다」로 강화)</span></div>
+</div>
+
+<h3>★ 세 가지가 동시에 뒤집힙니다</h3>
+<table class="tb">
+<tr><th class="c" style="width:18mm">뒤집힌 것</th><th style="width:52mm">원문</th><th>제출된 인용문</th></tr>
+<tr><td class="c s">화자</td><td><span class="s">담당 직원 A(피고)</span>가 제안한 매도 방안</td><td><span class="s">원고</span>가 스스로 품은 욕심</td></tr>
+<tr><td class="c s">일자</td><td>2018. <span class="s">1. 18.</span> + 2018. <span class="s">1. 31.</span> — <span class="s">13일 간격</span>의 별개 대화</td><td>한 번의 대화에서 한 말</td></tr>
+<tr><td class="c s">취지</td><td>회사가 제시한 <span class="s">손실 상쇄 방안</span> / 회사의 무응답에 대한 원고의 <span class="s">답답함</span></td><td>원고의 <span class="s">투기적 욕심</span>으로 팔지 않은 것</td></tr>
+<tr><td class="c s">상대방</td><td>조각① 담당 직원 A ↔ 조각② <span class="s">센터장 B</span> — 상대도 다릅니다</td><td>센터장 B 한 사람과의 대화로 기재</td></tr>
+</table>
+
+<h3>그리고 같은 구조가 판결 이유에 나타납니다</h3>
+<div class="cite">「가) 피고 담당 직원 A는 2018. 1. 18. 원고에게 향후 주가 추이를 지켜보면서 주가가 올랐을 때 이 사건 주식을 매도하여 더 많은 주식 양도차익을 남기도록 권유하였고, <span class="q">이에 따라 원고도</span> 2018. 1. 18. 이후로 주가 추이를 살피며 이 사건 주식의 <span class="q">가격이 올랐을 때 이를 매도하고자 하였던 것으로 보인다.</span>」
+<span class="src">— 항소심 판결문 <b>093001 제12면</b> (2024. 11. 7.)</span></div>
+<div class="note"><b>여기서 멈춥니다.</b> 저는 「그 서면 때문에 판결이 그렇게 되었다」고 <b>단정하지 않습니다.</b> 인과관계는 제가 증명할 수 있는 것이 아닙니다. 제가 적는 것은 <b>「담당 직원 A의 제안」이 「원고의 의사」로 전환되는 구조가 서면과 판결 이유에 함께 있다」</b>는 <b>사실의 병존</b>뿐입니다. 그 판단은 수사기관의 몫입니다.</div>
+
+<div class="foot"><span>소송사기 — 접합의 해부 · 김성만 · 2026. 9. 15.</span><span class="pg">- 2 / 5 -</span></div>
+</div>
+
+<!-- ========== PAGE 3 ========== -->
+<div class="page tight">
+<h2>제4. 반복 패턴 — <span class="n">「없는 것을 있다, 있는 것을 없다」</span></h2>
+<p style="margin:0 0 2.5mm;font-size:8.8pt">고의를 다투려면 한 번으로는 부족합니다. <span class="s">같은 대리인이 같은 방향으로 네 번</span> 한 일을 나란히 둡니다.</p>
+<table class="tb">
+<tr><th class="c" style="width:8mm">№</th><th style="width:40mm">기록에 있는 것</th><th style="width:44mm">서면에 적힌 것</th><th>출처 · 일자</th></tr>
+<tr><td class="c s">1</td><td>갑6(1.18 담당 직원 A) + 갑12(1.31 원고) — <span class="s">별개 녹취록 2건</span></td><td>한 사람이 한 번에 한 말로 <span class="s">따옴표 인용</span></td><td>037001 제3쪽 · 2023. 8. 28.<br>080001 제2쪽 · 2024. 6. 26.</td></tr>
+<tr><td class="c s">2</td><td>회사 직원이 <span class="s">2022. 8. 22.·8. 26. 이메일로 녹취 12건 전송</span> (발신 nhqv.com)</td><td>「<span class="q">녹음파일 원본을 보유하고 있지 않으므로</span>」</td><td>025001 제8쪽 각주 · 2023. 1. 20.<br>→ 그러나 <span class="s">2024. 8. 9. 을가9~11로 mp3 제출</span></td></tr>
+<tr><td class="c s">3</td><td>2024. 11. 20. 회사 직원 답변 「<span class="q">현금상환해야 한다고 합니다</span>」</td><td>제4쪽 「<span class="q">특별승인한 것이나</span>」·「<span class="q">피고 회사의 승인 없이는 이루어질 수 없는 일</span>」<br>제10쪽 「<span class="q">피고 회사로부터 특별 승인을 받아</span>」</td><td>083001 제4쪽·제10쪽 · 2024. 8. 9.</td></tr>
+<tr><td class="c s">4</td><td><span class="s">2018. 6. 28.~7. 17. 매매거래정지</span> — 담당 직원 A 본인이 <span class="s">두 번 안내</span>(4. 30. · 6. 1.)</td><td>「2018. <span class="q">7. 13.</span> 기준 69억 원으로 13억 원이 상승」·「<span class="q">더 큰 이익을 실현할 수 있는 기회도 왔었던 것</span>」·「<span class="q">차일피일</span>」</td><td>070001 제4쪽·제12쪽 · 2024. 4. 16.<br><span class="s">7. 13. = 정지 16일째</span></td></tr>
+</table>
+
+<div class="punch">네 번 모두, <span>기록을 열면 5분 안에 확인되는 것</span>들입니다.<br>9년 동안 <span>그 대조가 한 번도 이루어지지 않았습니다.</span></div>
+
+<h2>제5. 이득액 — <span class="n">부풀리지 않습니다</span></h2>
+<table class="tb">
+<tr><th style="width:44mm">항목</th><th style="width:34mm">금액</th><th>설명</th></tr>
+<tr><td class="s">소송사기의 이득액</td><td class="s" style="font-size:9.6pt">502,323,582원</td><td>피고가 <span class="s">면한 지급의무 = 전소 청구액</span>(양도세 52,323,582원 + 순자산손실 중 450,000,000원). 형법 제347조를 넘어서는 부분은 <span class="s">5억~50억 구간</span>에 해당합니다</td></tr>
+<tr><td>주식매수청구 규모<br>93,153원 × 60,000주</td><td>5,589,180,000원</td><td>★ <span class="s">이것은 손해액이 아닙니다.</span> 「닫힌 출구의 규모」일 뿐이며, <span class="s">손해액으로 쓰면 이 문서 전체의 신빙성이 무너집니다.</span> 제가 먼저 배제합니다</td></tr>
+<tr><td>대출이자<br>(2018. 1. 18.~2020. 3. 20.)</td><td>275,123,446원</td><td>회사가 발급한 자료에 근거 — <span class="s">가장 다투기 어려운 항목</span></td></tr>
+<tr><td>소송비용 청구액</td><td>33,427,079원</td><td>2025. 7. 10. 상대방 신청. 제가 받은 2,000만 원보다 <span class="s">13,427,079원 많습니다</span></td></tr>
+</table>
+
+
+
+<div class="foot"><span>소송사기 — 접합의 해부 · 김성만 · 2026. 9. 15.</span><span class="pg">- 3 / 5 -</span></div>
+</div>
+
+<!-- ========== PAGE 4 ========== -->
+<div class="page tight">
+<div class="warn"><span class="h">제가 하지 않는 주장 — 먼저 적습니다</span>
+<table class="tb" style="margin:0">
+<tr><th class="c" style="width:8mm">№</th><th>하지 않는 주장</th><th style="width:58mm">이유</th></tr>
+<tr><td class="c">1</td><td>「<span class="s">55억 8,918만 원의 손해</span>를 입었다」</td><td>매수청구가는 1주 가격이지 6만 주 일괄 매도가가 아닙니다. <span class="s">손해액으로 쓰지 않습니다</span></td></tr>
+<tr><td class="c">2</td><td>「이득액 50억 이상」</td><td>이득액은 <span class="s">전소 청구액 5억 232만 원</span>입니다. 구간을 올려 적으면 전부 버려집니다</td></tr>
+<tr><td class="c">3</td><td>「이 형사사건으로 <span class="s">재심</span>을 하겠다」</td><td>민사소송법 제451조 제1항 제6호는 「증거가 된 <span class="s">문서</span>의 위조·변조」, 제7호는 「<span class="s">증인·감정인·통역인 또는 당사자신문</span>의 거짓 진술」입니다. <span class="s">서면상 허위 주장은 어느 쪽에도 포섭되지 않습니다</span></td></tr>
+<tr><td class="c">4</td><td>「갑12 선별 발췌도 범죄다」</td><td>변론주의상 적법한 반박이라는 항변이 강합니다 — <span class="s">C등급으로 내리고 주장하지 않습니다</span></td></tr>
+<tr><td class="c">5</td><td>「유죄가 명백하다」</td><td>★ <span class="s">고의 입증이 최대 관문</span>입니다. 무혐의 가능성을 전제하고 다른 절차를 병행합니다</td></tr>
+</table></div>
+
+<h2>제6. <span class="n">제 주장이 깨지는 지점</span> — 상대가 쓸 반론을 제가 먼저 적습니다</h2>
+<table class="tb">
+<tr><th class="c" style="width:12mm">반론</th><th style="width:60mm">상대가 할 말</th><th>제 답</th></tr>
+<tr><td class="c s" style="color:var(--bad)">R1<br>★최강</td><td><span class="s">2018. 6. 27. 종가 98,900원 &gt; 매수청구가 93,153원.</span> 매수청구를 못 하게 한 것은 오히려 <span class="s">불리한 선택지를 막아 준 것</span>이다 (차액 5,747원 × 60,000주 = 3억 4,482만 원)</td><td>종가는 <span class="s">1주 가격이지 6만 주 가격이 아닙니다.</span> 담당 직원 A 본인이 말했습니다 — 「<span class="q">거래량이 … 적게 될 때는 몇만 주 되는 경우도 있어 갖고요 … 좀 가격은 많이 빠지는 부분이 있더라고요</span>」(2018. 12. 3. 15:45:09). <span class="s">가격 프리미엄으로 주장하면 집니다.</span> 「대량 보유자의 유일한 일괄·확정 출구」로만 구성하고, <span class="s">거래소 일별 거래량 자료 확보가 필수</span>입니다</td></tr>
+<tr><td class="c s">R2</td><td>원고가 <span class="s">스스로 포기</span>했다</td><td>발언 전문에 유보가 있습니다 — 「…15억 밑으로 파는 걸로 그렇게 생각하고 있을게요. <span class="q">일단은 뭐 마음 바뀌면 전화 드릴게요</span>」. 직전에 담당 직원 A가 「확답은 못 받았어요」라 했고, 오히려 「<span class="q">오늘 중으로 혹시 답변 가능할까요</span>」라며 재촉했습니다. <span class="s">전제가 미확정인 상태의 잠정 결정은 권리 포기가 아닙니다</span></td></tr>
+<tr><td class="c s">R3</td><td>회사에 <span class="s">승인 의무가 없었다</span></td><td>세 갈래 모두 책임이 남습니다 — 「<span class="s">승인했다</span>」면 승인이 가능했음을 자인한 것이고(규제상 불가 항변 소멸) 통지하지 않은 책임이 남습니다. 「<span class="s">못 했다</span>」면 대법원에 낸 서면이 사실과 다릅니다. 「<span class="s">품의 중이었다</span>」면 마감이 있는 법정 권리에 무응답한 것입니다</td></tr>
+<tr><td class="c s">R4</td><td><span class="s">소멸시효</span>가 지났다</td><td>민법 제766조 「안 날」은 <span class="s">위법한 가해행위임을 인식할 수 있었던 날</span>입니다. 2018년에는 「본사 검토 중」으로 인식했습니다. <span class="s">피고가 「특별승인했다」고 주장한 2025. 2. 27.</span>을 기산점으로 볼 여지가 있고, 장기 10년은 2028. 6.까지입니다 <span style="color:var(--mute)">(«유보» — 법원 판단 사항)</span></td></tr>
+<tr><td class="c s">R5</td><td><span class="s">단순 착오</span>였다</td><td>이것이 <span class="s">가장 현실적인 항변</span>입니다. 단일 행위로는 깨기 어렵습니다. <span class="s">제3장의 네 건을 하나로 묶어야만</span> 다툴 수 있습니다 — 두 녹취록은 <span class="s">표지에 녹음일시·대화자가 각각 명기된 별개 문서</span>이므로 「혼동」이라 하기 어렵고, 같은 인용이 <span class="s">10개월 뒤 더 강한 표현으로 반복</span>되었습니다</td></tr>
+</table>
+
+<div class="foot"><span>소송사기 — 접합의 해부 · 김성만 · 2026. 9. 15.</span><span class="pg">- 4 / 5 -</span></div>
+</div>
+
+<!-- ========== PAGE 5 ========== -->
+<div class="page tight">
+<div class="chk"><span class="h">수사기관에 요청드리는 것 — 전부 「문서를 여는 일」입니다</span>
+<ol>
+<li><span class="s">갑 제6호증(정본 003006 제18면)과 갑 제12호증(정본 034021 제7면) 원문</span>을, 037001 제3쪽·080001 제2쪽의 인용문과 <span class="s">한 줄씩 대조</span> — 5분이면 끝납니다.</li>
+<li><span class="s">「특별 승인」의 내부 결재 기록</span> — 회사가 「회사의 승인 없이는 이루어질 수 없는 일」이라고 스스로 적었으므로, <span class="s">결재 기록이 있거나 없거나 둘 중 하나</span>입니다.</li>
+<li><span class="s">회사의 통화 녹취 보유 목록·조회·반출 로그</span>(2022. 8. 시점) — 「원본 미보유」 기재와 대조할 <span class="s">유일한 자료</span>입니다.</li>
+<li><span class="s">회사와 대리인 사이의 자료 송부 내역</span> — 「회사가 잘못 전달했다」는 항변의 진위가 여기서 갈립니다.</li>
+<li><span class="s">거래소 CJ ENM 일별 거래량 자료</span>(2018. 6.) — R1 반론에 대비하기 위해 <span class="s">제가 먼저 요청드립니다</span>.</li>
+</ol></div>
+
+<div class="punch">제가 구하는 것은 처벌이 아니라 <span>대조</span>입니다.<br>대조해서 제가 틀렸다면, <span>그 결과를 받아들이겠습니다.</span></div>
+
+<p class="src"><b>자료</b> — 전자소송 정본(대법원 2024다321102 기록): 025001 · 037001 · 070001 · 080001 · 083001 · 087001 · 093001 · 003006(갑6) · 034021(갑12). 속기사무소 인증 녹취록 1,607쪽. 회사 직원 이메일 원본 3통. <b>쪽수는 2026. 9. 15. 정본 인쇄면 기준으로 재대조한 것이며 원본 전부를 보유합니다.</b><br>
+<b>유보</b> — ① 판례 번호는 서면 인용 전 대법원 종합법률정보에서 재확인 필요. ② 「접합」과 판결 이유의 관계는 <b>사실의 병존</b>으로만 적었으며 인과관계를 단정하지 않습니다. ③ 대리인의 <b>고의를 단정하지 않습니다</b> — 이 문서는 수사기관의 판단을 구하는 자료입니다. ④ 소멸시효 기산점은 법원의 판단 사항입니다.<br>
+ⓒ 김성만 · 2026. 9. 15. · 대구광역시 북구 서변동 72, 102동 305호 · 010-6511-1389 · touchi@hanmail.net · touchi.oopy.io</p>
+
+
+<h2>제7. 세 절차의 역할 — <span class="n">서로를 대신하지 않습니다</span></h2>
+<table class="tb">
+<tr><th style="width:36mm">절차</th><th style="width:34mm">대상</th><th>이 절차가 하는 일 · 하지 못하는 일</th></tr>
+<tr><td class="s">① 형사<br><span style="font-weight:400;font-size:8pt">서울영등포경찰서 2026형제29726<br>서울남부지방검찰청</span></td><td>서면을 작성한 사람</td><td><span class="s">사실의 확정.</span> 이 문서가 다루는 것이 여기입니다. 다만 <span class="s">고의 입증이 최대 관문</span>이며, 무혐의 가능성을 전제합니다</td></tr>
+<tr><td class="s">② 징계<br><span style="font-weight:400;font-size:8pt">대한변호사협회</span></td><td>대리인의 직무상 책임</td><td>형사와 별개로 진행됩니다. <span class="s">서면별 징계시효</span>에 유의 — 037001(2023. 8. 28.)분은 이미 경과한 것으로 보이고, 080001·070001·083001·091001·002001은 남아 있습니다 <span style="color:var(--mute)">(«유보» — 변협 판단 사항)</span></td></tr>
+<tr><td class="s">③ 감독<br><span style="font-weight:400;font-size:8pt">금융감독원 · 금융위원회</span></td><td>회사의 법령 준수</td><td><span class="s">제가 접근할 수 없는 자료의 확보</span> — 「규정」 제9조 제3항 원본 일시보관. <span class="s">형사 절차가 쓸 자료를 남기는 것</span>이 실익입니다</td></tr>
+<tr><td class="s">④ 민사</td><td>—</td><td>★ <span class="s">2025. 3. 13. 확정되어 끝났습니다.</span> 이 문서는 그 판결의 당부를 다투지 않으며, <span class="s">재심을 목표로 하지 않습니다</span></td></tr>
+</table>
+<div class="foot"><span>소송사기 — 접합의 해부 · 김성만 · 2026. 9. 15.</span><span class="pg">- 5 / 5 -</span></div>
+</div>
+</body></html>

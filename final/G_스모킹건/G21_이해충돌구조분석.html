@@ -1,0 +1,78 @@
+<!DOCTYPE html><html lang="ko"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>이해충돌 구조 분석</title><link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700;900&display=swap" rel="stylesheet"><style>:root{--navy:#1f3864;--red:#b3271e;--line:#e3e7ee;--dim:#5b6472}*{box-sizing:border-box}body{margin:0;background:#f7f8fb;font-family:'Noto Sans KR',sans-serif;color:#1c2230;line-height:1.7}.wrap{max-width:960px;margin:0 auto;padding:0 18px 60px}header{background:linear-gradient(135deg,#16233f,#27406e);color:#fff;border-radius:0 0 20px 20px;padding:30px 30px 24px;margin-bottom:24px}header .tag{font-size:12px;letter-spacing:3px;color:#9fb4d8;font-weight:700}header h1{font-size:24px;margin:8px 0 6px;line-height:1.3}header .sub{font-size:14px;color:#cdd9ef}header a{color:#cdd9ef;font-size:12px}.doc{background:#fff;border:1px solid var(--line);border-radius:14px;padding:26px 30px;box-shadow:0 2px 10px rgba(0,0,0,.05)}.doc p{margin:0 0 .7em;font-size:14.5px}.doc h2,.doc h3{color:var(--navy);margin:1.3em 0 .5em}.doc table{border-collapse:collapse;width:100%;margin:.8em 0;font-size:13px}.doc td,.doc th{border:1px solid #cfd6e2;padding:5px 8px;vertical-align:top}.doc th{background:#e8edf6}.doc img{max-width:100%;height:auto;border:1px solid var(--line);margin:.5em 0}.pg{border-top:2px dashed #cfd6e2;margin:1.6em 0 .8em;padding-top:.4em;font-size:12px;color:var(--dim)}.note{font-size:12.5px;color:var(--dim);margin-top:22px;padding:12px 16px;background:#fff;border-radius:10px;border:1px dashed var(--line)}.foot{font-size:12px;color:#6b7280;text-align:center;margin-top:24px}.srcbox{background:#e8edf6;border-radius:10px;padding:10px 14px;font-size:13px;margin-bottom:14px}</style></head><body><div class="wrap"><header><div class="tag">G21 · 스모킹건</div><h1>이해충돌 구조 분석</h1><div class="sub">매도 시점 조언자 = 배상 결정자 · 감독기관과 대리인의 겹침</div><div style="margin-top:8px"><a href="../index.html">← 자료 모음으로</a></div></header><div class="srcbox">원본: PDF → 텍스트 추출 웹 변환(표·그림은 원본과 다를 수 있음) · smokingun-이해충돌구조분석_20260818-2329-smokingun.pdf</div><style id="pdfstyle">
+.doc h2.s{font-family:'Black Han Sans','Noto Sans KR',sans-serif;font-size:21px;color:#fff;background:linear-gradient(90deg,#1f3864,#2c4d86);padding:8px 16px;border-radius:8px;margin:1.4em 0 .7em;font-weight:400}
+.doc h3.s{font-size:16.5px;color:#1f3864;border-left:6px solid #1f3864;padding:4px 12px;background:#eef2f9;border-radius:0 8px 8px 0;margin:1.2em 0 .5em}
+.doc .sub{display:block;font-weight:900;color:#b3271e;background:#fdecea;border:1px solid #f3b7b2;border-radius:8px;padding:6px 12px;margin:.9em 0 .4em;font-size:15px}
+.doc .qb{border-left:5px solid #b3271e;background:#fff8f0;border-radius:0 10px 10px 0;padding:10px 14px;margin:.6em 0 .8em}
+.doc .qb .who{display:inline-block;font-weight:900;color:#fff;background:#1f3864;border-radius:6px;padding:0 8px;font-size:12.5px;margin-right:6px}
+.doc .qb .who.me{background:#b45309}
+.doc .qb .q{color:#7f1d1d;font-weight:700}
+.doc .an{display:block;margin:.3em 0 .9em;padding:6px 12px;color:#1f3864;background:#eaf1ff;border-radius:8px;font-size:14px}
+.doc .an b.ar{color:#b45309;margin-right:4px}
+.doc .kv{display:grid;grid-template-columns:110px 1fr;gap:6px 10px;align-items:start;margin:.3em 0}
+.doc .kv .k{font-weight:900;color:#fff;background:#b45309;border-radius:6px;padding:2px 8px;font-size:13px;text-align:center}
+.doc .kv .v{font-size:14px}
+.doc q,.doc .qq{color:#7f1d1d;font-weight:700}
+.doc .dt{color:#1f3864;font-weight:900;white-space:nowrap}
+.doc .mn{font-weight:900;color:#0f5132;background:#d1e7dd;border-radius:4px;padding:0 4px}
+.doc .kw{background:#fff3b0;font-weight:700;border-radius:3px;padding:0 2px}
+.doc .lead{font-size:16px;font-weight:900;color:#1f3864;border-bottom:3px solid #b3271e;padding-bottom:6px;margin-bottom:.9em}
+.doc .cite{color:#5b6472;font-size:13px}
+.legend{display:flex;flex-wrap:wrap;gap:8px;font-size:12px;margin:0 0 14px}
+.legend span{border-radius:6px;padding:2px 8px;border:1px solid #e3e7ee;background:#fff}
+</style><style id="tbstyle">.doc table.tb{border-collapse:collapse;width:100%;margin:.6em 0 1em;font-size:13.5px;table-layout:auto}.doc table.tb th{background:#1f3864;color:#fff;font-weight:900;padding:6px 8px;border:1px solid #cfd6e2;text-align:left}.doc table.tb td{border:1px solid #cfd6e2;padding:6px 8px;vertical-align:top;line-height:1.55}.doc table.tb td.k{background:#fff3e6;color:#9a3412;font-weight:900;white-space:nowrap}.doc table.tb tr:nth-child(even) td{background:#fafbfd}.doc table.tb tr:nth-child(even) td.k{background:#ffe9d6}.doc table.tb th .kw{background:transparent;color:#ffe08a}.doc table.tb th .qq,.doc table.tb th .dt,.doc table.tb th .mn{color:#fff;background:transparent}</style><!--styled-v1--><!--styled-v2--><!--tables-v3--><div class="doc"><div class="legend"><span style="background:#1f3864;color:#fff">제목·절</span><span style="background:#fdecea;color:#b3271e;font-weight:900">● 핵심 항목</span><span style="background:#fff8f0;color:#7f1d1d;font-weight:700;border-left:4px solid #b3271e">“발언 원문”</span><span style="background:#eaf1ff;color:#1f3864">→ 분석·평가</span><span style="background:#b45309;color:#fff;font-weight:900">표 항목</span><span class="dt" style="color:#1f3864;font-weight:900">날짜</span><span class="mn">금액</span><span class="kw">핵심어</span></div><div class="pg">— 원본 1면 —</div>
+<div class="lead">NH투자증권 <span class="kw">증거</span>사이트 www.touchi.oopy.io · 열람 비밀번호는 요청 시 별도 제공</div>
+<h2 class="s">이해충돌 구조 분석 보고서</h2>
+<h3 class="s">이 사건은 「<span class="kw">양도세</span> 사건」이 아니라 「이해충돌 사건」입니다 — 시가에 연동된 <span class="kw">양도세</span>, <span class="kw">배상</span> 의무자가</h3>
+<h3 class="s">매도 시점을 조언한 구조, 그리고 감시자의 세 개의 모자</h3>
+<p>이해충돌구조분석_20260819 · 김성만 · 조견표 1권(21면, A3) 기반 · 수사·감찰 참고자료</p>
+<h2 class="s">제1. 재정의 — 왜 <span class="kw">양도세</span> 사건이 아닌가</h2>
+<p>9년간 이 사건은 「<span class="kw">양도세</span> 오안내 사건」으로 불렸습니다. 그 이름이 사건을 작게 만들었습니다. <span class="kw">양도세</span>는 고정된 숫</p>
+<p>자가 아니라 시가에 연동되는 변수였고, 그 순간 <span class="kw">배상</span> 문제는 세금 문제가 아니라 이해충돌 문제로 바뀝니다. 주가가</p>
+<p>오르면 차익과 <span class="kw">양도세</span>가 함께 커져 <span class="kw">배상</span> 의무자(회사)의 부담이 커지고, 주가가 내리면 <span class="kw">양도세</span>는 줄지만 피해자의 시</p>
+<p>가손실이 그 몇 배로 커집니다. 즉 피해자와 <span class="kw">배상</span> 의무자는 주가의 방향을 두고 정반대 이익을 가진 당사자였습니다.</p>
+<p>그런데 매도 시점을 조언하고 처리를 주도한 것은 그 반대편 당사자였습니다 — 공직자였다면 그 자리에서 회피 의무</p>
+<p>가 발생하는 구조입니다.</p>
+<h2 class="s">제2. 조견표의 수학 — 하락 1원당 누가 얼마를 잃는가</h2>
+<p>첨부 조견표(2018년 주식 거래일별 피해금액 조견표, 21면)는 2017년말 <span class="mn">97,700원</span>·60,000주(<span class="mn">58.62억 원</span>)를 기준</p>
+<p>으로 매 거래일의 시가손실·<span class="kw">양도세</span> 과세표준·보상차액을 계산한 표입니다. 그 수학의 핵심은 한 줄입니다.</p>
+<table class="tb"><tr><th>구조</th><th>계산</th><th>의미</th></tr><tr><td class="k">하락 시</td><td>주가 <span class="mn">1원</span> 하락 = 시가손실 <span class="mn">60,000원</span> 전액 발생, 양도 세 절감은 세율만큼(30% 가정 시 <span class="mn">18,000원</span>)뿐 → 피 해자 순손실은 <span class="kw">양도세</span> 절감분의 약 2.3배(세율</td><td>「<span class="kw">양도세</span>가 줄었으니 됐다」는 산수 자체가 성립 불 가 — 내릴수록 피해자만 잃습니다</td></tr></table>
+<p>NH투자증권 <span class="kw">증거</span>사이트 www.touchi.oopy.io · 열람 비밀번호는 요청 시 별도 제공</p>
+<div class="pg">— 원본 2면 —</div>
+<p>NH투자증권 <span class="kw">증거</span>사이트 www.touchi.oopy.io · 열람 비밀번호는 요청 시 별도 제공</p>
+<table class="tb"><tr><td></td><td>30%)~2.6배(세율 27.5%)</td><td></td></tr><tr><td class="k">상승 시</td><td>차익·<span class="kw">양도세</span> 동반 증가 → 「올랐을 때 차액으로 보상 갈음」 프레임 발동(담당 직원 A <span class="dt">2018. 1. 18.</span> 「<span class="mn">5,000원</span> 정도 가격이 오르면 그 돈만큼」) → 회사 <span class="kw">배상</span> 명분 소멸</td><td>오르면 <span class="kw">배상</span>이 사라지고, 내리면 손실이 피해자 몫 — 회사는 어느 방향에도 걸어둔 셈</td></tr><tr><td class="k">보합·지연</td><td>보유 지속 = 신용·담보대출 이자 수입 지속 (확정 기 록: 총 대출이자 약 <span class="mn">2.75억 원</span>)</td><td>기다리게 할수록 회사의 이자 수입은 쌓입니다</td></tr></table>
+<table class="tb"><tr><td>대표 행 (조견표 원문 수치)</td><td>종가</td><td>시가손실</td><td>세율 30% 가정 <span class="kw">양도세</span></td><td>보상차액 피해액</td></tr><tr><td><span class="dt">2018. 1. 2.</span> (연초 첫 거래일)</td><td>96,100</td><td>-122,979,000</td><td>381,024,942</td><td>-504,003,942</td></tr><tr><td><span class="dt">2018. 1. 4.</span> (오안내 자인 직 전)</td><td>91,000</td><td>-428,979,000</td><td>289,224,942</td><td>-718,203,942</td></tr><tr><td><span class="dt">2018. 6. 27.</span> (거래정지 전 마 지막 날)</td><td>98,900</td><td>+45,021,000</td><td>431,424,942</td><td>-386,403,942</td></tr><tr><td><span class="dt">2018. 7. 13.</span> (합병 후 최대 피 해 지점)</td><td>286,400 (24,421주)</td><td>+1,105,195,400</td><td>749,477,262</td><td>최대 피해 국면 — 조견표 표기 「최대 피해금액」</td></tr></table>
+<p>이 표가 증명하는 것 — <span class="dt">2018년 1월 2일</span>, 즉 오안내 자인(1. 18.)보다도 앞선 연초부터 이미 <span class="mn">5억</span> 원대의 피해 변동이 시작 되어 하루도 멈추지 않았습니다. 「매도해서 손실이 확정되어야 보상 논의가 가능하다」(센터장 B 경위서)는 말은, 매일 움 직이는 이 표 위에서 피해자를 세워 둔 채 시계만 돌린 것입니다. 그리고 그 시계의 이자는 회사 계좌로 들어갔습니다.</p>
+<h2 class="s">제3. 게임의 표 — 어느 칸에서도 회사가 이깁니다</h2>
+<table class="tb"><tr><th>시나리오</th><th>피해자</th><th>회사 (<span class="kw">배상</span> 의무자)</th></tr><tr><td class="k">주가 상승</td><td><span class="kw">양도세</span> 급증 (시가 연동) — 팔면 세금, 안 팔면 다음 국면</td><td>「올랐으니 차액으로 갈음」 — <span class="kw">배상</span> 명분 소멸 + 이 자 수입</td></tr><tr><td class="k">주가 하락</td><td>시가손실 = <span class="kw">양도세</span> 절감분의 2.3~2.6배</td><td><span class="kw">배상</span> 기준액(<span class="kw">양도세</span>) 축소 + 이자 수입</td></tr><tr><td class="k">보합·관망</td><td>결정 불능 상태 지속 — 「팔아야 보상」과 「팔면 손 실 확정」의 협공</td><td>이자 수입 지속 + 시간 경과로 <span class="kw">시효</span> 소진</td></tr><tr><td class="k">결론</td><td>세 칸 모두 손실 — 「팔아도 지고 안 팔아도 지는」 구조의 수학적 실체</td><td>세 칸 모두 이익 또는 무손실 — 지연은 실수가 아니라 합리적 전략이었습니다</td></tr></table>
+<p>NH투자증권 <span class="kw">증거</span>사이트 www.touchi.oopy.io · 열람 비밀번호는 요청 시 별도 제공</p>
+<div class="pg">— 원본 3면 —</div>
+<p>NH투자증권 <span class="kw">증거</span>사이트 www.touchi.oopy.io · 열람 비밀번호는 요청 시 별도 제공</p>
+<p>수사적으로 이 표가 중요한 이유는 고의의 정황이기 때문입니다. 지연이 회사에 항상 유리했다면, 1년의 지연(2018)</p>
+<p>과 2년의 <span class="kw">민원</span> 지연(2020~2022)과 640일의 조정 소비는 우연의 반복이 아니라 유인의 실현으로 읽힙니다. 게으름</p>
+<p>은 세 번 반복되지 않습니다 — 이익은 세 번 반복됩니다.</p>
+<h2 class="s">제4. 관계자별 이해충돌 매트릭스 — 심판이 전부 선수였습니다</h2>
+<table class="tb"><tr><th>관계자</th><th>맡은 자리 (심판)</th><th>실제 이해 (선수)</th><th>원문 근거</th></tr><tr><td class="k">담당 직원 A</td><td>매도 시점의 조언자·<span class="kw">민원</span>의 접수자</td><td>자기 과실의 처리 당사자 — <span class="kw">배상</span>액이 커질수록 본인 책임 커짐</td><td>「올라갔을 때 좀 매도를 하면」 [20180118] · <span class="kw">합의서</span> 작성 <span class="kw">자백</span> 「법 무팀하고 같이」 [20200807]</td></tr><tr><td class="k">센터장 B</td><td>「원만한 해결」의 중재자</td><td>회사 이익의 대변자 — 「회사에서 해 준 거는 사실 없거든요」</td><td>「매도해서 손실금액이 나와야 보상 논 의 가능 … 매도를 강하게 권유」 [경위 서 20200706]</td></tr><tr><td class="k">금융소비자보호부</td><td><span class="kw">민원</span>인 보호 부서</td><td>회사 방어 서면의 작성 부서 — 보호와 방어를 한 손으로</td><td><span class="kw">회신문</span> @NH증금소보2020-414 「수 용할 수 없다는 의견」 [20200721]</td></tr><tr><td class="k">컴플라이언스부</td><td>이해상충 관리 의무 부서 (자본시장법 §44)</td><td>지연 구조의 설계 통보자 — 「손실 확 정 전 보상 불가」</td><td>담당 직원 A 경위서 「당사 컴플라이언스팀 과 법무팀 통해 알아본 바」 [20200701] · 쟁점 복명 후 무조치 [20220824]</td></tr><tr><td class="k">감사·감사실</td><td>내부 감시의 정점</td><td>「자체 해결」 지시의 발원지</td><td>센터장 B 경위서: 「감사실 문의결과 자 체 해결하는게 좋다고하여」 [20200706]</td></tr><tr><td class="k">금감원 담당라인</td><td>외부 감독자</td><td>전임자들의 판단 뒤집기·청원 셀프각 하 — 감독의 실종</td><td>「<span class="kw">기각</span> 회신을 드린 거라고요」 [20230713] · 배정 회귀 09:40/15:28 [배정내역]</td></tr></table>
+<h2 class="s">제5. 감시자의 세 개의 모자 — 감사 임원 V4 노드</h2>
+<table class="tb"><tr><th>모자</th><th>내용</th><th>출처·검증 상태</th></tr><tr><td class="k">첫째 모자</td><td>금융감독당국 고위직(부원장급) 출신 — 감독하던 자</td><td>금감원 금감원 직원 S3 팀장 육성: 「누구요, 누구요? 전 누구</td></tr></table>
+<p>NH투자증권 <span class="kw">증거</span>사이트 www.touchi.oopy.io · 열람 비밀번호는 요청 시 별도 제공</p>
+<div class="pg">— 원본 4면 —</div>
+<p>NH투자증권 <span class="kw">증거</span>사이트 www.touchi.oopy.io · 열람 비밀번호는 요청 시 별도 제공</p>
+<table class="tb"><tr><td></td><td>리에서 감독받는 회사의 감사로</td><td>요? (임원 V4) 옛날에 근무하다가 가셨죠」 [20220404] — 감독기관 스스로 근무 이력을 확인</td></tr><tr><td class="k">둘째 모자</td><td>NH투자증권 감사 — 이 사건 기간 내부 감시의 정점. 그 산하 감사실이 「자체 해결」을 지시</td><td>센터장 B 경위서 [20200706] — 개인 <span class="kw">합의</span> 유도의 발 원지가 감사 라인이었다는 자인</td></tr><tr><td class="k">셋째 모자</td><td>김앤장 법률사무소 고문 (고소인 확인 사항)</td><td>공개 경력 자료·법인 공시로 확인 가능한 사항 — 확인 되면 「감독기관 → 피감회사 감사 → 대형 로펌 고 문」의 3단 <span class="kw">회전문</span>이 완성됩니다. 본 보고서는 이를 단정하지 않고 확인 요청 사항으로 등재합니다</td></tr></table>
+<p>셋째 모자의 의미 — 이 사건에서 「자체 해결」(개인 <span class="kw">합의</span>)이라는 결정은 회사에 수십억의 <span class="kw">배상</span>을 면하게 한 결정이었습 니다. 그 결정 라인의 정점에 감독기관 출신 감사가 있었고, 감사실은 컴플라이언스·법무팀과 함께 <span class="kw">합의서</span> 국면에 등장합 니다. 공직자라면 이해충돌방지법 제5조의 회피 대상인 구조가, 민간 감사라는 이유로 어떤 신고도 회피도 없이 작동했습 니다. 확인 요청: ①당시 감사의 「자체 해결」 지시 관련 감사실 문서 ②감사의 겸직·퇴임 후 이력 공시.</p>
+<h2 class="s">제6. 법적 프레임 — 민간이라서 무죄가 아닙니다</h2>
+<table class="tb"><tr><th>규범</th><th>내용</th><th>본건 적용</th></tr><tr><td class="k">자본시장법 §37②</td><td>금융투자업자는 정당한 사유 없이 투자자의 이익을 해 하면서 자기 또는 제3자의 이익을 얻어서는 안 된다</td><td>지연이 항상 회사에 유리한 구조에서 「기다려라」 조언 — 조문이 금지한 바로 그 형태</td></tr><tr><td class="k">자본시장법 §44</td><td>이해상충 발생 가능성의 파악·평가·관리 의무, 낮출 수 없으면 거래 회피 의무</td><td>이해상충의 당사자(담당 직원 A·센터장 B·컴플라이언스)가 처리를 주도 — 관리가 아니라 실연</td></tr><tr><td class="k">지배구조법 §24</td><td><span class="kw">내부통제</span>기준·준수 의무</td><td>감사실 「자체 해결」·컴플라이언스 「보상 불가」 통보 — 통제 장치가 거꾸로 작동</td></tr><tr><td>공직자 대입 (비교 기준)</td><td>이해충돌방지법 §5 — 사적이해관계자의 신고·회피</td><td>같은 구조를 공직자가 했다면 형사·징계 사안 — 「민 간이라 괜찮다」가 아니라 「민간 규범(§37·§44) 으로 처벌하라」가 결론입니다</td></tr></table>
+<h2 class="s">제7. 활용 방향</h2>
+<p>NH투자증권 <span class="kw">증거</span>사이트 www.touchi.oopy.io · 열람 비밀번호는 요청 시 별도 제공</p>
+<div class="pg">— 원본 5면 —</div>
+<p>NH투자증권 <span class="kw">증거</span>사이트 www.touchi.oopy.io · 열람 비밀번호는 요청 시 별도 제공</p>
+<p>영등포 수사에는 제3장의 게임표를 고의 입증의 정황으로, 제2장의 조견표 수치를 이득액 산정의 기초로 제출할 수</p>
+<p>있습니다. 금감원 감찰·감사원에는 제4장의 매트릭스를 — 이해상충 관리 의무 위반을 감독기관이 검증했는지의 관</p>
+<p>점으로 연결합니다. 임원 V4 관련은 셋째 모자의 공시 확인이 끝날 때까지 「확인 요청 사항」 지위를 유지합니다 —</p>
+<p>단정 없이도 첫째·둘째 모자만으로 구조는 완성되어 있습니다.</p>
+<p>이솝의 우화로 마칩니다. 고양이가 병든 닭들에게 문안을 갔습니다. 「좀 어떠니, 내가 도울 일은 없니.」 닭들이 답했습니 다. 「당신이 떠나 주시면 저희는 낫습니다.」 매도 시점을 조언한 사람, <span class="kw">민원</span>을 접수한 사람, 이해상충을 관리한다던 사람, 내부를 감시한다던 사람 — 전부 같은 쪽이었습니다. 닭장의 병은 닭의 병이 아니었습니다. 문병 온 고양이가 병이었습니다.</p>
+<p>첨부: ①2018년 주식 거래일별 피해금액 조견표 1권(21면, A3 원본) ②담당 직원 A·센터장 B 경위서 ③<span class="kw">회신문</span> @NH증금</p>
+<p>소 보 2020-414 ④ 금 리 전 산 로 그 3 장 면 ⑤ 녹 취 해 당 면</p>
+<p>(20180118·20200312·20200807·20220404·20220824) ⑥배정내역 원본</p>
+<p>2026. 8.</p>
+<h3 class="s">19. 김 성 만</h3>
+<p>NH투자증권 <span class="kw">증거</span>사이트 www.touchi.oopy.io · 열람 비밀번호는 요청 시 별도 제공</p></div><div class="note">※ 이 문서는 수사기관·감독기관 제출용 분석 서면을 웹 열람용으로 옮긴 것입니다. 원본 서식(표·그림)은 변환 과정에서 달라질 수 있으며, 원본 파일은 요청 시 제출합니다. 「“ ”」 안은 녹취·회신문·판결문 원문입니다. 확정판결의 당부를 다투지 않고, 특정인의 고의·유착을 단정하지 않으며, 최종 판단은 수사기관·법원·감독당국의 권한입니다.</div><div class="foot">NH투자증권 사건 자료 아카이브 · 작성 김성만 · 2026. 9. 27.</div></div></body></html>
