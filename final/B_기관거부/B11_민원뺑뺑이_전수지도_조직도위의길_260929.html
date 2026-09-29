@@ -1,0 +1,403 @@
+<!doctype html>
+<html lang="ko"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>민원 뺑뺑이 전수 지도</title>
+<style>
+:root{--navy:#1F3A5F;--red:#C62828;--red2:#FFEBEE;--green:#2E7D32;--green2:#E8F5E9;--amb:#B26A00;--amb2:#FFF4E0;--grey:#6B7280;--grey2:#F3F4F6;--ink:#111;--line:#CBD5E1;--bg:#FAFBFC}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:"Noto Sans CJK KR","Noto Sans KR","Malgun Gothic",sans-serif;color:var(--ink);background:var(--bg);line-height:1.5}
+.wrap{max-width:1560px;margin:0 auto;padding:28px 24px 40px}
+header{background:var(--navy);color:#fff;border-radius:10px;padding:22px 28px}
+header h1{font-size:30px;font-weight:900;letter-spacing:-.5px}
+header .sub{font-size:15px;opacity:.92;margin-top:6px}
+header .note{font-size:12px;opacity:.75;margin-top:8px}
+.kpi{display:grid;grid-template-columns:repeat(6,1fr);gap:10px;margin:14px 0 6px}
+.kpi div{background:#fff;border:1px solid var(--line);border-radius:8px;padding:12px 14px}
+.kpi b{display:block;font-size:30px;font-weight:900;color:var(--red);line-height:1.1}
+.kpi b.g{color:var(--navy)}
+.kpi span{font-size:12.5px;color:#374151}
+h2{font-size:20px;color:var(--navy);margin:26px 0 10px;padding-bottom:5px;border-bottom:2.5px solid var(--navy)}
+h2 small{font-size:13px;color:var(--grey);font-weight:500;margin-left:8px}
+.card{background:#fff;border:1px solid var(--line);border-radius:10px;padding:14px}
+svg text{font-family:"Noto Sans CJK KR","Noto Sans KR","Malgun Gothic",sans-serif}
+.legend{display:flex;gap:18px;flex-wrap:wrap;font-size:12.5px;margin:4px 2px 10px;color:#374151}
+.legend i{display:inline-block;width:26px;height:0;border-top:3px solid;vertical-align:middle;margin-right:6px}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+/* org panels */
+.org h3{font-size:16px;color:#fff;background:var(--navy);margin:-14px -14px 12px;padding:9px 14px;border-radius:10px 10px 0 0}
+.org h3 em{font-style:normal;font-size:12px;opacity:.8;margin-left:6px}
+.row{display:flex;gap:8px;justify-content:center;margin:0 0 6px}
+.box{border:1.5px solid #94A3B8;background:#fff;border-radius:6px;padding:6px 8px;font-size:12.5px;text-align:center;min-width:110px;position:relative}
+.box small{display:block;font-size:11px;color:#4B5563;line-height:1.35;margin-top:2px}
+.box.top{background:var(--navy);color:#fff;border-color:var(--navy);font-weight:800}
+.box.top small{color:#dbe4f0}
+.box.r{background:var(--red2);border-color:var(--red);border-width:2.5px}
+.box.r b{color:var(--red)}
+.box.g{background:var(--green2);border:2.5px dashed var(--green)}
+.box.g b{color:var(--green)}
+.box.a{background:var(--amb2);border:2.5px solid var(--amb)}
+.box.a b{color:var(--amb)}
+.box.n{background:var(--grey2);border-style:dotted;color:#4B5563}
+.down{text-align:center;color:#94A3B8;font-size:14px;line-height:1;margin:-2px 0 4px}
+.stamp{display:inline-block;font-size:10.5px;font-weight:800;color:#fff;background:var(--red);border-radius:3px;padding:0 5px;margin:2px 2px 0}
+.stamp.a{background:var(--amb)}.stamp.g{background:var(--green)}.stamp.n{background:var(--grey)}
+.path{margin-top:10px;border-top:1px dashed var(--line);padding-top:8px;font-size:12.5px;line-height:1.65}
+.path b.rt{color:var(--red)} .path b.gt{color:var(--green)}
+/* table */
+table{width:100%;border-collapse:collapse;font-size:12.5px;background:#fff}
+th{background:var(--navy);color:#fff;padding:7px 6px;font-weight:700}
+td{border:1px solid var(--line);padding:6px 7px;vertical-align:top}
+td.c{text-align:center;white-space:nowrap}
+td.q{color:#7A1F1F}
+tr.sep td{background:#EEF2F7;font-weight:800;color:var(--navy)}
+/* quotes */
+.wall{display:grid;grid-template-columns:repeat(4,1fr);gap:10px}
+.q{background:#fff;border-left:5px solid var(--red);border-radius:6px;padding:10px 12px;box-shadow:0 1px 2px rgba(0,0,0,.06)}
+.q p{font-size:14.5px;font-weight:800;color:#7A1F1F;line-height:1.45}
+.q span{display:block;font-size:11.5px;color:var(--grey);margin-top:6px}
+.q.b{border-left-color:var(--navy)} .q.b p{color:var(--navy)}
+.mirror{display:grid;grid-template-columns:repeat(5,1fr);gap:10px}
+.mirror div{background:#fff;border:1px solid var(--line);border-top:5px solid var(--red);border-radius:6px;padding:10px 12px;font-size:13px}
+.mirror b{display:block;font-size:15px;color:var(--red);margin-bottom:4px}
+.blood{border:2px solid #7A1F1F;background:#FFF7F7;border-radius:8px;padding:14px 18px;font-size:15px;line-height:1.75;margin-top:12px}
+.next{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-top:10px}
+.next div{background:#fff;border:1.5px solid var(--green);border-radius:6px;padding:9px 11px;font-size:12.5px}
+.next b{color:var(--green);display:block;font-size:14px}
+footer{font-size:11.5px;color:var(--grey);margin-top:22px;border-top:1px solid var(--line);padding-top:10px;line-height:1.7}
+@media print{body{background:#fff}.wrap{padding:10px}}
+</style></head><body><div class="wrap">
+
+<header>
+<h1>아홉 해, 열네 개의 문 — 민원 «뺑뺑이» 전수 지도</h1>
+<div class="sub">2020. 6. 30. 첫 민원 → 2026. 9. 29. 「향후 … 회신하지 아니함」 수령 · <b>2,282일</b> · 기관 «조직도» 위에 서류가 «간 길»과 «돌아온 말»을 그렸습니다</div>
+<div class="note">「」 = 기관 회신문·공인 속기 녹취 원문 · 인물은 «직위»로만 · 판결의 당부는 다투지 않음 · 평가어 없이 «기록»만 나란히 놓음 · 김성만 작성 (2026. 9. 29. 기준)</div>
+</header>
+
+<div class="kpi">
+<div><b>2,282일</b><span>첫 민원(2020. 6. 30.) → 「앞으로 답하지 않겠다」 수령(2026. 9. 29.)</span></div>
+<div><b class="g">14곳</b><span>두드린 기관 — 회사·감독·법원·감찰·수사·국회·대통령실</span></div>
+<div><b>7번</b><span>«이송·이첩·배당·재분류» — 서류가 «다른 책상»으로 간 횟수</span></div>
+<div><b>6번</b><span>「민형사로」「재판에서」「재판에 관한 사항」「소송 가서」 — «다른 문»을 가리킨 문장</span></div>
+<div><b>0번</b><span>「제출한 서류를 열었는가」에 대한 «예 · 아니오 · 기록 없음»의 답</span></div>
+<div><b>1번</b><span>「향후 동일한 취지의 청원서를 다시 제출할 경우 회신하지 아니함」 — 특별송달</span></div>
+</div>
+
+<!-- ============ 1. 전체 순환 지도 ============ -->
+<h2>① 전체 순환 지도 <small>가운데 한 사람이 보낸 서류(파랑)와, 기관 사이를 도는 «이송·이첩»(빨강 점선), 돌아온 말(빨강)</small></h2>
+<div class="legend"><span><i style="border-color:#1F3A5F"></i>김성만이 보낸 것</span><span><i style="border-color:#C62828;border-top-style:dashed"></i>기관 → 기관 «이송·이첩·배당»</span><span><i style="border-color:#C62828"></i>돌아온 말 · 다른 문을 가리킴</span><span><i style="border-color:#B26A00;border-top-style:dotted"></i>회신 «대기» (2026. 9. 29. 현재)</span></div>
+<div class="card" style="padding:6px">
+<svg viewBox="0 0 1500 905" width="100%" role="img" aria-label="전체 순환 지도">
+<defs>
+<marker id="mb" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#1F3A5F"/></marker>
+<marker id="mr" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#C62828"/></marker>
+<marker id="ma" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#B26A00"/></marker>
+<filter id="sh" x="-5%" y="-5%" width="110%" height="120%"><feDropShadow dx="0" dy="1.5" stdDeviation="1.5" flood-opacity=".18"/></filter>
+</defs>
+
+<!-- clusters -->
+<!-- 금감원 -->
+<rect x="30" y="30" width="400" height="300" rx="12" fill="#FFF5F5" stroke="#C62828" stroke-width="2" filter="url(#sh)"/>
+<text x="230" y="58" text-anchor="middle" font-size="19" font-weight="900" fill="#C62828">금융감독원</text>
+<rect x="55" y="75" width="170" height="54" rx="6" fill="#FFEBEE" stroke="#C62828" stroke-width="2"/>
+<text x="140" y="98" text-anchor="middle" font-size="13" font-weight="800">소비자보호총괄</text>
+<text x="140" y="117" text-anchor="middle" font-size="11.5" fill="#7A1F1F">민원 4건이 모두 여기로</text>
+<rect x="240" y="75" width="170" height="54" rx="6" fill="#E8F5E9" stroke="#2E7D32" stroke-width="2" stroke-dasharray="6 4"/>
+<text x="325" y="98" text-anchor="middle" font-size="13" font-weight="800" fill="#2E7D32">금융투자 검사국</text>
+<text x="325" y="117" text-anchor="middle" font-size="11.5" fill="#2E7D32">«검사 요청»이 가야 할 곳 · 0건</text>
+<text x="50" y="155" font-size="12" fill="#111">① 2020. 6. 30. 민원 202071209 → 640일 → 「민형사로」</text>
+<text x="50" y="176" font-size="12" fill="#111">② 2023. 직원 대상 청원 → 「저희 쪽으로 배정이 됐어요」</text>
+<text x="50" y="197" font-size="12" fill="#111">③ 2026. 9. 10. «검사 실시 요청» 107면 → 민원 202611431</text>
+<text x="50" y="218" font-size="12" fill="#111">④ 9. 15. 「이첩 거부」 → 9. 18. 민원 202611596 재배당</text>
+<text x="50" y="239" font-size="12" fill="#111">⑤ 금융위 앞 내용증명 → 9. 18. 민원 2026ZC175로 «내려옴»</text>
+<rect x="50" y="252" width="360" height="62" rx="6" fill="#fff" stroke="#C62828"/>
+<text x="230" y="274" text-anchor="middle" font-size="13" font-weight="800" fill="#C62828">「검사 요청한다고 해서 검사가 실시된 경우는 없었습니다」</text>
+<text x="230" y="296" text-anchor="middle" font-size="13" font-weight="800" fill="#C62828">「NH에다가 이첩하겠습니다」 (2026. 9. 15.)</text>
+
+<!-- NH -->
+<rect x="30" y="560" width="400" height="310" rx="12" fill="#F5F7FF" stroke="#1F3A5F" stroke-width="2" filter="url(#sh)"/>
+<text x="230" y="588" text-anchor="middle" font-size="19" font-weight="900" fill="#1F3A5F">NH투자증권 (피감독 회사)</text>
+<rect x="55" y="605" width="110" height="50" rx="6" fill="#FFEBEE" stroke="#C62828" stroke-width="2"/>
+<text x="110" y="626" text-anchor="middle" font-size="12" font-weight="800">금융소비자보호</text>
+<text x="110" y="643" text-anchor="middle" font-size="11" fill="#7A1F1F">회사 회신문 작성</text>
+<rect x="175" y="605" width="110" height="50" rx="6" fill="#FFF4E0" stroke="#B26A00" stroke-width="2"/>
+<text x="230" y="626" text-anchor="middle" font-size="12" font-weight="800">준법감시</text>
+<text x="230" y="643" text-anchor="middle" font-size="11" fill="#7A4A00">「사실 팩트예요」</text>
+<rect x="295" y="605" width="110" height="50" rx="6" fill="#F3F4F6" stroke="#6B7280" stroke-width="1.5" stroke-dasharray="3 3"/>
+<text x="350" y="626" text-anchor="middle" font-size="12" font-weight="800">감사위원회</text>
+<text x="350" y="643" text-anchor="middle" font-size="11" fill="#4B5563">주주 통지 대기</text>
+<text x="50" y="685" font-size="12">⑥ 2020. 7. 21. 회사 회신문 → 금감원이 «처리 결과»로 사용</text>
+<text x="50" y="706" font-size="12">⑦ 「손님한테 … 의견을 일일이 다 듣지 않고 보내는」 (2020. 11. 12.)</text>
+<text x="50" y="727" font-size="12">⑧ 「안 해 주기로 방침을 위에서 정했습니다」 (전언 2021. 4. 15.)</text>
+<text x="50" y="748" font-size="12">⑨ 삼자대면: 「그렇게까지 해 본 적은 한 번도 없습니다」</text>
+<text x="50" y="769" font-size="12">⑩ 「소송을 취하를 하신다면은」 (2022. 9. 14. — 제소 12일 뒤)</text>
+<rect x="50" y="784" width="360" height="70" rx="6" fill="#fff" stroke="#C62828"/>
+<text x="230" y="808" text-anchor="middle" font-size="13" font-weight="800" fill="#C62828">검사의 «대상»이 검사의 «답»을 쓰는 구조</text>
+<text x="230" y="830" text-anchor="middle" font-size="12" fill="#7A1F1F">2020년 회사 회신문 → 2026년 「NH에 이첩」</text>
+<text x="230" y="846" text-anchor="middle" font-size="12" fill="#7A1F1F">같은 길을 두 번</text>
+
+<!-- 법원 재판 --><g transform="translate(0,70)">
+<rect x="540" y="30" width="420" height="190" rx="12" fill="#F8FAFC" stroke="#475569" stroke-width="2" filter="url(#sh)"/>
+<text x="750" y="58" text-anchor="middle" font-size="19" font-weight="900" fill="#334155">법원 (재판) — 2022. 9. 2. 강제된 제소</text>
+<rect x="560" y="75" width="120" height="70" rx="6" fill="#fff" stroke="#475569"/>
+<text x="620" y="98" text-anchor="middle" font-size="13" font-weight="800">1심 남부지법</text>
+<text x="620" y="116" text-anchor="middle" font-size="11.5">2023. 11. 10. 각하</text>
+<text x="620" y="133" text-anchor="middle" font-size="11" fill="#C62828">탄원 47면 언급 0</text>
+<rect x="690" y="75" width="120" height="70" rx="6" fill="#fff" stroke="#475569"/>
+<text x="750" y="98" text-anchor="middle" font-size="13" font-weight="800">2심 서울고법</text>
+<text x="750" y="116" text-anchor="middle" font-size="11.5">2024. 11. 7. 기각</text>
+<text x="750" y="133" text-anchor="middle" font-size="11" fill="#C62828">신의칙 위반은 «인정»</text>
+<rect x="820" y="75" width="120" height="70" rx="6" fill="#fff" stroke="#475569"/>
+<text x="880" y="98" text-anchor="middle" font-size="13" font-weight="800">3심 대법원</text>
+<text x="880" y="116" text-anchor="middle" font-size="11.5">2025. 3. 13.</text>
+<text x="880" y="133" text-anchor="middle" font-size="11" fill="#C62828">심리불속행 · 이유 0줄</text>
+<line x1="680" y1="110" x2="690" y2="110" stroke="#475569" stroke-width="2" marker-end="url(#mb)"/>
+<line x1="810" y1="110" x2="820" y2="110" stroke="#475569" stroke-width="2" marker-end="url(#mb)"/>
+<text x="750" y="172" text-anchor="middle" font-size="12.5">세 판결 합계 27쪽 — 선고 3일 전 낸 47면·녹취 USB «0줄»</text>
+<text x="750" y="196" text-anchor="middle" font-size="12.5" font-weight="800" fill="#334155">«판결은 적법» — 그래서 남은 질문은 「열었는가」 하나</text>
+
+</g>
+<!-- 대법원 감찰 -->
+<rect x="1070" y="30" width="400" height="330" rx="12" fill="#FFF5F5" stroke="#C62828" stroke-width="2" filter="url(#sh)"/>
+<text x="1270" y="58" text-anchor="middle" font-size="19" font-weight="900" fill="#C62828">대법원 윤리감사관 · 법원행정처</text>
+<rect x="1090" y="72" width="170" height="54" rx="6" fill="#E8F5E9" stroke="#2E7D32" stroke-width="2" stroke-dasharray="6 4"/>
+<text x="1175" y="95" text-anchor="middle" font-size="13" font-weight="800" fill="#2E7D32">대법원장</text>
+<text x="1175" y="114" text-anchor="middle" font-size="11" fill="#2E7D32">징계 청구권자 · 도달 기록 0</text>
+<rect x="1280" y="72" width="170" height="54" rx="6" fill="#FFF4E0" stroke="#B26A00" stroke-width="2"/>
+<text x="1365" y="95" text-anchor="middle" font-size="13" font-weight="800" fill="#7A4A00">법원행정처장</text>
+<text x="1365" y="114" text-anchor="middle" font-size="11" fill="#7A4A00">= 3심 재판장 = 피고발인</text>
+<text x="1085" y="152" font-size="12">⑪ 7. 27.·28. 감찰요구 → 접수번호 통지 없음 51일</text>
+<text x="1085" y="173" font-size="12">⑫ 8. 19. 처리경과 질의 → 무응답</text>
+<text x="1085" y="194" font-size="12">⑬ 9. 11. 법원행정처장 앞 → 신문고 → 법제처 → 법원행정처 이송</text>
+<text x="1085" y="215" font-size="12">⑭ 9. 16. 회신 4934 — 4건+1건 «일괄» · 심의관 «전결»</text>
+<text x="1085" y="236" font-size="12">⑮ 9. 18. 회신 4985 — 「향후 … 회신하지 아니함」</text>
+<text x="1085" y="257" font-size="12">⑯ 9. 24. 특별송달 발송(고발 다음 날) → 9. 29. 수령</text>
+<rect x="1085" y="270" width="370" height="74" rx="6" fill="#fff" stroke="#C62828"/>
+<text x="1270" y="294" text-anchor="middle" font-size="13" font-weight="800" fill="#C62828">「구체적인 사건의 재판에 관한 사항으로</text>
+<text x="1270" y="314" text-anchor="middle" font-size="13" font-weight="800" fill="#C62828">… 청원과 민원의 대상이 아님」</text>
+<text x="1270" y="334" text-anchor="middle" font-size="11.5" fill="#7A1F1F">+ 묻지 않은 「재심」 안내</text>
+
+<!-- 정부 기관 -->
+<rect x="1070" y="470" width="400" height="400" rx="12" fill="#F8FAFC" stroke="#1F3A5F" stroke-width="2" filter="url(#sh)"/>
+<text x="1270" y="498" text-anchor="middle" font-size="19" font-weight="900" fill="#1F3A5F">정부 · 수사 · 감찰 기관</text>
+<g font-size="12.5">
+<rect x="1090" y="512" width="175" height="50" rx="6" fill="#FFEBEE" stroke="#C62828" stroke-width="2"/>
+<text x="1177" y="533" text-anchor="middle" font-weight="800">금융위원회</text><text x="1177" y="551" text-anchor="middle" font-size="11" fill="#7A1F1F">9. 16. → 금감원 민원으로</text>
+<rect x="1275" y="512" width="175" height="50" rx="6" fill="#FFEBEE" stroke="#C62828" stroke-width="2"/>
+<text x="1362" y="533" text-anchor="middle" font-weight="800">감사원</text><text x="1362" y="551" text-anchor="middle" font-size="11" fill="#7A1F1F">2023. 7. 18. → 금융위로 이송</text>
+<rect x="1090" y="570" width="175" height="50" rx="6" fill="#FFEBEE" stroke="#C62828" stroke-width="2"/>
+<text x="1177" y="591" text-anchor="middle" font-weight="800">국민권익위원회</text><text x="1177" y="609" text-anchor="middle" font-size="11" fill="#7A1F1F">9. 21. 종결 · 제출 요구 0회</text>
+<rect x="1275" y="570" width="175" height="50" rx="6" fill="#FFEBEE" stroke="#C62828" stroke-width="2"/>
+<text x="1362" y="591" text-anchor="middle" font-weight="800">경찰 (2022)</text><text x="1362" y="609" text-anchor="middle" font-size="11" fill="#7A1F1F">선행 고소 → 불송치</text>
+<rect x="1090" y="628" width="175" height="50" rx="6" fill="#FFF4E0" stroke="#B26A00" stroke-width="2" stroke-dasharray="3 3"/>
+<text x="1177" y="649" text-anchor="middle" font-weight="800">공수처</text><text x="1177" y="667" text-anchor="middle" font-size="11" fill="#7A4A00">9. 23. 고발 · 접수번호 통지 전</text>
+<rect x="1275" y="628" width="175" height="50" rx="6" fill="#FFF4E0" stroke="#B26A00" stroke-width="2" stroke-dasharray="3 3"/>
+<text x="1362" y="649" text-anchor="middle" font-weight="800">대통령실 정무·민정</text><text x="1362" y="667" text-anchor="middle" font-size="11" fill="#7A4A00">9. 23. 탄원 · 회신 전</text>
+<rect x="1090" y="686" width="175" height="50" rx="6" fill="#FFF4E0" stroke="#B26A00" stroke-width="2" stroke-dasharray="3 3"/>
+<text x="1177" y="707" text-anchor="middle" font-weight="800">서울중앙지검</text><text x="1177" y="725" text-anchor="middle" font-size="11" fill="#7A4A00">2026진정824 · 진행</text>
+<rect x="1275" y="686" width="175" height="50" rx="6" fill="#FFF4E0" stroke="#B26A00" stroke-width="2" stroke-dasharray="3 3"/>
+<text x="1362" y="707" text-anchor="middle" font-weight="800">영등포경찰서</text><text x="1362" y="725" text-anchor="middle" font-size="11" fill="#7A4A00">2026형제29726·34535</text>
+<rect x="1090" y="744" width="360" height="50" rx="6" fill="#FFF4E0" stroke="#B26A00" stroke-width="2" stroke-dasharray="3 3"/>
+<text x="1270" y="765" text-anchor="middle" font-weight="800">국회 정무위 (입법청원 21인) · 법사위</text><text x="1270" y="783" text-anchor="middle" font-size="11" fill="#7A4A00">9. 22. 청원 · 국감 대기</text>
+</g>
+<rect x="1090" y="804" width="360" height="54" rx="6" fill="#fff" stroke="#C62828"/>
+<text x="1270" y="826" text-anchor="middle" font-size="13" font-weight="800" fill="#C62828">「원본 증거자료를 제출하지 않아서」 (권익위)</text>
+<text x="1270" y="846" text-anchor="middle" font-size="11.5" fill="#7A1F1F">— 제출을 «요구»한 기록은 0회</text>
+
+<!-- 가운데 김성만 -->
+<circle cx="750" cy="470" r="92" fill="#1F3A5F" filter="url(#sh)"/>
+<text x="750" y="455" text-anchor="middle" font-size="24" font-weight="900" fill="#fff">김성만</text>
+<text x="750" y="480" text-anchor="middle" font-size="12.5" fill="#dbe4f0">NH투자증권 30년 고객 · 주주</text>
+<text x="750" y="500" text-anchor="middle" font-size="12.5" fill="#dbe4f0">등기·내용증명 수십 통</text>
+<text x="750" y="522" text-anchor="middle" font-size="12" fill="#FFCDD2">받은 «판단» 0</text>
+
+<!-- blue sends -->
+<path d="M668,440 C540,430 400,410 330,336" fill="none" stroke="#1F3A5F" stroke-width="3" marker-end="url(#mb)"/>
+<path d="M665,510 C560,560 480,610 432,640" fill="none" stroke="#1F3A5F" stroke-width="3" marker-end="url(#mb)"/>
+<path d="M750,378 L750,296" fill="none" stroke="#1F3A5F" stroke-width="3" marker-end="url(#mb)"/>
+<path d="M835,440 C950,420 1030,390 1110,364" fill="none" stroke="#1F3A5F" stroke-width="3" marker-end="url(#mb)"/>
+<path d="M835,510 C940,560 1010,620 1066,660" fill="none" stroke="#1F3A5F" stroke-width="3" marker-end="url(#mb)"/>
+
+<!-- red transfers between agencies -->
+<!-- 금감원 -> NH 이첩 -->
+<path d="M150,334 C120,420 120,480 150,556" fill="none" stroke="#C62828" stroke-width="3.5" stroke-dasharray="9 6" marker-end="url(#mr)"/>
+<text x="20" y="440" font-size="13" font-weight="900" fill="#C62828">«이첩»</text>
+<text x="20" y="458" font-size="11" fill="#C62828">2020 · 2026</text>
+<!-- NH -> 금감원 회사 회신문 -->
+<path d="M300,556 C330,480 330,420 300,334" fill="none" stroke="#C62828" stroke-width="2.5" marker-end="url(#mr)"/>
+<text x="335" y="450" font-size="12" font-weight="800" fill="#C62828">회사가 쓴 답</text>
+<text x="335" y="466" font-size="11" fill="#C62828">→ «처리 결과»</text>
+<!-- 금감원 -> 법원 민형사로 -->
+<path d="M432,80 C480,70 510,95 536,130" fill="none" stroke="#C62828" stroke-width="3.5" marker-end="url(#mr)"/>
+<text x="560" y="50" font-size="13.5" font-weight="900" fill="#C62828">① 금감원 「민형사로 다툴 사항」 (2022. 4. 1.)</text>
+<text x="560" y="68" font-size="11.5" fill="#C62828">→ 5개월 뒤 2022. 9. 2. 제소 (시효에 몰린 강제 제소)</text>
+<!-- 법원 -> 윤리감사관 -->
+<path d="M962,160 C1010,145 1040,145 1066,160" fill="none" stroke="#475569" stroke-width="2.5" marker-end="url(#mb)"/>
+<text x="1014" y="124" text-anchor="middle" font-size="11" font-weight="800" fill="#475569">확정 뒤</text><text x="1014" y="138" text-anchor="middle" font-size="11" font-weight="800" fill="#475569">«열었는가»</text>
+<!-- 윤리감사관 -> 법원 재판사항 -->
+<path d="M1066,250 C1020,285 1000,285 962,262" fill="none" stroke="#C62828" stroke-width="3.5" marker-end="url(#mr)"/>
+<text x="1008" y="314" text-anchor="middle" font-size="12.5" font-weight="900" fill="#C62828">「재판에 관한 사항」</text>
+<text x="1008" y="330" text-anchor="middle" font-size="10.5" fill="#C62828">→ 「법이 정한 절차로」</text>
+<!-- 금감원 2026 소송 가서 -> 법원 -->
+<path d="M432,210 C480,215 510,230 538,250" fill="none" stroke="#C62828" stroke-width="3.5" marker-end="url(#mr)"/>
+<text x="442" y="308" font-size="13" font-weight="900" fill="#C62828">「소송 가서 해결」</text>
+<text x="442" y="324" font-size="11" fill="#C62828">2026. 9. 15. — 이미 다녀온 문</text>
+<!-- 금융위 -> 금감원 이송 -->
+<path d="M1088,540 C900,640 560,620 434,320" fill="none" stroke="#C62828" stroke-width="3" stroke-dasharray="9 6" marker-end="url(#mr)"/>
+<text x="900" y="620" text-anchor="middle" font-size="13" font-weight="900" fill="#C62828">금융위 → 금감원 «이송»</text>
+<text x="900" y="636" text-anchor="middle" font-size="11" fill="#C62828">감독기관 앞 요청이 «민원»으로</text>
+<!-- 감사원 -> 금융위 -->
+<!-- 법제처 -> 법원행정처 -->
+<path d="M1450,610 C1520,500 1520,200 1455,140" fill="none" stroke="#C62828" stroke-width="2.5" stroke-dasharray="9 6" marker-end="url(#mr)"/>
+<text x="1290" y="405" text-anchor="middle" font-size="12.5" font-weight="900" fill="#C62828">신문고 → 법제처 → 법원행정처 «이송»</text><text x="1290" y="423" text-anchor="middle" font-size="11" fill="#C62828">감사원 → 금융위 «이송» (2023. 7. 18.)</text>
+
+<!-- loop caption -->
+<rect x="560" y="660" width="380" height="215" rx="12" fill="#fff" stroke="#7A1F1F" stroke-width="2"/>
+<text x="750" y="688" text-anchor="middle" font-size="16" font-weight="900" fill="#7A1F1F">닫힌 고리 — 문 셋이 서로를 가리킴</text>
+<text x="580" y="718" font-size="13">❶ 금감원 → 「민형사로」 → <tspan font-weight="800">법원</tspan></text>
+<text x="580" y="742" font-size="13">❷ 법원 → «판결 적법» · 이유 0줄 → <tspan font-weight="800">감찰</tspan></text>
+<text x="580" y="766" font-size="13">❸ 감찰 → 「재판에 관한 사항」 → <tspan font-weight="800">법원</tspan></text>
+<text x="580" y="790" font-size="13">❹ 다시 금감원 → 「소송 가서」 → <tspan font-weight="800">법원</tspan></text>
+<text x="580" y="814" font-size="13">❺ 금감원 → 「NH에 이첩」 → <tspan font-weight="800">회사</tspan> → 금감원</text>
+<text x="750" y="848" text-anchor="middle" font-size="13" font-weight="800" fill="#C62828">어느 문도 «자기»가 판단하지 않고</text>
+<text x="750" y="868" text-anchor="middle" font-size="13" font-weight="800" fill="#C62828">«다른 문»을 가리킨 기록 — 2,282일</text>
+</svg>
+</div>
+
+<!-- ============ 2. 조직도 위의 길 ============ -->
+<h2>② 조직도 위의 길 — «가야 할 자리»(초록 점선)와 «실제로 간 자리»(빨강) <small>기관 공개 조직도를 직위·부서로만 옮겨 그림</small></h2>
+<div class="grid2">
+
+<div class="card org"><h3>금융감독원 <em>2026. 공개 조직도 기준 · 직위만</em></h3>
+<div class="row"><div class="box top">금융감독원장<small>9. 10. 107면 «본인 수신» · 9. 22. 주주 통지 «친전»</small></div></div>
+<div class="down">▼</div>
+<div class="row">
+<div class="box r"><b>소비자보호총괄 (부원장보)</b><small>소비자보호감독총괄국 · 소비자피해예방국 · <b>소비자소통국</b> · 소비자권익보호국</small><span class="stamp">202071209</span><span class="stamp">202611431</span><span class="stamp">202611596</span><span class="stamp">2026ZC175</span></div>
+<div class="box g"><b>자본시장·회계 (부원장)</b><small>→ 금융투자 (부원장보) → <b>금융투자검사 1·2·3국</b> · 자본시장감독국 · 자본시장특별사법경찰국(직속)</small><span class="stamp g">검사 요청 도달 0</span></div>
+<div class="box n"><b>감사</b><small>감사실 · 감찰실</small><span class="stamp n">직원 청원 → 「그 부서로 배정」</span></div>
+</div>
+<div class="path"><b class="gt">가야 할 길 :</b> 「검사 실시 요청」(자본시장법 §419(?) · 검사규정 §8(?)) → 자본시장·회계 → 금융투자 검사국 → «검사 실시 여부 판단 기록»<br>
+<b class="rt">실제 간 길 :</b> 소비자 부문 «민원» 배당 → 「검사 실시된 경우는 없었습니다」 → 「NH에 이첩」 → 이의 → 「한 번 민원이면 재분류 안 됩니다」 → 재배당 · 금융위 요청까지 «민원»으로 합류</div></div>
+
+<div class="card org"><h3>대법원 · 법원행정처 <em>공개 조직도 기준 · 직위만</em></h3>
+<div class="row"><div class="box g"><b>대법원장</b><small>법관징계법 §7(?) 징계 청구권자 · 9. 22. 이의신청 · 9. 28. 탄원 · 9. 29. 이의신청 · 9. 30. 회피 요청</small><span class="stamp g">판단 기록 도달 0</span></div></div>
+<div class="down">▼</div>
+<div class="row">
+<div class="box r"><b>윤리감사관</b><small>윤리감사제1심의관 → «총괄심의관 전결»</small><span class="stamp">4934 재판에 관한 사항</span><span class="stamp">4985 회신 안 함</span></div>
+<div class="box a"><b>법원행정처장</b><small>= 2025. 3. 13. 상고심 재판장 = 2026. 9. 23. 피고발인 = 감찰·정보공개·행정심판 조직의 장</small><span class="stamp a">회피 기록 존부 미확인</span></div>
+</div>
+<div class="row">
+<div class="box n">서울고등법원 → 서울남부지방법원<small>1심 각하 · 2심 기각 — «판결은 적법» · 다투지 않음</small></div>
+<div class="box n">사법연수원 · 법원공무원교육원<small>상대 대리인 강의 이력(공개) — «병치»만, 단정 ✕</small></div>
+</div>
+<div class="path"><b class="gt">가야 할 길 :</b> 감찰 요구 → 접수번호 통지 → «열람 로그» 확인 → 청구권자(대법원장)에게 «판단» 도달<br>
+<b class="rt">실제 간 길 :</b> 접수번호 없이 51일 → 신문고 → 법제처 → 법원행정처 «이송» → 심의관 «전결» 한 문단(4934) → 이틀 뒤 「앞으로 회신하지 아니함」(4985) · 특별송달 5,420원</div></div>
+
+<div class="card org"><h3>NH투자증권 · NH농협금융그룹 <em>공개 자료 재구성 · 직위만</em></h3>
+<div class="row"><div class="box n">농협중앙회 → NH농협금융지주 (49%)<small>9. 28. 대주주 통지(내용증명) · 회신 요청 10. 15.</small></div><div class="box n">국민연금공단 (주주)<small>9. 28. 통지 · 회신 요청 10. 15.</small></div></div>
+<div class="down">▼</div>
+<div class="row"><div class="box top">이사회 → 대표이사<small>2020 민원 이후 «배상하지 않기로 방침»(전언) · 9. 20. 내용증명</small></div></div>
+<div class="down">▼</div>
+<div class="row">
+<div class="box a"><b>준법감시인 · 준법감시본부</b><small>2022. 9. 14. 「그때 부장이 잘못 안내를 해드렸어요. 그건 사실 팩트예요」</small><span class="stamp a">인정 → 조건부 「소송 취하하신다면」</span></div>
+<div class="box r"><b>CCO · 금융소비자보호본부</b><small>민원·분쟁 처리 — 2020. 7. 21. 회사 회신문 작성 · 「의견을 일일이 다 듣지 않고」</small><span class="stamp">감독기관의 «답»이 됨</span></div>
+<div class="box n"><b>감사위원회 · 감사실</b><small>주주 통지 대상 · 회신 대기</small></div>
+</div>
+<div class="path"><b class="gt">가야 할 길 :</b> 직원 오안내 «인정» → 금융사고 «보고»(검사규정 §41(?)) → 배상 판단<br>
+<b class="rt">실제 간 길 :</b> 「사실 팩트」 인정 → 보고 여부 «불명» → 70여 장 세무 서류 뭉치 사이의 합의서 한 장 → 삼자대면 거절 → 「소송 취하」 조건 · 금감원이 이 회사에 «다시» 이첩</div></div>
+
+<div class="card org"><h3>정부 조직 — 대통령 · 국무총리 소속 <em>정부 조직도 기준 · 관련 기관만 표시</em></h3>
+<div class="row"><div class="box top">대통령<small>대통령비서실</small></div></div>
+<div class="down">▼</div>
+<div class="row">
+<div class="box a"><b>대통령실 정무·민정</b><small>9. 23. 탄원 2건</small><span class="stamp a">회신 전</span></div>
+<div class="box r"><b>감사원</b><small>2023. 7. 18. 청원</small><span class="stamp">→ 금융위 이송</span></div>
+<div class="box a"><b>고위공직자범죄수사처</b><small>9. 23. 고발 · 9. 28. 보충의견 1차</small><span class="stamp a">접수번호 통지 전</span></div>
+</div>
+<div class="row"><div class="box top">국무총리</div></div>
+<div class="down">▼</div>
+<div class="row">
+<div class="box r"><b>금융위원회</b><small>9. 16. 감독권 행사 요청</small><span class="stamp">→ 금감원 민원 이송</span></div>
+<div class="box r"><b>국민권익위원회</b><small>부패신고 2026-20629</small><span class="stamp">종결 · 요구 0회</span><span class="stamp a">9. 22. 재신고</span></div>
+<div class="box r"><b>법제처</b><small>국민신문고</small><span class="stamp">→ 법원행정처 이송</span></div>
+</div>
+<div class="row">
+<div class="box r">법무부 → 검찰 · 행안부 → 경찰<small>2022 선행 고소 «불송치»</small></div>
+<div class="box a">서울중앙지검 2026진정824 · 영등포서 2026형제29726·34535<small>진행 중 · 9. 28. 증거보전 탄원</small></div>
+</div>
+<div class="path"><b class="gt">가야 할 길 :</b> 감독권자(금융위)가 «스스로» 판단 · 감사원이 «감사»로 판단 · 권익위가 «자료를 요구»한 뒤 판단<br>
+<b class="rt">실제 간 길 :</b> 감사원 → 금융위 → 금감원 → 회사 · 권익위 「원본 미제출」 종결(요구 기록 0) · 신문고 → 법제처 → 법원행정처 → 「재판 사항」</div></div>
+</div>
+
+<!-- ============ 3. 전수 연표 ============ -->
+<h2>③ 문마다 «무엇을 보냈고 · 무엇이 돌아왔는가» — 전수 연표 <small>2020. 6. 30. ~ 2026. 9. 29.</small></h2>
+<table>
+<tr><th style="width:3%">#</th><th style="width:9%">일자</th><th style="width:14%">기관 (자리)</th><th style="width:27%">보낸 것</th><th style="width:32%">돌아온 것 (원문)</th><th style="width:15%">도장</th></tr>
+<tr class="sep"><td colspan="6">2020 ~ 2022 — 회사와 감독기관 : «회사가 답하고, 감독기관이 그 답을 처리 결과로»</td></tr>
+<tr><td class="c">1</td><td class="c">2020. 6. 30.</td><td>금융감독원 (소비자 부문)</td><td>민원 202071209 — 양도세 오안내 · 매도 봉쇄</td><td class="q">2020. 7. 21. «회사 회신문»(NH증금소보2020-414)으로 처리</td><td><span class="stamp">회사가 답함</span></td></tr>
+<tr><td class="c">2</td><td class="c">2020. 11. 12.</td><td>NH 금융소비자보호</td><td>회신문이 어떻게 쓰였는가 질의</td><td class="q">「손님한테 뭐 따로 이렇게 의견을 일일이 다 듣지 않고 보내는 그런 경우도 있습니다」</td><td><span class="stamp">진술 없이</span></td></tr>
+<tr><td class="c">3</td><td class="c">2020 ~ 2022</td><td>NH · 금융감독원</td><td>삼자대면 요청 (3회)</td><td class="q">「그렇게까지 해 본 적은 한 번도 없습니다」 · 「별 소용 없다」</td><td><span class="stamp">거절</span></td></tr>
+<tr><td class="c">4</td><td class="c">2021. 4. 15.</td><td>금융감독원 → (회사 전언)</td><td>배상 여부 확인</td><td class="q">「합의금 그런 거 안 해 주기로 그렇게 방침을 위에서 정했습니다」</td><td><span class="stamp a">조직의 방침</span></td></tr>
+<tr><td class="c">5</td><td class="c">2021. 5. 31.</td><td>금융감독원</td><td>검토 경위 확인</td><td class="q">「합의서 안 쓴 걸로 보고서는 한 게」</td><td><span class="stamp a">합의서 빼고 검토</span></td></tr>
+<tr><td class="c">6</td><td class="c">2022. 4. 1.</td><td>금융감독원</td><td>같은 민원 640일 · 담당 교체</td><td class="q">「민형사로 다툴 사항」 — 기각</td><td><span class="stamp">→ 법원으로</span></td></tr>
+<tr><td class="c">7</td><td class="c">2022</td><td>경찰</td><td>선행 고소</td><td class="q">불송치</td><td><span class="stamp">종결</span></td></tr>
+<tr><td class="c">8</td><td class="c">2022. 9. 14.</td><td>NH 준법감시</td><td>제소 12일 뒤 통화</td><td class="q">「그건 사실 팩트예요」 → 「소송을 취하를 하신다면은」</td><td><span class="stamp a">인정 + 조건</span></td></tr>
+<tr class="sep"><td colspan="6">2022. 9. 2. ~ 2025 — 강제된 제소와 재판 : «적법» 세 번</td></tr>
+<tr><td class="c">9</td><td class="c">2023. 11. 10.</td><td>서울남부지방법원</td><td>소장 · 선고 3일 전 탄원 47면 · 녹취 USB</td><td class="q">각하 — 탄원·녹취 «언급 0»</td><td><span class="stamp n">적법 · 다투지 않음</span></td></tr>
+<tr><td class="c">10</td><td class="c">2023. 6. ~ 8.</td><td>금융감독원 · 감사원</td><td>통화 · 감사원 청원(7. 18.) · 직원 대상 청원</td><td class="q">「여기서는 보지 않는다」 · 「재판에서 밝혀질 것」 · 감사원 → 금융위 «이송» · 「저희 쪽으로 배정이 됐어요」</td><td><span class="stamp">이송 · 셀프 배정</span></td></tr>
+<tr><td class="c">11</td><td class="c">2024. 11. 7.</td><td>서울고등법원</td><td>항소</td><td class="q">신의칙 위반 «인정» · 불이익변경금지로 기각</td><td><span class="stamp n">적법 · 다투지 않음</span></td></tr>
+<tr><td class="c">12</td><td class="c">2025. 3. 13.</td><td>대법원</td><td>상고</td><td class="q">심리불속행 — 이유 0줄 (106일 · 기한 내)</td><td><span class="stamp n">적법 · 다투지 않음</span></td></tr>
+<tr class="sep"><td colspan="6">2026. 7. ~ 9. 29. — 판결 «뒤»의 문 : «열었는가»를 묻자</td></tr>
+<tr><td class="c">13</td><td class="c">7. 27. · 28.</td><td>대법원 윤리감사관실</td><td>감찰요구 · 보완진정 — 「판결 취소·변경 구하지 않음」</td><td class="q">접수번호 통지 없음 (51일)</td><td><span class="stamp">무번호</span></td></tr>
+<tr><td class="c">14</td><td class="c">8. 19.</td><td>대법원 윤리감사관실</td><td>처리경과 질의</td><td class="q">(회신 없음 · 4934 열거에도 없음)</td><td><span class="stamp">무응답</span></td></tr>
+<tr><td class="c">15</td><td class="c">9. 11. → 9. 14.</td><td>법원행정처장 앞 → 국민신문고</td><td>「접수번호가 오지 않습니다」</td><td class="q">법제처 → 법원행정처 «이송»</td><td><span class="stamp">이송</span></td></tr>
+<tr><td class="c">16</td><td class="c">9. 10.</td><td>금융감독원장 (본인 수신)</td><td>«검사 실시 요청서» 107면</td><td class="q">9. 15. 민원 202611431 배당 — 「검사 요청한다고 해서 검사가 실시된 경우는 없었습니다」 · 「NH에다가 이첩하겠습니다」 · 「검사는 공익 … 소송 가서 해결」</td><td><span class="stamp">민원 배당 · 이첩</span></td></tr>
+<tr><td class="c">17</td><td class="c">9. 15.</td><td>금융감독원장 (본인 수신)</td><td>「이첩 거부 및 검사 실시 요청」</td><td class="q">9. 18. 민원 202611596 재배당 — 「한 번 민원으로 분류돼 처리되면 웬만해선 재분류가 안 됩니다」</td><td><span class="stamp">재배당</span></td></tr>
+<tr><td class="c">18</td><td class="c">9. 16.</td><td>금융위원장 (본인 수신)</td><td>감독권 행사 요청 내용증명</td><td class="q">9. 18. 금감원 민원 2026ZC175로 «이송»</td><td><span class="stamp">이송</span></td></tr>
+<tr><td class="c">19</td><td class="c">9. 16.</td><td>대법원 윤리감사관 (전결)</td><td>7~9월 청원 4건 + 신문고 1건</td><td class="q">회신 4934 — 「구체적인 사건의 재판에 관한 사항 … 청원과 민원의 대상이 아님」 + 묻지 않은 「재심」 안내</td><td><span class="stamp">재판 사항</span></td></tr>
+<tr><td class="c">20</td><td class="c">9. 21.</td><td>국민권익위원회</td><td>부패행위 신고 2026-20629</td><td class="q">「원본 증거자료를 제출하지 않아서」 종결 — 제출 «요구» 0회</td><td><span class="stamp">종결</span></td></tr>
+<tr><td class="c">21</td><td class="c">9. 18. 시행<br>9. 29. 수령</td><td>대법원 윤리감사관 (전결)</td><td>9. 15. 보완민원 — «사실 다섯» 통지 요청</td><td class="q">회신 4985 — 「향후 동일한 취지의 청원서를 다시 제출할 경우 회신하지 아니함」 · 특별송달 · 9. 24. 발송 (고발 다음 날)</td><td><span class="stamp">앞으로 답 안 함</span></td></tr>
+<tr><td class="c">22</td><td class="c">9. 22. ~ 29.</td><td>대법원장 · 법원행정처장</td><td>이의신청 133 · 정보공개 16건 · 탄원 27면 · 이의신청 177</td><td class="q">(회신 대기 — 10. 14. ~ 10. 20.)</td><td><span class="stamp a">대기</span></td></tr>
+<tr><td class="c">23</td><td class="c">9. 22. ~ 23.</td><td>국회 정무위 · 대통령실</td><td>입법청원 21인 · 정무·민정 탄원</td><td class="q">(회신 대기)</td><td><span class="stamp a">대기</span></td></tr>
+<tr><td class="c">24</td><td class="c">9. 23. · 28.</td><td>고위공직자범죄수사처</td><td>고발장 · 보충의견 1차</td><td class="q">(접수번호 통지 전)</td><td><span class="stamp a">대기</span></td></tr>
+<tr><td class="c">25</td><td class="c">진행 중</td><td>서울중앙지검 · 영등포경찰서</td><td>진정 824 · 2026형제29726·34535 · 9. 28. 증거보전 탄원</td><td class="q">(진행)</td><td><span class="stamp g">진행</span></td></tr>
+</table>
+
+<!-- ============ 4. 돌아온 말 ============ -->
+<h2>④ 돌아온 말 — 열두 문장 <small>녹취 공인 속기·기관 회신문 원문 · 발언자는 직위로만</small></h2>
+<div class="wall">
+<div class="q"><p>「의견을 일일이 다 듣지 않고 보내는 그런 경우도 있습니다」</p><span>NH 금융소비자보호 담당 · 2020. 11. 12.</span></div>
+<div class="q"><p>「합의금 그런 거 안 해 주기로 방침을 위에서 정했습니다」</p><span>금감원 담당 (회사 전언) · 2021. 4. 15.</span></div>
+<div class="q"><p>「합의서 안 쓴 걸로 보고서는 한 게」</p><span>금감원 담당 · 2021. 5. 31.</span></div>
+<div class="q"><p>「민형사로 다툴 사항」</p><span>금융감독원 · 2022. 4. 1. — 640일 뒤</span></div>
+<div class="q b"><p>「그건 사실 팩트예요」</p><span>NH 준법감시 담당 · 2022. 9. 14.</span></div>
+<div class="q"><p>「소송을 취하를 하신다면은」</p><span>NH 준법감시 담당 · 같은 날</span></div>
+<div class="q"><p>「재판에서 밝혀질 것」</p><span>금감원 담당 · 2023. 7. — 한 통화 14회 이상</span></div>
+<div class="q"><p>「저희 쪽으로 배정이 됐어요」</p><span>금감원 담당 · 2023. 8. 10. — 직원 대상 청원</span></div>
+<div class="q"><p>「검사 요청한다고 해서 검사가 실시된 경우는 없었습니다」</p><span>금감원 담당 · 2026. 9. 15.</span></div>
+<div class="q"><p>「NH에다가 이첩하겠습니다 … NH하고 잘 얘기해 보십시오」</p><span>금감원 담당 · 2026. 9. 15.</span></div>
+<div class="q"><p>「구체적인 사건의 재판에 관한 사항으로 … 대상이 아님」</p><span>대법원 윤리감사제1심의관-4934 · 2026. 9. 16.</span></div>
+<div class="q"><p>「향후 … 다시 제출할 경우 회신하지 아니함」</p><span>대법원 윤리감사제1심의관-4985 · 2026. 9. 18. · 특별송달</span></div>
+</div>
+
+<!-- ============ 5. 거울 ============ -->
+<h2>⑤ 거울 — 다섯 기관, 같은 동작 다섯 <small>평가어 없이 «동작»만</small></h2>
+<div class="mirror">
+<div><b>① 번호만 준다</b>접수번호·민원번호는 나오지만 «판단»은 없다 — 202071209 · 202611431 · 202611596 · 2026ZC175 · 1BA-2609-0620926</div>
+<div><b>② 옆으로 보낸다</b>감사원 → 금융위 → 금감원 → 회사 · 신문고 → 법제처 → 법원행정처 — 이송·이첩·배당 7번</div>
+<div><b>③ 다른 문을 가리킨다</b>「민형사로」「재판에서」「소송 가서」「재판에 관한 사항」「재심」 — 가리킨 문은 이미 다녀온 문</div>
+<div><b>④ 묻지 않은 것에 답한다</b>「열었는가」를 물었고, 돌아온 것은 「재심」 안내 · 「원본 미제출」 · 「검사는 공익」</div>
+<div><b>⑤ 문을 잠근다</b>「향후 회신하지 아니함」 — 장래의 청원까지 «미리» 닫는 통지, 송달 «증명»과 함께</div>
+</div>
+<div class="blood">한 기관이면 실수이고, 둘이면 우연일 수 있습니다. 그러나 2020년부터 2026년까지 <b>같은 사람</b>에게, <b>열네 곳</b>에서, <b>같은 모양</b>이 반복되었다면 — 그것은 한 사건의 불만이 아니라 <b>민원이 «판단» 없이 «순환»하도록 짜인 길</b>의 기록입니다. 김성만이 구하는 것은 어느 결론도 아닙니다. 「제출한 서류를 열었는가 — 예 · 아니오 · 기록 없음」, <b>셋 중 하나를 기록으로</b> 받는 것, 그것이 2,282일 만의 첫 번째 답이 되기를 바랍니다.</div>
+
+<h2>⑥ 남은 문 — 순환을 끊는 순서 <small>2026. 9. 30. 발송 · 10월 결과</small></h2>
+<div class="next">
+<div><b>9. 30. 발송 5건</b>184A·B 회피 요청(대법원장·법원행정처장) · 181 정보공개(4985 근거 6항목) · 185A·B 금융위원장·금감원장 친전 — «조문·호» 요구</div>
+<div><b>10. 13. ~ 20.</b>정보공개 결정·간주거부 · 이의신청 결정 · 회피 기록 회신 · 금융당국 회신 — «기관이 쓰는 문서»</div>
+<div><b>10. 16. ~ 20.</b>공수처 보충의견 2차 — 「앞으로 답하지 않겠다」를 «기관 문서»로 편철 · 국회 국정감사 자료</div>
+<div><b>11. 10.</b>1심 선고 + 3년 — 법관징계법 §8(?) 시효. 이 날까지 «판단 여부» 기록이 없으면 그 «없음»이 기록이 됩니다</div>
+</div>
+
+<footer>
+작성 김성만 (NH투자증권 30년 고객 · 주주) · 2026. 9. 29. 기준 · 조직도는 각 기관 공개 조직도(금융감독원 · 대법원 · 정부 조직도 · NH농협금융그룹 2018. 12. · NH투자증권 공시 자료 재구성)를 직위·부서만 남겨 다시 그림 — 개인 이름은 넣지 않음 · 「」 안은 기관 회신문·공인 속기 녹취 원문, 날짜·번호는 정본·등기 기록 기준 · 조문 뒤 (?)는 법조인이 아니어서 원문 대조 후 확정할 표시 · 판결의 당부는 다투지 않으며 어느 개인의 고의도 단정하지 않음 · 증거 원본은 요청 시 증거 메일(PDF·MD5) 또는 USB로 제출
+</footer>
+</div></body></html>
